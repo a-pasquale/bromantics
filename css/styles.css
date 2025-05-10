@@ -611,7 +611,9 @@ body.menu-open {
 .controls {
     display: flex;
     justify-content: center;
+    align-items: center; /* Vertical centering */
     margin-bottom: 1rem;
+    min-height: 60px; /* Match the height of the largest button */
 }
 
 .controls button {
@@ -631,6 +633,7 @@ body.menu-open {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+    position: relative; /* For alignment purposes */
 }
 
 .controls button:hover {
@@ -659,6 +662,8 @@ body.menu-open {
     position: relative;
     overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0; /* Ensure no unexpected margins affect alignment */
+    margin-bottom: 0;
 }
 
 #play-pause-btn:before {
@@ -817,6 +822,13 @@ body.menu-open {
 }
 
 /* Connect Section */
+/* Custom styles for heading word-break */
+@media (max-width: 480px) {
+    .break-after {
+        display: block;
+    }
+}
+
 .connect {
     background-color: var(--darker-bg);
     background-image: 
@@ -1129,6 +1141,21 @@ body.menu-open {
     
     .player-controls {
         padding: 0.5rem 0;
+    }
+    
+    .controls {
+        min-height: 50px;
+    }
+    
+    #play-pause-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .controls button {
+        margin: 0 0.8rem;
+        width: 35px;
+        height: 35px;
     }
     
     .track {
