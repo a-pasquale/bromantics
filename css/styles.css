@@ -88,19 +88,9 @@ h2 {
     font-weight: 700;
 }
 
-/* Horizontal rule removed */
-
-h2:before {
-    content: '';
-    position: absolute;
-    bottom: -1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0.3);
-    filter: blur(4px);
-    opacity: 0.8;
+/* Horizontal rule and shadow completely removed */
+h2:before, h2:after {
+    display: none;
 }
 
 p {
