@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.2.0';
+const VERSION = '1.2.1';
 
 // Using 4 shows per page for optimal display balance
 
@@ -28,6 +28,38 @@ function getVersionedUrl(url) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Venmo deep linking with fallback
+    const venmoAppLink = document.getElementById('venmo-app-link');
+    if (venmoAppLink) {
+        const venmoWebUrl = 'https://account.venmo.com/u/AndrewPasquale';
+
+        venmoAppLink.addEventListener('click', function(e) {
+            // Store the deep link URL
+            const deepLinkUrl = this.getAttribute('href');
+
+            // On iOS and Android, attempt the deep link first
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                // Set a fallback timer in case the app isn't installed
+                const fallbackTimeout = setTimeout(function() {
+                    window.location.href = venmoWebUrl;
+                }, 500);
+
+                // If app opens, clear the timeout
+                window.addEventListener('pagehide', function() {
+                    clearTimeout(fallbackTimeout);
+                }, { once: true });
+
+                // Allow the deep link to proceed
+                return true;
+            } else {
+                // On desktop, just go to the web version
+                e.preventDefault();
+                window.open(venmoWebUrl, '_blank');
+                return false;
+            }
+        });
+    }
+
     // Handle direct links to sections using URL hash
     if (window.location.hash) {
         const targetId = window.location.hash;
