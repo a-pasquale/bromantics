@@ -12,23 +12,52 @@ document.addEventListener('DOMContentLoaded', function() {
         heroSlides[currentSlide].classList.remove('current');
         currentSlide = (currentSlide + 1) % heroSlides.length;
         heroSlides[currentSlide].classList.add('current');
+        updateDots();
     }
     
     function prevSlide() {
         heroSlides[currentSlide].classList.remove('current');
         currentSlide = (currentSlide - 1 + heroSlides.length) % heroSlides.length;
         heroSlides[currentSlide].classList.add('current');
+        updateDots();
     }
     
     // Event listeners for manual navigation
     slidePrevBtn.addEventListener('click', function() {
         clearInterval(slideInterval);
         prevSlide();
+        updateDots();
     });
     
     slideNextBtn.addEventListener('click', function() {
         clearInterval(slideInterval);
         nextSlide();
+        updateDots();
+    });
+    
+    // Slide dots navigation
+    const slideDots = document.querySelectorAll('.dot');
+    
+    // Function to update active dot
+    function updateDots() {
+        slideDots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    // Click event for dots
+    slideDots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            clearInterval(slideInterval);
+            heroSlides[currentSlide].classList.remove('current');
+            currentSlide = index;
+            heroSlides[currentSlide].classList.add('current');
+            updateDots();
+        });
     });
     // Initialize variables
     const audioPlayer = new Audio();

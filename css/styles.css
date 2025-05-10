@@ -366,7 +366,7 @@ body.menu-open {
 }
 
 .slide-content h1 {
-    font-size: 5rem;
+    font-size: clamp(2.5rem, 8vw, 5rem);
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -376,11 +376,15 @@ body.menu-open {
     font-weight: 700;
     position: relative;
     display: inline-block;
+    line-height: 1.1;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .slide-content p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
     color: var(--gray-text);
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
@@ -418,6 +422,41 @@ body.menu-open {
     font-size: 1.5rem;
 }
 
+/* Slide Dots */
+.slide-dots {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    z-index: 3;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.dot.active {
+    background-color: var(--primary-color);
+    box-shadow: 
+        0 0 10px rgba(var(--primary-color-rgb), 0.7),
+        0 0 20px rgba(var(--primary-color-rgb), 0.4);
+    transform: scale(1.1);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.dot:hover {
+    background-color: rgba(var(--primary-color-rgb), 0.7);
+}
+
 /* About Section */
 .about {
     background-color: var(--darker-bg);
@@ -453,7 +492,7 @@ body.menu-open {
     text-align: center;
     line-height: 1.8;
     position: relative;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
 }
 
 .band-bio p {
@@ -1028,8 +1067,10 @@ body.menu-open {
     margin-bottom: 1.2rem;
     color: var(--light-text);
     text-shadow: 0 0 10px rgba(0, 184, 255, 0.3);
-    height: 30px; /* Fixed height for consistency */
+    min-height: 30px; /* Minimum height instead of fixed */
+    height: auto; /* Allow height to grow as needed */
     text-align: center; /* Ensure all headings are centered */
+    line-height: 1.3; /* Add line height for better readability on wrap */
 }
 
 .mailing-list h3 {
@@ -1089,6 +1130,16 @@ body.menu-open {
         height: auto; /* Remove fixed height on mobile */
         min-height: 350px; /* Ensure minimum height for content */
         margin-bottom: 2rem;
+        padding: 1.5rem 1rem;
+    }
+    
+    .connect h3 {
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .mailing-list #mc_embed_signup {
+        margin-top: 0.5rem;
     }
     
     .connect .streaming-links {
@@ -1130,6 +1181,12 @@ body.menu-open {
     gap: 1.5rem;
 }
 
+@media (max-width: 768px) {
+    .shows-list {
+        gap: 1rem;
+    }
+}
+
 .show-item {
     display: flex;
     align-items: center;
@@ -1152,7 +1209,7 @@ body.menu-open {
     justify-content: center;
     width: 100px;
     margin-right: 2.5rem;
-    padding: 1rem 0.5rem;
+    padding: 0.8rem 0.5rem;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     border: 1px solid rgba(var(--primary-color-rgb), 0.2);
@@ -1182,14 +1239,7 @@ body.menu-open {
     font-family: 'League Gothic', sans-serif;
     letter-spacing: 2px;
     text-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.4);
-}
-
-.year {
-    font-size: 1.1rem;
-    opacity: 0.8;
-    margin-top: 0.3rem;
-    font-family: 'Special Elite', cursive;
-    color: var(--gray-text);
+    margin-top: -0.2rem;
 }
 
 .time {
@@ -1206,10 +1256,20 @@ body.menu-open {
     margin-bottom: 0.3rem;
     font-size: 1.5rem;
     font-family: 'Poppins', sans-serif;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     letter-spacing: 0.5px;
     font-weight: 600;
     text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(var(--secondary-color-rgb), 0.4);
+    transition: all 0.3s ease;
+}
+
+.show-item:hover .show-info h3 {
+    color: var(--secondary-color);
+    text-shadow: 
+        0 0 10px rgba(var(--secondary-color-rgb), 0.7),
+        0 0 20px rgba(var(--secondary-color-rgb), 0.4);
+    transform: translateY(-1px);
 }
 
 .location {
@@ -1726,7 +1786,9 @@ body.menu-open {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     flex: 0 0 auto;
-    height: 40px;
+    min-height: 20px;
+    height: auto;
+    line-height: 1.4;
 }
 
 /* 80s Style Icons */
@@ -1897,16 +1959,39 @@ footer p {
         background-position: 35% top;
     }
     
+    /* Font size for hero h1 is handled by clamp in the main styles */
     .hero h1 {
-        font-size: 3rem;
+        letter-spacing: 2px;
     }
     
     .hero p {
         font-size: 1.2rem;
     }
     
+    /* Hide arrows and adjust dots positioning on mobile */
+    .arrows {
+        display: none;
+    }
+    
+    .slide-dots {
+        bottom: 70px; /* Position above the buttons */
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+    
     section {
-        padding: 4rem 0;
+        padding: 3rem 0;
+    }
+    
+    .about {
+        padding: 3rem 0 2.5rem;
+    }
+    
+    .band-bio {
+        padding: 0 0.75rem;
     }
     
     .video-wrapper {
@@ -1920,17 +2005,41 @@ footer p {
     .show-item {
         flex-direction: column;
         text-align: center;
+        padding: 1.2rem 1rem;
+        margin-bottom: 1rem;
     }
     
     .show-date {
         margin-right: 0;
-        margin-bottom: 1.5rem;
-        width: 120px;
+        margin-bottom: 0.7rem; /* Reduced from 1.2rem to bring date closer to venue name */
+        width: 110px;
+        padding: 0.6rem 0.5rem;
+    }
+    
+    .day {
+        font-size: 3.2rem;
+    }
+    
+    .month {
+        font-size: 1.8rem;
     }
     
     .show-links {
         margin-left: 0;
-        margin-top: 1rem;
+        margin-top: 0.7rem;
+    }
+    
+    .show-info h3 {
+        margin-bottom: 0.2rem;
+    }
+    
+    .location, .time {
+        margin-bottom: 0.2rem;
+    }
+    
+    .support {
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
     }
     
     .mailing-list form,
@@ -1941,8 +2050,9 @@ footer p {
     .mailing-list input,
     #mce-EMAIL {
         border-radius: 0;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
         border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.7rem 1rem;
     }
     
     .mailing-list .btn,
@@ -1950,6 +2060,13 @@ footer p {
         border-radius: 0;
         width: 100%;
         box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+        padding: 0.7rem 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-note {
+        margin-top: 0.25rem;
+        padding: 0 0.5rem;
     }
 }
 
@@ -1962,6 +2079,26 @@ footer p {
         display: block;
         width: 100%;
         margin-bottom: 1rem;
+        padding: 0.7rem 1.4rem;
+        font-size: 0.9rem;
+    }
+    
+    .slide-content .btn {
+        margin-right: 0;
+        margin-bottom: 0.8rem;
+    }
+    
+    .slide-content {
+        width: 90%;
+    }
+    
+    .connect .mailing-list {
+        min-height: 320px; /* Slightly shorter on very small screens */
+        padding: 1rem 0.75rem;
+    }
+    
+    .connect h3 {
+        font-size: 1.3rem;
     }
 }
 
