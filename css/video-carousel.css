@@ -1,11 +1,18 @@
-/* Video Carousel Styles */
+/*
+   Video Carousel Styles
+   Version: 1.1.1
+*/
 .carousel-container {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
     overflow: hidden;
-    /* Add new touch-action property for better swipe gesture handling */
+    /* Set touch action to just handle y-axis scrolling, limiting x-axis to the carousel */
     touch-action: pan-y pinch-zoom;
+    /* Prevent elastic scrolling on iOS */
+    -webkit-overflow-scrolling: auto;
+    /* Don't interfere with page scrolling */
+    overscroll-behavior: none;
 }
 .video-carousel {
     position: relative;
@@ -14,6 +21,13 @@
     overflow: visible;
     width: 100%;
     cursor: grab; /* Shows that content is swipeable */
+    /* Prevent drag behavior beyond the carousel */
+    touch-action: pan-y;
+    /* Limit the swipe effect to just this element */
+    overscroll-behavior-x: contain;
+    /* Make it clear this is a draggable element */
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .video-carousel:active {
@@ -76,21 +90,43 @@
     transition: opacity 0.3s ease;
     cursor: pointer;
     z-index: 10;
+    pointer-events: none; /* By default, overlay doesn't intercept clicks */
+}
+
+/* Only make overlay clickable when it's the current video */
+.video-wrapper.current .video-play-overlay {
+    pointer-events: auto;
 }
 
 @media (max-width: 768px) {
     .video-play-overlay {
-        opacity: 0.85; /* Make overlay more visible on mobile */
-        left: 2%;
-        right: 2%;
-        background-color: rgba(0, 0, 0, 0.65);
+        opacity: 0; /* Start transparent - will be visible only for the current video */
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.4); /* Lighter background so video is visible */
+        z-index: 15; /* Higher z-index to ensure it's above everything */
+        pointer-events: auto !important; /* Ensure it captures clicks */
+        touch-action: auto !important; /* Ensure touch events work properly */
+    }
+
+    /* Only show overlay for the current video in view */
+    .video-wrapper.current .video-play-overlay {
+        opacity: 0.9;
     }
 
     /* Always show play button on mobile */
     .video-play-overlay .play-icon {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1.1); /* Make it a bit larger */
         background-color: rgba(var(--primary-color-rgb), 0.9);
+        width: 70px; /* Larger target for mobile */
+        height: 70px;
+        font-size: 2.2rem;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.7); /* More pronounced shadow */
+    }
+
+    .video-play-overlay:active .play-icon {
+        transform: scale(0.9); /* Feedback when pressed */
     }
 }
 
@@ -247,30 +283,31 @@
 
 @media (max-width: 768px) {
     .video-nav {
-        width: 38px;
-        height: 38px;
-        font-size: 1.2rem;
-        background-color: rgba(var(--primary-color-rgb), 0.8);
-        opacity: 0.9;
-        top: calc(50% - 50px); /* Move buttons away from center to avoid overlap with play button */
+        width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
+        background-color: rgba(0, 0, 0, 0.8); /* Darker background for better contrast */
+        opacity: 0.9; /* More visible */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%);
         position: absolute;
+        z-index: 100; /* Very high z-index to ensure they're on top of everything */
+        border: none; /* Remove border on mobile */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow for emphasis */
     }
 
     .video-nav.prev {
-        left: -20px; /* Move much further outside the video area */
+        left: 5px; /* Position at the edge but not overlapping content */
     }
 
     .video-nav.next {
-        right: -20px; /* Move much further outside the video area */
+        right: 5px; /* Position at the edge but not overlapping content */
     }
 
-    /* Make them visible when needed */
-    .video-carousel:hover .video-nav.prev {
-        left: -5px;
-    }
-
-    .video-carousel:hover .video-nav.next {
-        right: -5px;
+    /* Active state for clear touch feedback */
+    .video-carousel .video-nav:active {
+        background-color: var(--primary-color);
+        transform: translateY(-50%) scale(0.95); /* Slight scale effect when pressed */
     }
 }
 
@@ -299,18 +336,4 @@
     transform: scale(1.2);
 }
 
-@media (max-width: 768px) {
-    .video-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-    
-    .video-nav.prev {
-        left: 5px;
-    }
-    
-    .video-nav.next {
-        right: 5px;
-    }
-}
+/* Removed duplicate media query for video-nav */

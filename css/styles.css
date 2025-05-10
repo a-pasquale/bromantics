@@ -1324,6 +1324,8 @@ body.menu-open {
 .video {
     background-color: var(--darker-bg);
     position: relative;
+    /* Prevent issues with video carousel swipe affecting page */
+    overscroll-behavior: contain;
 }
 
 /* Apply consistent section heading animations */
