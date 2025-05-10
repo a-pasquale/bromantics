@@ -920,15 +920,9 @@ body.menu-open {
 }
 
 /* Connect Section */
-/* Custom styles for heading word-break */
+/* Connect section responsive styles */
 @media (max-width: 480px) {
-    .break-after {
-        display: block;
-    }
-    
-    .connect h2 .break-after {
-        display: block;
-    }
+    /* Responsive styling for connect section */
 }
 
 .connect {
@@ -1142,10 +1136,7 @@ body.menu-open {
     animation: neon-pulse-connect 2s infinite alternate;
 }
 
-.connect h2 .break-after {
-    display: inline-block;
-    animation: neon-pulse-connect 2s infinite alternate;
-}
+/* Connect heading styles */
 
 @keyframes neon-pulse-connect {
     0% {
