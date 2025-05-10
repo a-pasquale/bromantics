@@ -1,5 +1,15 @@
+// Version control for cache busting
+const VERSION = '1.0.1';
+
+// Using 4 shows per page for optimal display balance
+
+// Helper function to add version to URLs
+function getVersionedUrl(url) {
+    return `${url}?v=${VERSION}`;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Hero Slider
+    // ===== HERO SLIDER =====
     const heroSlides = document.querySelectorAll('.slide');
     const slidePrevBtn = document.querySelector('.arrow.prev');
     const slideNextBtn = document.querySelector('.arrow.next');
@@ -59,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
             updateDots();
         });
     });
-    // Initialize variables
+
+    // ===== AUDIO PLAYER =====
     const audioPlayer = new Audio();
     const playPauseBtn = document.getElementById('play-pause-btn');
     const prevBtn = document.getElementById('prev-btn');
@@ -77,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch and load audio files
     function loadAudioFiles() {
         // Load playlist from JSON file (this approach works well for static sites)
-        fetch('audio/playlist.json')
+        fetch(getVersionedUrl('audio/playlist.json'))
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -281,6 +292,268 @@ document.addEventListener('DOMContentLoaded', function() {
     // When track ends, play next track
     audioPlayer.addEventListener('ended', nextTrack);
     
+    // ===== SHOWS SECTION =====
+    // Shows container and UI elements
+    const showsContainer = document.getElementById('shows-container');
+    const noShowsMessage = document.querySelector('.no-shows-message');
+    const loadingIndicator = document.querySelector('.loading-indicator');
+    const paginationContainer = document.getElementById('pagination-container');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    
+    // Current active tab (default to upcoming)
+    let activeTab = 'upcoming';
+    // Pagination settings
+    const showsPerPage = 4; // Set to 4 shows per page
+    let currentPage = 1;
+    let totalPages = 1;
+    let allShows = []; // Store all filtered shows for pagination
+    
+    // Event listeners for tab buttons
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Update active tab
+            activeTab = this.getAttribute('data-tab');
+            
+            // Update active button styling
+            tabButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Reset to first page when changing tabs
+            currentPage = 1;
+            
+            // Show loading indicator
+            showsContainer.innerHTML = '';
+            loadingIndicator.style.display = 'flex';
+            noShowsMessage.style.display = 'none';
+            paginationContainer.innerHTML = '';
+            
+            // Load shows for the selected tab
+            loadShows(activeTab);
+        });
+    });
+    
+    // Function to load shows from JSON file
+    function loadShows(tabType = 'upcoming') {
+        fetch(getVersionedUrl('data/shows.json'))
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Get current date (at the start of day to compare dates properly)
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                // Filter shows based on tab type and current date
+                allShows = data.shows.filter(show => {
+                    const showDate = new Date(show.date);
+                    showDate.setHours(0, 0, 0, 0);
+                    const isPast = showDate < today;
+                    return tabType === 'upcoming' ? !isPast : isPast;
+                });
+                
+                // Sort shows by date
+                allShows.sort((a, b) => {
+                    // For upcoming shows: ascending order (closest first)
+                    // For past shows: descending order (most recent first)
+                    return tabType === 'upcoming' 
+                        ? new Date(a.date) - new Date(b.date)
+                        : new Date(b.date) - new Date(a.date);
+                });
+                
+                // Hide loading indicator
+                loadingIndicator.style.display = 'none';
+                
+                // Display shows or no shows message
+                if (allShows.length > 0) {
+                    // Calculate total pages
+                    totalPages = Math.ceil(allShows.length / showsPerPage);
+                    
+                    // Render current page of shows
+                    renderCurrentPage();
+                    
+                    // Generate pagination
+                    renderPagination();
+                    
+                    noShowsMessage.style.display = 'none';
+                } else {
+                    showsContainer.innerHTML = '';
+                    paginationContainer.innerHTML = '';
+                    noShowsMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading shows:', error);
+                loadingIndicator.style.display = 'none';
+                showsContainer.innerHTML = '<div class="error-message">Sorry, there was an error loading the shows. Please try again later.</div>';
+                paginationContainer.innerHTML = '';
+            });
+    }
+    
+    // Function to render current page of shows
+    function renderCurrentPage() {
+        // Calculate start and end indices for current page
+        const startIndex = (currentPage - 1) * showsPerPage;
+        const endIndex = Math.min(startIndex + showsPerPage, allShows.length);
+        
+        // Get shows for current page
+        const currentShows = allShows.slice(startIndex, endIndex);
+        
+        // Render shows
+        renderShows(currentShows);
+    }
+    
+    // Function to render pagination
+    function renderPagination() {
+        paginationContainer.innerHTML = '';
+        
+        // Don't show pagination if only one page
+        if (totalPages <= 1) {
+            paginationContainer.style.display = 'none';
+            return;
+        }
+        
+        paginationContainer.style.display = 'flex';
+        
+        // Previous button
+        const prevBtn = document.createElement('button');
+        prevBtn.className = `page-btn ${currentPage === 1 ? 'disabled' : ''}`;
+        prevBtn.innerHTML = '<i class="ti ti-chevron-left"></i>';
+        prevBtn.setAttribute('aria-label', 'Previous page');
+        if (currentPage > 1) {
+            prevBtn.addEventListener('click', () => {
+                currentPage--;
+                renderCurrentPage();
+                renderPagination();
+                // Scroll to top of shows section
+                document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+        paginationContainer.appendChild(prevBtn);
+        
+        // Page buttons (limited to 5 buttons with ellipsis)
+        const renderPageButtons = () => {
+            // Always show first page
+            renderPageButton(1);
+            
+            // Calculate range to show
+            if (totalPages <= 7) {
+                // If 7 or fewer pages, show all page buttons
+                for (let i = 2; i < totalPages; i++) {
+                    renderPageButton(i);
+                }
+            } else {
+                // Handle cases with more than 7 pages
+                if (currentPage <= 3) {
+                    // Near the start
+                    for (let i = 2; i <= 5; i++) {
+                        renderPageButton(i);
+                    }
+                    renderEllipsis();
+                } else if (currentPage >= totalPages - 2) {
+                    // Near the end
+                    renderEllipsis();
+                    for (let i = totalPages - 4; i < totalPages; i++) {
+                        renderPageButton(i);
+                    }
+                } else {
+                    // Middle: show ellipsis on both sides
+                    renderEllipsis();
+                    for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                        renderPageButton(i);
+                    }
+                    renderEllipsis();
+                }
+            }
+            
+            // Always show last page
+            if (totalPages > 1) {
+                renderPageButton(totalPages);
+            }
+        };
+        
+        // Helper to render page button
+        function renderPageButton(pageNum) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `page-btn ${pageNum === currentPage ? 'active' : ''}`;
+            pageBtn.textContent = pageNum;
+            pageBtn.setAttribute('aria-label', `Page ${pageNum}`);
+            if (pageNum !== currentPage) {
+                pageBtn.addEventListener('click', () => {
+                    currentPage = pageNum;
+                    renderCurrentPage();
+                    renderPagination();
+                    // Scroll to top of shows section
+                    document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+            paginationContainer.appendChild(pageBtn);
+        }
+        
+        // Helper to render ellipsis
+        function renderEllipsis() {
+            const ellipsis = document.createElement('span');
+            ellipsis.className = 'page-btn disabled';
+            ellipsis.innerHTML = '&hellip;';
+            ellipsis.style.pointerEvents = 'none';
+            ellipsis.setAttribute('aria-hidden', 'true');
+            paginationContainer.appendChild(ellipsis);
+        }
+        
+        // Render the page buttons
+        renderPageButtons();
+        
+        // Next button
+        const nextBtn = document.createElement('button');
+        nextBtn.className = `page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextBtn.innerHTML = '<i class="ti ti-chevron-right"></i>';
+        nextBtn.setAttribute('aria-label', 'Next page');
+        if (currentPage < totalPages) {
+            nextBtn.addEventListener('click', () => {
+                currentPage++;
+                renderCurrentPage();
+                renderPagination();
+                // Scroll to top of shows section
+                document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+        paginationContainer.appendChild(nextBtn);
+    }
+    
+    // Function to render shows
+    function renderShows(shows) {
+        // Clear container
+        showsContainer.innerHTML = '';
+        
+        // Create show elements
+        shows.forEach(show => {
+            const showElement = document.createElement('div');
+            showElement.className = 'show-item';
+            showElement.innerHTML = `
+                <div class="show-date">
+                    <span class="day">${show.day}</span>
+                    <span class="month">${show.month}</span>
+                </div>
+                <div class="show-info">
+                    <h3>${show.venue}</h3>
+                    <p class="location">${show.location}</p>
+                    <p class="time">${show.time}</p>
+                    <p class="support">${show.support}</p>
+                </div>
+                <div class="show-links">
+                    <a href="https://maps.google.com/?q=${show.mapQuery}" target="_blank" class="btn-small"><i class="ti ti-map-pin"></i> Map</a>
+                </div>
+            `;
+            showsContainer.appendChild(showElement);
+        });
+    }
+    
+    // Initial load of shows (default to upcoming)
+    loadShows(activeTab);
+    
+    // ===== UI OPTIMIZATIONS =====
     // Sticky header
     const header = document.querySelector('header');
     window.addEventListener('scroll', function() {
@@ -304,18 +577,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mailing list form - now redirects to Mailchimp
     const mailingListForm = document.getElementById('mailing-list-form');
     
-    mailingListForm.addEventListener('submit', function(e) {
-        // No need to prevent default, we want it to submit to Mailchimp
-        // Form will open in a new tab thanks to target="_blank" attribute
-        
-        // Optional: You could add tracking here if needed
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'signup', {
-                'event_category': 'Mailing List',
-                'event_label': 'Signup Form'
-            });
-        }
-    });
+    if (mailingListForm) {
+        mailingListForm.addEventListener('submit', function(e) {
+            // No need to prevent default, we want it to submit to Mailchimp
+            // Form will open in a new tab thanks to target="_blank" attribute
+            
+            // Optional: You could add tracking here if needed
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'signup', {
+                    'event_category': 'Mailing List',
+                    'event_label': 'Signup Form'
+                });
+            }
+        });
+    }
 });
 
 // Smooth scrolling for navigation links and any element with scroll-to class

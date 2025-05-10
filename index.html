@@ -25,7 +25,7 @@
     
     <link rel="icon" type="image/png" href="favicon/favicon.png">
     <link rel="apple-touch-icon" href="favicon/favicon.png">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=1.0.1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +36,7 @@
     <header>
         <div class="logo-container">
             <a href="#" class="logo-link">
-                <img src="img/Bromantics-horizontal-white.png" alt="The Bromantics" class="logo">
+                <img src="img/Bromantics-horizontal-white.png?v=1.0.1" alt="The Bromantics" class="logo">
             </a>
         </div>
         <div class="mobile-menu-toggle" id="mobile-menu-toggle">
@@ -184,71 +184,31 @@
 
     <section id="shows" class="shows">
         <div class="container">
-            <h2>Upcoming Shows</h2>
-            <div class="shows-list">
-                <div class="show-item">
-                    <div class="show-date">
-                        <span class="day">24</span>
-                        <span class="month">MAY</span>
-                    </div>
-                    <div class="show-info">
-                        <h3>Progression Brewing Company</h3>
-                        <p class="location">9 Pearl St, Northampton</p>
-                        <p class="time">7:00 - 9:30 PM</p>
-                        <p class="support">Join us at this great brewery in downtown Northampton.</p>
-                    </div>
-                    <div class="show-links">
-                        <a href="https://maps.google.com/?q=Progression+Brewing+Company+9+Pearl+St+Northampton" target="_blank" class="btn-small"><i class="ti ti-map-pin"></i> Map</a>
-                    </div>
+            <h2>Shows</h2>
+            
+            <div class="show-tabs">
+                <button class="tab-btn active" data-tab="upcoming">
+                    <i class="ti ti-calendar-event"></i> Upcoming
+                </button>
+                <button class="tab-btn" data-tab="past">
+                    <i class="ti ti-calendar-stats"></i> Past
+                </button>
+            </div>
+            
+            <div class="shows-list" id="shows-container">
+                <!-- Shows will be loaded dynamically via JavaScript -->
+                <div class="loading-indicator">
+                    <div class="spinner"></div>
+                    <p>Loading shows...</p>
                 </div>
-                
-                <div class="show-item">
-                    <div class="show-date">
-                        <span class="day">06</span>
-                        <span class="month">JUN</span>
-                    </div>
-                    <div class="show-info">
-                        <h3>The Deck</h3>
-                        <p class="location">125A Pleasant St, Northampton</p>
-                        <p class="time">6:00 - 9:00 PM</p>
-                        <p class="support">We'll be outside on the patio playing your favorite tunes!</p>
-                    </div>
-                    <div class="show-links">
-                        <a href="https://maps.google.com/?q=The+Deck+125A+Pleasant+St+Northampton" target="_blank" class="btn-small"><i class="ti ti-map-pin"></i> Map</a>
-                    </div>
-                </div>
-                
-                <div class="show-item">
-                    <div class="show-date">
-                        <span class="day">05</span>
-                        <span class="month">SEP</span>
-                    </div>
-                    <div class="show-info">
-                        <h3>The Deck</h3>
-                        <p class="location">125A Pleasant St, Northampton</p>
-                        <p class="time">6:00 - 9:00 PM</p>
-                        <p class="support">Join us for an outdoor end-of-summer show!</p>
-                    </div>
-                    <div class="show-links">
-                        <a href="https://maps.google.com/?q=The+Deck+125A+Pleasant+St+Northampton" target="_blank" class="btn-small"><i class="ti ti-map-pin"></i> Map</a>
-                    </div>
-                </div>
-                
-                <div class="show-item">
-                    <div class="show-date">
-                        <span class="day">01</span>
-                        <span class="month">NOV</span>
-                    </div>
-                    <div class="show-info">
-                        <h3>New City Brewery</h3>
-                        <p class="location">180 Pleasant St, Easthampton</p>
-                        <p class="time">7:00 - 10:00 PM</p>
-                        <p class="support">Our third annual Halloween show! Wear your costume and celebrate the Day of the Dead!</p>
-                    </div>
-                    <div class="show-links">
-                        <a href="https://maps.google.com/?q=New+City+Brewery+180+Pleasant+St+Easthampton" target="_blank" class="btn-small"><i class="ti ti-map-pin"></i> Map</a>
-                    </div>
-                </div>
+            </div>
+            
+            <div class="pagination" id="pagination-container">
+                <!-- Pagination will be generated dynamically via JavaScript -->
+            </div>
+            
+            <div class="no-shows-message" style="display: none;">
+                <p>No shows to display at this time. Check back soon!</p>
             </div>
         </div>
     </section>
@@ -284,7 +244,7 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=1.0.1"></script>
     <script>
         // Mobile menu functionality
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');

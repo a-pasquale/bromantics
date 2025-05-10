@@ -1,0 +1,74 @@
+{
+  "shows": [
+    {
+      "date": "2025-05-24",
+      "day": "24",
+      "month": "MAY",
+      "venue": "Progression Brewing Company",
+      "location": "9 Pearl St, Northampton",
+      "time": "7:00 - 9:30 PM",
+      "support": "Join us at this great brewery in downtown Northampton.",
+      "mapQuery": "Progression+Brewing+Company+9+Pearl+St+Northampton"
+    },
+    {
+      "date": "2025-06-06",
+      "day": "06",
+      "month": "JUN",
+      "venue": "The Deck",
+      "location": "125A Pleasant St, Northampton",
+      "time": "6:00 - 9:00 PM",
+      "support": "We'll be outside on the patio playing your favorite tunes!",
+      "mapQuery": "The+Deck+125A+Pleasant+St+Northampton"
+    },
+    {
+      "date": "2025-09-05",
+      "day": "05",
+      "month": "SEP",
+      "venue": "The Deck",
+      "location": "125A Pleasant St, Northampton",
+      "time": "6:00 - 9:00 PM",
+      "support": "Join us for an outdoor end-of-summer show!",
+      "mapQuery": "The+Deck+125A+Pleasant+St+Northampton"
+    },
+    {
+      "date": "2025-11-01",
+      "day": "01",
+      "month": "NOV",
+      "venue": "New City Brewery",
+      "location": "180 Pleasant St, Easthampton",
+      "time": "7:00 - 10:00 PM",
+      "support": "Our third annual Halloween show! Wear your costume and celebrate the Day of the Dead!",
+      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton"
+    },
+    {
+      "date": "2024-12-31",
+      "day": "31",
+      "month": "JAN",
+      "venue": "The Guilded Brick",
+      "location": "390 Dwight St, Holyoke",
+      "time": "9:00 PM - late",
+      "support": "Ring in the New Year with us!",
+      "mapQuery": "The+Guilded+Brick+390+Dwight+St+Holyoke"
+    },
+    {
+      "date": "2025-03-08",
+      "day": "8",
+      "month": "MAR",
+      "venue": "The Guilded Brick",
+      "location": "390 Dwight St, Holyoke",
+      "time": "8:00 - 12:00 PM",
+      "support": "Party with us at the Guilded Brick!",
+      "mapQuery": "The+Guilded+Brick+390+Dwight+St+Holyoke"
+    },
+    {
+      "date": "2025-04-11",
+      "day": "11",
+      "month": "APR",
+      "venue": "New City Brewery",
+      "location": "180 Pleasant St, Easthampton",
+      "time": "7:00 - 10:00 PM",
+      "support": "Join us on the dance floor!",
+      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton"
+    }
+  ]
+}
