@@ -1,28 +1,74 @@
 {
   "tracks": [
     {
-      "file": "Blister in the Sun - Progression Brewery 6-8-24.m4a",
-      "title": "Blister in the Sun",
-      "venue": "Progression Brewery",
-      "date": "June 8, 2024"
+      "file": "(What's So Funny 'Bout) Peace, Love and Understanding - New City Brewery 4.11.2025.m4a",
+      "title": "(What's So Funny 'Bout) Peace, Love and Understanding",
+      "venue": "New City Brewery",
+      "date": "April 11, 2025",
+      "original": false
     },
     {
-      "file": "Lips Like Sugar - Progression Brewery 6-8-24.m4a",
-      "title": "Lips Like Sugar",
-      "venue": "Progression Brewery",
-      "date": "June 8, 2024"
+      "file": "Badlands - New City Brewery 4.11.2025.m4a",
+      "title": "Badlands",
+      "venue": "New City Brewery",
+      "date": "April 11, 2025",
+      "original": false
     },
     {
-      "file": "Message to You Rudy - Progression Brewery 6-8-24.m4a",
-      "title": "Message to You Rudy",
-      "venue": "Progression Brewery",
-      "date": "June 8, 2024"
+      "file": "Free and Brave - New City Brewery 11.2.2024.m4a",
+      "title": "Free and Brave",
+      "venue": "New City Brewery",
+      "date": "November 2, 2024",
+      "original": true
     },
     {
-      "file": "Pulling Mussels from the Shell - Progression Brewery 6:8:24.m4a",
-      "title": "Pulling Mussels from the Shell",
+      "file": "Hello Let's Go - The Deck on 8.2.2024.m4a",
+      "title": "Hello Let's Go",
+      "venue": "The Deck",
+      "date": "August 2, 2024",
+      "original": true
+    },
+    {
+      "file": "Here Comes Your Man - Progression Brewery 6.8.2024.m4a",
+      "title": "Here Comes Your Man",
       "venue": "Progression Brewery",
-      "date": "June 8, 2024"
+      "date": "June 8, 2024",
+      "original": false
+    },
+    {
+      "file": "Little Man Walking - Hitchcock Brewing 10.20.2023.m4a",
+      "title": "Little Man Walking",
+      "venue": "Hitchcock Brewing",
+      "date": "October 20, 2023",
+      "original": true
+    },
+    {
+      "file": "Should I Stay or Should I Go - New City Brewery 11.2.2024.m4a",
+      "title": "Should I Stay or Should I Go",
+      "venue": "New City Brewery",
+      "date": "November 2, 2024",
+      "original": false
+    },
+    {
+      "file": "Soul Crushing Creep - New City Brewery 11.2.2024.m4a",
+      "title": "Soul Crushing Creep",
+      "venue": "New City Brewery",
+      "date": "November 2, 2024",
+      "original": true
+    },
+    {
+      "file": "Surrender - The Sevens on 3.22.2025.m4a",
+      "title": "Surrender",
+      "venue": "The Sevens",
+      "date": "March 22, 2025",
+      "original": false
+    },
+    {
+      "file": "Whip It - New City Brewery 11.2.2024.m4a",
+      "title": "Whip It",
+      "venue": "New City Brewery",
+      "date": "November 2, 2024",
+      "original": false
     }
   ]
 }

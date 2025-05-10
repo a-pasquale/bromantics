@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.2.9';
+const VERSION = '1.3.0';
 
 // Using 4 shows per page for optimal display balance
 
@@ -228,9 +228,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         const trackElement = document.createElement('div');
                         trackElement.className = 'track';
                         trackElement.setAttribute('data-src', `audio/${track.file}`);
+
+                        // Check if this is an original song
+                        const isOriginal = track.original === true;
+
                         trackElement.innerHTML = `
                             <div class="track-info">
-                                <h3>${track.title}</h3>
+                                <h3>${track.title}${isOriginal ? ' <span class="original-badge">Original</span>' : ''}</h3>
                                 <p>${track.venue} - ${track.date}</p>
                             </div>
                             <button class="play-btn"><i class="ti ti-player-play"></i></button>
@@ -293,9 +297,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     const trackElement = document.createElement('div');
                     trackElement.className = 'track';
                     trackElement.setAttribute('data-src', `audio/${file}`);
+
+                    // Check if this is an original song (for fallback, we'd need to guess)
+                    const isOriginal = songTitle.match(/Free and Brave|Hello Let's Go|Little Man Walking|Soul Crushing Creep/) !== null;
+
                     trackElement.innerHTML = `
                         <div class="track-info">
-                            <h3>${songTitle}</h3>
+                            <h3>${songTitle}${isOriginal ? ' <span class="original-badge">Original</span>' : ''}</h3>
                             <p>${venue}</p>
                         </div>
                         <button class="play-btn"><i class="ti ti-player-play"></i></button>
