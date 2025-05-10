@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.0.7';
+const VERSION = '1.0.8';
 
 // Using 4 shows per page for optimal display balance
 
@@ -260,17 +260,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update play/pause button icon
     function updatePlayPauseIcon() {
-        playPauseBtn.innerHTML = isPlaying 
-            ? '<i class="ti ti-player-pause"></i>' 
-            : '<i class="ti ti-player-play"></i>';
-        
+        // Update main player button
+        if (isPlaying) {
+            playPauseBtn.innerHTML = '<i class="ti ti-player-pause"></i>';
+            playPauseBtn.setAttribute('aria-label', 'Pause');
+        } else {
+            playPauseBtn.innerHTML = '<i class="ti ti-player-play"></i>';
+            playPauseBtn.setAttribute('aria-label', 'Play');
+        }
+
         // Update individual track play buttons
         tracks.forEach((track, index) => {
             const trackPlayBtn = track.querySelector('.play-btn');
             if (index === currentTrackIndex && isPlaying) {
                 trackPlayBtn.innerHTML = '<i class="ti ti-player-pause"></i>';
+                trackPlayBtn.setAttribute('aria-label', 'Pause');
             } else {
                 trackPlayBtn.innerHTML = '<i class="ti ti-player-play"></i>';
+                trackPlayBtn.setAttribute('aria-label', 'Play');
             }
         });
     }
@@ -309,7 +316,24 @@ document.addEventListener('DOMContentLoaded', function() {
     audioPlayer.addEventListener('timeupdate', function() {
         const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
         progressBar.style.width = progress + '%';
+
+        // Update accessibility attributes
+        const progressContainer = document.querySelector('.progress-container');
+        progressContainer.setAttribute('aria-valuenow', Math.round(progress));
+
+        // Calculate and display time for screen readers
+        const currentTime = formatTime(audioPlayer.currentTime);
+        const duration = formatTime(audioPlayer.duration);
+        progressContainer.setAttribute('aria-valuetext', `${currentTime} of ${duration}`);
     });
+
+    // Format time helper function for accessibility
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    }
     
     // Click on progress bar to seek
     progressContainer.addEventListener('click', function(e) {
