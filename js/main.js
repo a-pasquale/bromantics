@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.1.7';
+const VERSION = '1.1.9';
 
 // Using 4 shows per page for optimal display balance
 
@@ -28,6 +28,23 @@ function getVersionedUrl(url) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Handle direct links to sections using URL hash
+    if (window.location.hash) {
+        const targetId = window.location.hash;
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            // Wait a bit for page to settle
+            setTimeout(() => {
+                const headerOffset = 80;
+                window.scrollTo({
+                    top: targetElement.offsetTop - headerOffset,
+                    behavior: 'smooth'
+                });
+            }, 300);
+        }
+    }
+
     // Initialize video carousel
     initVideoCarousel();
 
@@ -1014,6 +1031,56 @@ document.querySelectorAll('nav a, .scroll-to, .slide-content a').forEach(anchor 
             window.location.hash = targetId;
         }
     });
+});
+
+// Handle URL hash updates when scrolling
+window.addEventListener('scroll', function() {
+    // Don't run this on every scroll event - use throttling
+    if (!window.scrollTimeout) {
+        window.scrollTimeout = setTimeout(function() {
+            // Clear the timeout
+            window.scrollTimeout = null;
+
+            // Get all sections
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY;
+
+            // Find the section that is currently in view
+            // Using a small offset to trigger the section a bit earlier
+            const headerOffset = 100;
+
+            // Track which section is currently in view with the most visibility
+            let currentSection = null;
+            let maxVisibleArea = 0;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - headerOffset;
+                const sectionHeight = section.offsetHeight;
+                const sectionBottom = sectionTop + sectionHeight;
+
+                // Calculate how much of the section is visible in the viewport
+                const viewportHeight = window.innerHeight;
+                const visibleTop = Math.max(sectionTop, scrollPosition);
+                const visibleBottom = Math.min(sectionBottom, scrollPosition + viewportHeight);
+
+                if (visibleBottom > visibleTop) {
+                    const visibleArea = visibleBottom - visibleTop;
+                    if (visibleArea > maxVisibleArea) {
+                        maxVisibleArea = visibleArea;
+                        currentSection = section;
+                    }
+                }
+            });
+
+            // Update URL if a section is in view and it's not already in the URL
+            if (currentSection && currentSection.id) {
+                const hash = '#' + currentSection.id;
+                if (history.replaceState && window.location.hash !== hash) {
+                    history.replaceState(null, null, hash);
+                }
+            }
+        }, 100); // Throttle to run at most every 100ms
+    }
 });
 
 // Update copyright year - using a self-executing function for immediate execution
