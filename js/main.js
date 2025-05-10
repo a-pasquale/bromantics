@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.0.1';
+const VERSION = '1.0.3';
 
 // Using 4 shows per page for optimal display balance
 
@@ -9,12 +9,41 @@ function getVersionedUrl(url) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Add organization structured data for the band
+    function addOrganizationStructuredData() {
+        const organizationData = {
+            "@context": "https://schema.org",
+            "@type": "MusicGroup",
+            "name": "The Bromantics",
+            "description": "Experience the high-voltage energy of The Bromantics, a six-piece powerhouse delivering blistering sets that splice the DNA of icons like Talking Heads, The Clash, and The Cure.",
+            "url": "https://bromantics.band/",
+            "logo": "https://bromantics.band/img/bromantics-stacked-white.png",
+            "image": "https://bromantics.band/img/IMG_5040.jpg",
+            "genre": "New Wave / Post-Punk",
+            "email": "bromanticswmass@gmail.com",
+            "sameAs": [
+                "https://www.instagram.com/bromanticsband/",
+                "https://www.facebook.com/TheBromanticsBand",
+                "https://www.youtube.com/@thebromanticsband"
+            ]
+        };
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.setAttribute('data-organization-schema', '');
+        script.textContent = JSON.stringify(organizationData);
+        document.head.appendChild(script);
+    }
+
+    // Add organization data on page load
+    addOrganizationStructuredData();
+
     // ===== HERO SLIDER =====
     const heroSlides = document.querySelectorAll('.slide');
     const slidePrevBtn = document.querySelector('.arrow.prev');
     const slideNextBtn = document.querySelector('.arrow.next');
     let currentSlide = 0;
-    
+
     // Set interval for automatic slide change
     const slideInterval = setInterval(nextSlide, 6000);
     
@@ -522,6 +551,85 @@ document.addEventListener('DOMContentLoaded', function() {
         paginationContainer.appendChild(nextBtn);
     }
     
+    // Function to generate structured data for events
+    function generateEventStructuredData(shows) {
+        // Only include upcoming shows
+        const upcomingShows = shows.filter(show => new Date(show.date) >= new Date());
+
+        if (upcomingShows.length === 0) return;
+
+        // Remove any existing event structured data
+        const existingStructuredData = document.querySelector('script[data-event-schema]');
+        if (existingStructuredData) {
+            existingStructuredData.remove();
+        }
+
+        // Create JSON-LD structured data
+        const eventData = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": upcomingShows.map((show, index) => {
+                // Parse time for start/end time
+                let startTime = null;
+                let endTime = null;
+
+                if (show.time) {
+                    const timeMatch = show.time.match(/(\d+:\d+)\s*(?:-|–)\s*(\d+:\d+)\s*(AM|PM|am|pm)?/);
+                    if (timeMatch) {
+                        const startHour = timeMatch[1];
+                        const endHour = timeMatch[2];
+                        const period = timeMatch[3] || 'PM'; // Default to PM if not specified
+
+                        startTime = `${show.date}T${startHour}:00`;
+                        endTime = `${show.date}T${endHour}:00`;
+                    }
+                }
+
+                return {
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                        "@type": "MusicEvent",
+                        "name": `The Bromantics at ${show.venue}`,
+                        "startDate": startTime || show.date,
+                        "endDate": endTime || show.date,
+                        "location": {
+                            "@type": "Place",
+                            "name": show.venue,
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": show.location
+                            }
+                        },
+                        "offers": {
+                            "@type": "Offer",
+                            "availability": "https://schema.org/InStock",
+                            "url": `https://bromantics.band/#shows`
+                        },
+                        "performer": {
+                            "@type": "MusicGroup",
+                            "name": "The Bromantics",
+                            "genre": "New Wave / Post-Punk",
+                            "sameAs": [
+                                "https://www.instagram.com/bromanticsband/",
+                                "https://www.facebook.com/TheBromanticsBand",
+                                "https://www.youtube.com/@thebromanticsband"
+                            ]
+                        },
+                        "description": show.support || "Live music by The Bromantics"
+                    }
+                };
+            })
+        };
+
+        // Add to page
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.setAttribute('data-event-schema', '');
+        script.textContent = JSON.stringify(eventData);
+        document.head.appendChild(script);
+    }
+
     // Function to render shows
     function renderShows(shows) {
         // Clear container
@@ -531,16 +639,28 @@ document.addEventListener('DOMContentLoaded', function() {
         shows.forEach(show => {
             const showElement = document.createElement('div');
             showElement.className = 'show-item';
+            
+            // Add microdata attributes for better SEO
+            showElement.setAttribute('itemscope', '');
+            showElement.setAttribute('itemtype', 'https://schema.org/MusicEvent');
+            
             showElement.innerHTML = `
+                <meta itemprop="name" content="The Bromantics at ${show.venue}">
+                <meta itemprop="startDate" content="${show.date}">
+                <meta itemprop="performer" content="The Bromantics">
+                
                 <div class="show-date">
                     <span class="day">${show.day}</span>
                     <span class="month">${show.month}</span>
                 </div>
                 <div class="show-info">
-                    <h3>${show.venue}</h3>
+                    <h3 itemprop="location" itemscope itemtype="https://schema.org/Place">
+                        <span itemprop="name">${show.venue}</span>
+                        <meta itemprop="address" content="${show.location}">
+                    </h3>
                     <p class="location">${show.location}</p>
-                    <p class="time">${show.time}</p>
-                    <p class="support">${show.support}</p>
+                    <p class="time" itemprop="doorTime">${show.time}</p>
+                    <p class="support" itemprop="description">${show.support}</p>
                 </div>
                 <div class="show-links">
                     <a href="https://maps.google.com/?q=${show.mapQuery}" target="_blank" class="btn-small"><i class="ti ti-map-pin"></i> Map</a>
@@ -548,6 +668,11 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             showsContainer.appendChild(showElement);
         });
+        
+        // Generate structured data for events
+        if (activeTab === 'upcoming') {
+            generateEventStructuredData(shows);
+        }
     }
     
     // Initial load of shows (default to upcoming)
@@ -594,15 +719,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Smooth scrolling for navigation links and any element with scroll-to class
-document.querySelectorAll('nav a, .scroll-to').forEach(anchor => {
+document.querySelectorAll('nav a, .scroll-to, .slide-content a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        
+
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
-        
+
+        // Add additional offset for slider links to prevent header overlap
+        const isSliderLink = this.closest('.slide-content') !== null;
+        const headerOffset = isSliderLink ? 100 : 80;
+
         window.scrollTo({
-            top: targetElement.offsetTop - 80, // Adjust for header height
+            top: targetElement.offsetTop - headerOffset, // Adjust for header height with extra offset for slider links
             behavior: 'smooth'
         });
     });
