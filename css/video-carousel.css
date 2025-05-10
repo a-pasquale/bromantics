@@ -1,6 +1,6 @@
 /*
    Video Carousel Styles
-   Version: 1.1.1
+   Version: 1.2.1
 */
 .carousel-container {
     width: 100%;
@@ -20,18 +20,8 @@
     margin: 0 auto;
     overflow: visible;
     width: 100%;
-    cursor: grab; /* Shows that content is swipeable */
-    /* Prevent drag behavior beyond the carousel */
+    /* Swipe functionality removed */
     touch-action: pan-y;
-    /* Limit the swipe effect to just this element */
-    overscroll-behavior-x: contain;
-    /* Make it clear this is a draggable element */
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.video-carousel:active {
-    cursor: grabbing; /* Changes cursor when actively swiping */
 }
 
 .video-container {
@@ -67,7 +57,8 @@
 
     .carousel-container {
         overflow: visible; /* Allow navigation buttons to extend outside */
-        padding: 0 20px; /* Add side padding to accommodate buttons */
+        padding: 0 25px; /* Add more side padding to accommodate the larger buttons */
+        margin: 0 auto;
     }
 
     .video-carousel {
@@ -100,18 +91,25 @@
 
 @media (max-width: 768px) {
     .video-play-overlay {
-        opacity: 0; /* Start transparent - will be visible only for the current video */
+        opacity: 0; /* Start transparent */
         left: 0;
         right: 0;
-        background-color: rgba(0, 0, 0, 0.4); /* Lighter background so video is visible */
-        z-index: 15; /* Higher z-index to ensure it's above everything */
+        background-color: rgba(0, 0, 0, 0.6); /* Darker background for better contrast */
+        z-index: 25; /* Very high z-index to ensure it's above everything */
         pointer-events: auto !important; /* Ensure it captures clicks */
-        touch-action: auto !important; /* Ensure touch events work properly */
+        touch-action: none !important; /* Prevent other touch actions */
+        -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
     }
 
     /* Only show overlay for the current video in view */
     .video-wrapper.current .video-play-overlay {
-        opacity: 0.9;
+        opacity: 1; /* Fully visible */
+    }
+
+    /* Style for when it's been tapped */
+    .video-play-overlay[data-playing="true"] {
+        background-color: transparent !important;
+        pointer-events: none !important;
     }
 
     /* Always show play button on mobile */
@@ -161,53 +159,7 @@
     }
 }
 
-/* Video controls for fullscreen */
-.video-controls {
-    position: absolute;
-    bottom: 10px;
-    right: 10%;
-    z-index: 15;
-    display: flex;
-    justify-content: flex-end;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.video-wrapper:hover .video-controls {
-    opacity: 1;
-}
-
-.fullscreen-btn {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.fullscreen-btn:hover {
-    background-color: var(--primary-color);
-}
-
-@media (max-width: 768px) {
-    .video-controls {
-        opacity: 1;
-        right: 5%;
-        bottom: 15px;
-    }
-
-    .fullscreen-btn {
-        width: 32px;
-        height: 32px;
-        background-color: rgba(var(--primary-color-rgb), 0.8);
-    }
-}
+/* Fullscreen controls have been removed */
 
 /* Override video wrapper frame styles from main CSS */
 .video-carousel .video-wrapper {
@@ -265,6 +217,7 @@
     transition: all 0.3s ease;
     opacity: 0.7;
     border: 1px solid rgba(var(--primary-color-rgb), 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .video-nav:hover, .video-nav:focus {
@@ -283,25 +236,25 @@
 
 @media (max-width: 768px) {
     .video-nav {
-        width: 44px;
-        height: 44px;
-        font-size: 1.3rem;
-        background-color: rgba(0, 0, 0, 0.8); /* Darker background for better contrast */
-        opacity: 0.9; /* More visible */
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+        background-color: rgba(0, 0, 0, 0.85); /* Darker background for better contrast */
+        opacity: 0.95; /* Very visible */
         top: 50%; /* Center vertically */
         transform: translateY(-50%);
         position: absolute;
         z-index: 100; /* Very high z-index to ensure they're on top of everything */
         border: none; /* Remove border on mobile */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow for emphasis */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Stronger shadow for emphasis */
     }
 
     .video-nav.prev {
-        left: 5px; /* Position at the edge but not overlapping content */
+        left: -20px; /* Position much further outside the content area */
     }
 
     .video-nav.next {
-        right: 5px; /* Position at the edge but not overlapping content */
+        right: -20px; /* Position much further outside the content area */
     }
 
     /* Active state for clear touch feedback */

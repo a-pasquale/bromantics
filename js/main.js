@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.3.0';
+const VERSION = '1.3.2';
 
 // Using 4 shows per page for optimal display balance
 
@@ -936,24 +936,27 @@ document.addEventListener('DOMContentLoaded', function() {
                             <i class="ti ti-player-play-filled"></i>
                         </div>
                     </div>
-                    <div class="video-controls">
-                        <button class="fullscreen-btn" aria-label="Fullscreen" data-video-id="${video.id}">
-                            <i class="ti ti-arrows-maximize"></i>
-                        </button>
-                    </div>
                 `;
                 videoGallery.appendChild(videoWrapper);
 
-                // Add click event to play overlay
+                // Add touchend event to play overlay for better mobile support
                 const overlay = videoWrapper.querySelector('.video-play-overlay');
-                overlay.addEventListener('click', function(e) {
+                overlay.addEventListener('touchend', function(e) {
                     e.preventDefault();
                     e.stopPropagation(); // Prevent event bubbling
+
+                    // Prevent double-clicks by checking if already playing
+                    if (this.getAttribute('data-playing') === 'true') {
+                        return;
+                    }
+
+                    // Mark as playing to prevent double-clicks
+                    this.setAttribute('data-playing', 'true');
 
                     // Get the index of this video
                     const videoIndex = parseInt(this.getAttribute('data-index'));
 
-                    // If we're not on the right video (can happen after swiping)
+                    // If we're not on the right video
                     // update the current index without sliding (bypass animation)
                     if (currentVideoIndex !== videoIndex) {
                         console.log(`Video index mismatch: current=${currentVideoIndex}, clicked=${videoIndex}`);
@@ -1008,6 +1011,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     allOverlays.forEach(otherOverlay => {
                         if (otherOverlay !== this) {
                             otherOverlay.style.display = '';
+                            otherOverlay.removeAttribute('data-playing');
                         }
                     });
 
@@ -1016,49 +1020,108 @@ document.addEventListener('DOMContentLoaded', function() {
                                          !window.MSStream &&
                                          /WebKit/.test(navigator.userAgent);
 
-                    if (isMobileSafari) {
-                        // Use a different YouTube embed format for iOS
-                        clickedIframe.src = `https://www.youtube.com/embed/${videoId}?playsinline=1&rel=0&autoplay=1&enablejsapi=1`;
-                    } else {
-                        // Standard format for other browsers
-                        clickedIframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&enablejsapi=1`;
-                    }
-                });
+                    // Add a small delay before changing the iframe src to prevent Safari double-click issues
+                    setTimeout(() => {
+                        if (isMobileSafari) {
+                            // Use a different YouTube embed format for iOS
+                            clickedIframe.src = `https://www.youtube.com/embed/${videoId}?playsinline=1&rel=0&autoplay=1&enablejsapi=1`;
+                        } else {
+                            // Standard format for other browsers
+                            clickedIframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&enablejsapi=1`;
+                        }
+                    }, 50);
+                }, { passive: false });
 
-                // Add fullscreen button functionality
-                const fullscreenBtn = videoWrapper.querySelector('.fullscreen-btn');
-                fullscreenBtn.addEventListener('click', function(e) {
+                // Also keep click event for non-touch devices
+                overlay.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation(); // Prevent event bubbling
 
-                    const videoId = this.getAttribute('data-video-id');
-                    const iframe = videoWrapper.querySelector('iframe');
-
-                    // Detect if this is iOS (where iframe fullscreen often doesn't work)
-                    const isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-                    if (isiOS) {
-                        // For iOS devices, just open in YouTube app or site directly
-                        window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-                    } else {
-                        // For other browsers, try native fullscreen
-                        try {
-                            // Check if browser supports Fullscreen API
-                            if (iframe.requestFullscreen) {
-                                iframe.requestFullscreen();
-                            } else if (iframe.webkitRequestFullscreen) { /* Safari */
-                                iframe.webkitRequestFullscreen();
-                            } else if (iframe.msRequestFullscreen) { /* IE11 */
-                                iframe.msRequestFullscreen();
-                            } else {
-                                // Fallback for browsers that don't support fullscreen API
-                                window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-                            }
-                        } catch (err) {
-                            console.log('Fullscreen API error, opening in new tab');
-                            window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-                        }
+                    // Prevent double-clicks by checking if already playing
+                    if (this.getAttribute('data-playing') === 'true') {
+                        return;
                     }
+
+                    // Mark as playing to prevent double-clicks
+                    this.setAttribute('data-playing', 'true');
+
+                    // Get the index of this video
+                    const videoIndex = parseInt(this.getAttribute('data-index'));
+
+                    // If we're not on the right video
+                    // update the current index without sliding (bypass animation)
+                    if (currentVideoIndex !== videoIndex) {
+                        console.log(`Video index mismatch: current=${currentVideoIndex}, clicked=${videoIndex}`);
+                        // Set the index directly without animating
+                        currentVideoIndex = videoIndex;
+
+                        // Update the position immediately without animation
+                        const gallery = document.querySelector('.video-gallery');
+                        if (gallery) {
+                            gallery.style.transition = 'none'; // Disable transition temporarily
+                            const position = currentVideoIndex * 100;
+                            gallery.style.transform = `translateX(-${position}%)`;
+                            // Force a reflow to ensure the style change takes effect
+                            void gallery.offsetWidth;
+                            // Re-enable transition for future changes
+                            gallery.style.transition = 'transform 0.5s ease';
+                        }
+
+                        // Update UI state for the carousel
+                        updateCarousel();
+                    }
+
+                    // Hide this overlay immediately
+                    this.style.display = 'none';
+
+                    // Get current iframe
+                    const clickedIframe = this.previousElementSibling;
+                    const videoId = clickedIframe.getAttribute('data-video-id');
+
+                    // Pause audio player if it's playing
+                    if (audioPlayer && !audioPlayer.paused) {
+                        pauseTrack();
+                    }
+
+                    // Make sure iframe is accessible (for platforms that block iframes)
+                    clickedIframe.style.pointerEvents = 'auto';
+                    clickedIframe.style.zIndex = '10';
+
+                    // Stop all OTHER videos (not the one we're about to play)
+                    const allIframes = document.querySelectorAll('.video-wrapper iframe');
+                    allIframes.forEach(iframe => {
+                        if (iframe !== clickedIframe) {
+                            const otherVideoId = iframe.getAttribute('data-video-id');
+                            if (otherVideoId) {
+                                iframe.src = `https://www.youtube.com/embed/${otherVideoId}?rel=0&enablejsapi=1`;
+                            }
+                        }
+                    });
+
+                    // Show all OTHER overlays
+                    const allOverlays = document.querySelectorAll('.video-play-overlay');
+                    allOverlays.forEach(otherOverlay => {
+                        if (otherOverlay !== this) {
+                            otherOverlay.style.display = '';
+                            otherOverlay.removeAttribute('data-playing');
+                        }
+                    });
+
+                    // For mobile Safari, we need to handle this differently
+                    const isMobileSafari = /iPhone|iPad|iPod/.test(navigator.userAgent) &&
+                                         !window.MSStream &&
+                                         /WebKit/.test(navigator.userAgent);
+
+                    // Add a small delay before changing the iframe src to prevent Safari double-click issues
+                    setTimeout(() => {
+                        if (isMobileSafari) {
+                            // Use a different YouTube embed format for iOS
+                            clickedIframe.src = `https://www.youtube.com/embed/${videoId}?playsinline=1&rel=0&autoplay=1&enablejsapi=1`;
+                        } else {
+                            // Standard format for other browsers
+                            clickedIframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&enablejsapi=1`;
+                        }
+                    }, 50);
                 });
             });
 
@@ -1164,90 +1227,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Touch swipe functionality for the carousel
-        function addSwipeSupport() {
-            // DISABLED: Touch swipe functionality completely removed to prevent page scroll issues
-            // We'll rely only on the navigation buttons which work more reliably
-            return;
-
-            let touchStartX = 0;
-            let touchEndX = 0;
-            const minSwipeDistance = 50; // Minimum distance required for a swipe
-
-            let isSwiping = false;
-
-            carousel.addEventListener('touchstart', function(e) {
-                // Set isSwiping to false initially
-                isSwiping = false;
-
-                // Store starting position
-                touchStartX = e.changedTouches[0].screenX;
-
-                // Check if the target is a .video-wrapper or gallery element directly
-                const isCarouselElement = e.target.closest('.video-wrapper') ||
-                                         e.target.closest('.video-gallery');
-
-                // Check if we're NOT touching an interactive element
-                const isInteractive = e.target.closest('.video-play-overlay') ||
-                                     e.target.closest('.fullscreen-btn') ||
-                                     e.target.closest('.video-nav');
-
-                // Only set isSwiping to true for carousel elements that aren't interactive
-                if (isCarouselElement && !isInteractive) {
-                    isSwiping = true;
-                }
-            }, { passive: true });
-
-            // Simplified touchmove handler - just track position without visual effects
-            carousel.addEventListener('touchmove', function(e) {
-                // Only record the current touch position without any visual manipulation
-                touchEndX = e.changedTouches[0].screenX;
-
-                // Prevent default for horizontal swipes when we're swiping the carousel
-                if (isSwiping && Math.abs(touchEndX - touchStartX) > 10) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-
-            carousel.addEventListener('touchend', function(e) {
-                // Update ending position
-                touchEndX = e.changedTouches[0].screenX;
-
-                // Only process swipe if isSwiping is true
-                if (isSwiping) {
-                    handleSwipe();
-                }
-
-                // Reset isSwiping to false
-                isSwiping = false;
-            }, { passive: true });
-
-            // Simple touchcancel handler - just reset tracking
-            carousel.addEventListener('touchcancel', function() {
-                // Reset touch tracking variables
-                touchStartX = 0;
-                touchEndX = 0;
-            }, { passive: true });
-
-            function handleSwipe() {
-                const swipeDistance = touchEndX - touchStartX;
-
-                if (Math.abs(swipeDistance) >= minSwipeDistance) {
-                    // Determine swipe direction
-                    if (swipeDistance > 0) {
-                        // Swiped right (previous video)
-                        prevVideo();
-                    } else {
-                        // Swiped left (next video)
-                        nextVideo();
-                    }
-                }
-            }
-        }
+        // NOTE: Touch swipe functionality has been intentionally removed to prevent page scroll issues
+        // We rely only on the navigation buttons which work more reliably
 
         // Initialize
         createVideoElements();
-        addSwipeSupport();
+        // NOTE: Both swipe support and fullscreen functionality have been intentionally removed
 
         // Videos continue playing even when scrolled away
     }
