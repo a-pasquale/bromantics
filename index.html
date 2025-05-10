@@ -34,6 +34,7 @@
     <link rel="icon" type="image/png" href="favicon/favicon.png">
     <link rel="apple-touch-icon" href="favicon/favicon.png">
     <link rel="stylesheet" href="css/styles.css?v=1.0.7">
+    <link rel="stylesheet" href="css/video-carousel.css?v=1.0.3">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -185,10 +186,14 @@
     <section id="video" class="video">
         <div class="container">
             <h2>Video</h2>
-            <div class="video-gallery">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/HUsfZO2Gh5s?rel=0" title="The Bromantics - I Wanna Be Sedated (Cover)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="video-carousel">
+                <div class="video-container">
+                    <div class="video-gallery">
+                        <!-- Videos will be populated here via JavaScript -->
+                    </div>
                 </div>
+                <button class="video-nav prev" aria-label="Previous video"><i class="ti ti-chevron-left"></i></button>
+                <button class="video-nav next" aria-label="Next video"><i class="ti ti-chevron-right"></i></button>
             </div>
         </div>
     </section>
@@ -285,7 +290,7 @@
         </div>
     </footer>
 
-    <script src="js/main.js?v=1.0.8"></script>
+    <script src="js/main.js?v=1.1.7"></script>
     <script>
         // Set copyright year
         document.getElementById('copyright-year').textContent = new Date().getFullYear();

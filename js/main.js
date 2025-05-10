@@ -1,7 +1,26 @@
 // Version control for cache busting
-const VERSION = '1.0.8';
+const VERSION = '1.1.7';
 
 // Using 4 shows per page for optimal display balance
+
+// Global function to stop all videos
+function stopAllVideos() {
+    const allIframes = document.querySelectorAll('.video-wrapper iframe');
+    allIframes.forEach(iframe => {
+        // Get the video ID from data attribute
+        const videoId = iframe.getAttribute('data-video-id');
+        if (videoId) {
+            // Completely remake the src to ensure it stops
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+        }
+    });
+
+    // Show all play overlays
+    const overlays = document.querySelectorAll('.video-play-overlay');
+    overlays.forEach(overlay => {
+        overlay.style.display = '';
+    });
+}
 
 // Helper function to add version to URLs
 function getVersionedUrl(url) {
@@ -9,6 +28,9 @@ function getVersionedUrl(url) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize video carousel
+    initVideoCarousel();
+
     // Add organization structured data for the band
     function addOrganizationStructuredData() {
         const organizationData = {
@@ -162,8 +184,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add click events to the new track elements
                 tracks.forEach(track => {
                     track.addEventListener('click', function() {
+                        console.log('Track clicked - will play track');
                         const index = Array.from(tracks).indexOf(this);
                         loadTrack(index);
+
+                        // Explicitly stop any playing videos before playing audio
+                        stopAllVideos();
+
                         playTrack();
                     });
                 });
@@ -218,8 +245,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add click events to the new track elements
                 tracks.forEach(track => {
                     track.addEventListener('click', function() {
+                        console.log('Track clicked - will play track');
                         const index = Array.from(tracks).indexOf(this);
                         loadTrack(index);
+
+                        // Explicitly stop any playing videos before playing audio
+                        stopAllVideos();
+
                         playTrack();
                     });
                 });
@@ -246,6 +278,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Play track function
     function playTrack() {
+        console.log('Play track called - stopping videos');
+        // Stop any playing videos first
+        stopAllVideos();
+
         audioPlayer.play();
         isPlaying = true;
         updatePlayPauseIcon();
@@ -286,14 +322,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function prevTrack() {
         currentTrackIndex = (currentTrackIndex - 1 + trackData.length) % trackData.length;
         loadTrack(currentTrackIndex);
-        if (isPlaying) playTrack();
+        if (isPlaying) {
+            stopAllVideos();
+            playTrack();
+        }
     }
-    
+
     // Next track function
     function nextTrack() {
         currentTrackIndex = (currentTrackIndex + 1) % trackData.length;
         loadTrack(currentTrackIndex);
-        if (isPlaying) playTrack();
+        if (isPlaying) {
+            stopAllVideos();
+            playTrack();
+        }
     }
     
     // Event listeners
@@ -305,6 +347,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!audioPlayer.src || audioPlayer.src === '') {
                 loadTrack(0);
             }
+
+            // Always stop videos when playing audio
+            stopAllVideos();
+
             playTrack();
         }
     });
@@ -710,6 +756,208 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial load of shows (default to upcoming)
     loadShows(activeTab);
     
+    // ===== VIDEO CAROUSEL =====
+    function initVideoCarousel() {
+        const videoGallery = document.querySelector('.video-gallery');
+        const prevBtn = document.querySelector('.video-nav.prev');
+        const nextBtn = document.querySelector('.video-nav.next');
+
+        // Video data
+        const videos = [
+            {
+                id: 'HUsfZO2Gh5s',
+                title: 'The Bromantics - I Wanna Be Sedated (Cover)'
+            },
+            {
+                id: 'JKAPtkGTcgs',
+                title: 'The Bromantics - Echo Beach (Cover)'
+            },
+            {
+                id: 'dxuhfqz_3fE',
+                title: 'The Bromantics - This Charming Man (Cover)'
+            }
+            // Add more videos as needed
+        ];
+
+        let currentVideoIndex = 0;
+
+        // Create video elements
+        function createVideoElements() {
+            videoGallery.innerHTML = '';
+
+            videos.forEach((video, index) => {
+                const videoWrapper = document.createElement('div');
+                videoWrapper.className = 'video-wrapper';
+
+                // Create iframe with autoplay parameter removed (to prevent autoplay)
+                videoWrapper.innerHTML = `
+                    <iframe
+                        src="https://www.youtube.com/embed/${video.id}?rel=0"
+                        title="${video.title}"
+                        frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy"
+                        data-video-id="${video.id}">
+                    </iframe>
+                    <div class="video-play-overlay" data-index="${index}">
+                        <div class="play-icon">
+                            <i class="ti ti-player-play-filled"></i>
+                        </div>
+                    </div>
+                `;
+                videoGallery.appendChild(videoWrapper);
+
+                // Add click event to play overlay
+                const overlay = videoWrapper.querySelector('.video-play-overlay');
+                overlay.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const videoIndex = parseInt(this.getAttribute('data-index'));
+
+                    // Hide this overlay immediately
+                    this.style.display = 'none';
+
+                    // Get current iframe
+                    const clickedIframe = this.previousElementSibling;
+                    const videoId = clickedIframe.getAttribute('data-video-id');
+
+                    // Pause audio player if it's playing
+                    if (audioPlayer && !audioPlayer.paused) {
+                        pauseTrack();
+                    }
+
+                    // Stop all OTHER videos (not the one we're about to play)
+                    const allIframes = document.querySelectorAll('.video-wrapper iframe');
+                    allIframes.forEach(iframe => {
+                        if (iframe !== clickedIframe) {
+                            const otherVideoId = iframe.getAttribute('data-video-id');
+                            if (otherVideoId) {
+                                iframe.src = `https://www.youtube.com/embed/${otherVideoId}?rel=0`;
+                            }
+                        }
+                    });
+
+                    // Show all OTHER overlays
+                    const allOverlays = document.querySelectorAll('.video-play-overlay');
+                    allOverlays.forEach(otherOverlay => {
+                        if (otherOverlay !== this) {
+                            otherOverlay.style.display = '';
+                        }
+                    });
+
+                    // Start this video with a slight delay to ensure others are stopped
+                    setTimeout(() => {
+                        clickedIframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
+                    }, 100);
+                });
+            });
+
+            // Create video dots for navigation
+            createVideoDots();
+
+            // Add counter display
+            const videoCarousel = document.querySelector('.video-carousel');
+            const counterDiv = document.createElement('div');
+            counterDiv.className = 'video-counter';
+            counterDiv.textContent = `1 / ${videos.length}`;
+            counterDiv.setAttribute('aria-live', 'polite');
+            videoCarousel.appendChild(counterDiv);
+        }
+
+        // Create navigation dots
+        function createVideoDots() {
+            const videoCarousel = document.querySelector('.video-carousel');
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'video-dots';
+            dotsContainer.setAttribute('role', 'tablist');
+            dotsContainer.setAttribute('aria-label', 'Video navigation');
+
+            videos.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = index === 0 ? 'video-dot active' : 'video-dot';
+                dot.setAttribute('role', 'tab');
+                dot.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+                dot.setAttribute('aria-label', `Video ${index + 1}`);
+                dot.addEventListener('click', () => goToVideo(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            videoCarousel.appendChild(dotsContainer);
+        }
+
+        // Function to update carousel
+        function updateCarousel() {
+            // Simple position calculation - each video takes 100% of container
+            const position = currentVideoIndex * 100;
+
+            // Update gallery position
+            videoGallery.style.transform = `translateX(-${position}%)`;
+
+            // Reset all overlays
+            const overlays = document.querySelectorAll('.video-play-overlay');
+            overlays.forEach(overlay => {
+                overlay.style.display = '';
+            });
+
+            // Ensure videos are clickable
+            const allIframes = document.querySelectorAll('.video-wrapper iframe');
+            allIframes.forEach(iframe => {
+                iframe.style.pointerEvents = 'auto';
+            });
+
+            // Update counter
+            const counter = document.querySelector('.video-counter');
+            if (counter) {
+                counter.textContent = `${currentVideoIndex + 1} / ${videos.length}`;
+            }
+
+            // Update dots
+            const dots = document.querySelectorAll('.video-dot');
+            dots.forEach((dot, index) => {
+                if (index === currentVideoIndex) {
+                    dot.classList.add('active');
+                    dot.setAttribute('aria-selected', 'true');
+                } else {
+                    dot.classList.remove('active');
+                    dot.setAttribute('aria-selected', 'false');
+                }
+            });
+        }
+
+        // Go to specific video
+        function goToVideo(index) {
+            currentVideoIndex = index;
+            updateCarousel();
+        }
+
+        // Next video
+        function nextVideo() {
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            updateCarousel();
+        }
+
+        // Previous video
+        function prevVideo() {
+            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+            updateCarousel();
+        }
+
+        // Event listeners
+        if (prevBtn) prevBtn.addEventListener('click', prevVideo);
+        if (nextBtn) nextBtn.addEventListener('click', nextVideo);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.target.closest('.video-carousel')) {
+                if (e.key === 'ArrowLeft') prevVideo();
+                if (e.key === 'ArrowRight') nextVideo();
+            }
+        });
+
+        // Initialize
+        createVideoElements();
+    }
+
     // ===== UI OPTIMIZATIONS =====
     // Sticky header
     const header = document.querySelector('header');
@@ -722,14 +970,6 @@ document.addEventListener('DOMContentLoaded', function() {
             header.style.backgroundColor = 'rgba(10, 10, 10, 0.9)';
         }
     });
-    
-    // Video section optimizations
-    const videoFrame = document.querySelector('.video-wrapper iframe');
-    
-    // Add loading attribute for better performance
-    if (videoFrame) {
-        videoFrame.loading = 'lazy';
-    }
     
     // Mailing list form - now redirects to Mailchimp
     const mailingListForm = document.getElementById('mailing-list-form');
@@ -765,6 +1005,14 @@ document.querySelectorAll('nav a, .scroll-to, .slide-content a').forEach(anchor 
             top: targetElement.offsetTop - headerOffset,
             behavior: 'smooth'
         });
+
+        // Update URL with hash without triggering a page jump
+        if (history.pushState) {
+            history.pushState(null, null, targetId);
+        } else {
+            // Fallback for older browsers
+            window.location.hash = targetId;
+        }
     });
 });
 
