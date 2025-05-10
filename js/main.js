@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <h3>${track.title}</h3>
                                 <p>${track.venue} - ${track.date}</p>
                             </div>
-                            <button class="play-btn"><i class="bi bi-play-fill"></i></button>
+                            <button class="play-btn"><i class="ti ti-player-play"></i></button>
                         `;
                         
                         // Add to the playlist container
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <h3>${songTitle}</h3>
                             <p>${venue}</p>
                         </div>
-                        <button class="play-btn"><i class="bi bi-play-fill"></i></button>
+                        <button class="play-btn"><i class="ti ti-player-play"></i></button>
                     `;
                     
                     // Add to the playlist container
@@ -192,16 +192,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update play/pause button icon
     function updatePlayPauseIcon() {
         playPauseBtn.innerHTML = isPlaying 
-            ? '<i class="bi bi-pause-fill"></i>' 
-            : '<i class="bi bi-play-fill"></i>';
+            ? '<i class="ti ti-player-pause"></i>' 
+            : '<i class="ti ti-player-play"></i>';
         
         // Update individual track play buttons
         tracks.forEach((track, index) => {
             const trackPlayBtn = track.querySelector('.play-btn');
             if (index === currentTrackIndex && isPlaying) {
-                trackPlayBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                trackPlayBtn.innerHTML = '<i class="ti ti-player-pause"></i>';
             } else {
-                trackPlayBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+                trackPlayBtn.innerHTML = '<i class="ti ti-player-play"></i>';
             }
         });
     }
