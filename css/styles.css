@@ -41,6 +41,7 @@ body {
 h1, h2, h3, h4 {
     margin-bottom: 1rem;
     line-height: 1.2;
+    text-transform: capitalize; /* Ensures Title Case */
 }
 
 h2 {
@@ -3015,7 +3016,7 @@ footer p:last-child {
     
     h2 {
         font-size: 2.2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 4rem;
     }
     
     /* Button adjustments */
@@ -3132,6 +3133,11 @@ footer p:last-child {
 
 /* Extra small devices */
 @media (max-width: 375px) {
+    /* Adjust section headings */
+    h2 {
+        margin-bottom: 3.5rem;
+    }
+    
     /* Adjust slider buttons */
     .slide-content .btn {
         max-width: 75%;
