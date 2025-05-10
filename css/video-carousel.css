@@ -1,18 +1,23 @@
 /*
    Video Carousel Styles
-   Version: 1.2.1
+   Version: 1.4.2 - Increased play button background opacity to full for better visibility
 */
 .carousel-container {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    overflow: hidden;
-    /* Set touch action to just handle y-axis scrolling, limiting x-axis to the carousel */
-    touch-action: pan-y pinch-zoom;
-    /* Prevent elastic scrolling on iOS */
-    -webkit-overflow-scrolling: auto;
-    /* Don't interfere with page scrolling */
+    overflow-x: hidden; /* Explicitly prevent horizontal overflow */
+    overflow-y: visible; /* Allow vertical overflow for navigation elements */
+    /* Block all touch actions in the container */
+    touch-action: none;
+    /* Prevent scroll chaining */
     overscroll-behavior: none;
+    /* Prevent accidental selection */
+    -webkit-user-select: none;
+    user-select: none;
+    /* Additional fixes for iOS */
+    position: relative;
+    z-index: 1;
 }
 .video-carousel {
     position: relative;
@@ -20,20 +25,24 @@
     margin: 0 auto;
     overflow: visible;
     width: 100%;
-    /* Swipe functionality removed */
-    touch-action: pan-y;
+    /* Block all touch actions except for tap */
+    touch-action: none;
+    /* Ensure it doesn't interfere with page scrolling */
+    pointer-events: auto;
 }
 
 .video-container {
     width: 100%;
-    overflow: visible;
-    padding: 0 10px;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    box-sizing: border-box; /* Include padding in width calculation */
+    padding: 0 5px; /* Reduced padding for better gap visibility */
 }
 
 .video-gallery {
     display: flex;
     transition: transform 0.5s ease;
-    width: 100%;
+    width: calc(100% + 10px); /* Add a bit of extra width to account for margins */
+    column-gap: 10px; /* Add column gap for more spacing control */
 }
 
 /* Swipe animation class */
@@ -44,21 +53,32 @@
 .video-wrapper {
     min-width: 100%;
     flex: 0 0 100%;
-    padding: 0 9%;
+    padding: 0 4%; /* Reduced padding to create visual gap */
     box-sizing: border-box;
     transition: all 0.5s ease;
     position: relative;
+    margin: 0;
 }
 
 @media (max-width: 768px) {
     .video-wrapper {
-        padding: 0 0; /* No padding for full-width videos on mobile */
+        padding: 0 4px; /* Add a little padding on mobile */
+        margin: 0 6px; /* Slightly larger gap on mobile to ensure visibility */
+        box-sizing: border-box;
+        max-width: calc(100% - 12px); /* Account for margins */
+    }
+
+    .video-gallery {
+        width: calc(100% + 24px); /* Ensure we have room for proper spacing */
+        column-gap: 12px; /* More gap on mobile */
     }
 
     .carousel-container {
-        overflow: visible; /* Allow navigation buttons to extend outside */
+        overflow-x: hidden; /* Prevent horizontal overflow */
+        overflow-y: visible; /* Allow vertical overflow if needed */
         padding: 0 25px; /* Add more side padding to accommodate the larger buttons */
         margin: 0 auto;
+        position: relative; /* Ensure proper stacking context */
     }
 
     .video-carousel {
@@ -66,11 +86,11 @@
     }
 }
 
-.video-play-overlay {
+.video-play-overlay, .video-thumbnail-overlay {
     position: absolute;
     top: 0;
-    left: 9%;
-    right: 9%;
+    left: 4%;
+    right: 4%;
     bottom: 0;
     display: flex;
     align-items: center;
@@ -81,19 +101,20 @@
     transition: opacity 0.3s ease;
     cursor: pointer;
     z-index: 10;
-    pointer-events: none; /* By default, overlay doesn't intercept clicks */
 }
 
-/* Only make overlay clickable when it's the current video */
-.video-wrapper.current .video-play-overlay {
-    pointer-events: auto;
+/* Only show overlay on hover for desktop */
+.video-wrapper:hover .video-play-overlay {
+    opacity: 1;
 }
+
+/* Removed unused thumbnail styles */
 
 @media (max-width: 768px) {
-    .video-play-overlay {
+    .video-play-overlay, .video-thumbnail-overlay {
         opacity: 0; /* Start transparent */
-        left: 0;
-        right: 0;
+        left: 3%;
+        right: 3%;
         background-color: rgba(0, 0, 0, 0.6); /* Darker background for better contrast */
         z-index: 25; /* Very high z-index to ensure it's above everything */
         pointer-events: auto !important; /* Ensure it captures clicks */
@@ -101,58 +122,70 @@
         -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
     }
 
-    /* Only show overlay for the current video in view */
-    .video-wrapper.current .video-play-overlay {
-        opacity: 1; /* Fully visible */
+    /* Overlay styles are now primarily managed through JavaScript for maximum compatibility */
+    /* These styles act as a fallback only */
+    .carousel-container .video-wrapper.current .video-play-overlay,
+    .carousel-container .video-wrapper.current .video-thumbnail-overlay {
+        opacity: 1; /* Fallback in case JS doesn't work */
+        background-color: rgba(0, 0, 0, 0.6); /* Fallback background color */
     }
+}
 
-    /* Style for when it's been tapped */
-    .video-play-overlay[data-playing="true"] {
-        background-color: transparent !important;
-        pointer-events: none !important;
-    }
+/* Style for when it's been tapped */
+.video-play-overlay[data-playing="true"],
+.video-thumbnail-overlay[data-loading="true"] {
+    background-color: transparent !important;
+    pointer-events: none !important;
+}
 
-    /* Always show play button on mobile */
-    .video-play-overlay .play-icon {
+/* Always show play button on mobile */
+@media (max-width: 768px) {
+    .video-play-overlay .play-icon,
+    .video-thumbnail-overlay .play-icon {
         opacity: 1;
         transform: scale(1.1); /* Make it a bit larger */
-        background-color: rgba(var(--primary-color-rgb), 0.9);
+        background-color: rgba(var(--primary-color-rgb), 1.0); /* Fully opaque background */
         width: 70px; /* Larger target for mobile */
         height: 70px;
         font-size: 2.2rem;
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.7); /* More pronounced shadow */
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.9); /* More pronounced shadow with increased opacity */
     }
 
-    .video-play-overlay:active .play-icon {
+    .video-play-overlay:active .play-icon,
+    .video-thumbnail-overlay:active .play-icon {
         transform: scale(0.9); /* Feedback when pressed */
     }
 }
 
-.video-play-overlay:hover {
+.video-play-overlay:hover,
+.video-thumbnail-overlay:hover {
     opacity: 1;
 }
 
-.video-play-overlay .play-icon {
+.video-play-overlay .play-icon,
+.video-thumbnail-overlay .play-icon {
     width: 80px;
     height: 80px;
-    background-color: rgba(var(--primary-color-rgb), 0.8);
+    background-color: rgba(var(--primary-color-rgb), 1.0); /* Increased opacity to fully opaque */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2.5rem;
     color: white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Increased shadow opacity for better visibility */
     transform: scale(0.8);
     transition: transform 0.3s ease;
 }
 
-.video-play-overlay:hover .play-icon {
+.video-play-overlay:hover .play-icon,
+.video-thumbnail-overlay:hover .play-icon {
     transform: scale(1);
 }
 
 @media (max-width: 768px) {
-    .video-play-overlay .play-icon {
+    .video-play-overlay .play-icon,
+    .video-thumbnail-overlay .play-icon {
         width: 60px;
         height: 60px;
         font-size: 1.8rem;
@@ -163,7 +196,7 @@
 
 /* Override video wrapper frame styles from main CSS */
 .video-carousel .video-wrapper {
-    padding: 0 9%;
+    padding: 0 4%; /* Reduced padding to create visual gap between videos */
     overflow: hidden;
     border-radius: 0;
     margin: 0;
@@ -184,7 +217,7 @@
 
 @media (max-width: 768px) {
     .video-carousel .video-wrapper {
-        padding: 0;
+        padding: 0 3%; /* Slightly smaller padding on mobile but still maintain gap */
     }
 
     .video-carousel .video-wrapper iframe {
@@ -192,8 +225,8 @@
     }
 
     .video-play-overlay {
-        left: 0;
-        right: 0;
+        left: 3%;
+        right: 3%;
         border-radius: 4px;
     }
 }

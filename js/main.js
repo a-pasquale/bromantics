@@ -1,11 +1,13 @@
 // Version control for cache busting
-const VERSION = '1.3.2';
+const VERSION = '1.4.7';
 
 // Using 4 shows per page for optimal display balance
 
 // Global function to stop all videos
 function stopAllVideos() {
     console.log("Stopping all videos");
+
+    // Handle all videos on all devices
     const allIframes = document.querySelectorAll('.video-wrapper iframe');
     allIframes.forEach(iframe => {
         // Get the video ID from data attribute
@@ -19,9 +21,6 @@ function stopAllVideos() {
                 }), '*');
 
                 // Method 2: Force the iframe to reload with a new src
-                const currentSrc = iframe.src;
-
-                // First clear the src completely
                 iframe.src = 'about:blank';
 
                 // After a very short delay, reset the src to the proper embed URL with enablejsapi=1
@@ -36,10 +35,11 @@ function stopAllVideos() {
         }
     });
 
-    // Method 3: Show all play overlays
-    const overlays = document.querySelectorAll('.video-play-overlay');
+    // Show all play overlays and reset loading state
+    const overlays = document.querySelectorAll('.video-thumbnail-overlay');
     overlays.forEach(overlay => {
         overlay.style.display = '';
+        overlay.setAttribute('data-loading', 'false');
     });
 }
 
@@ -49,6 +49,14 @@ function getVersionedUrl(url) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Prevent dragging on carousel container (added at top level)
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        // Prevent touch events from affecting page scrolling
+        carouselContainer.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    }
     // Venmo deep linking with fallback
     const venmoAppLink = document.getElementById('venmo-app-link');
     if (venmoAppLink) {
@@ -911,18 +919,18 @@ document.addEventListener('DOMContentLoaded', function() {
         function createVideoElements() {
             videoGallery.innerHTML = '';
 
+            // Check if this is a mobile device
+            const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
             videos.forEach((video, index) => {
                 const videoWrapper = document.createElement('div');
                 videoWrapper.className = index === 0 ? 'video-wrapper current' : 'video-wrapper';
+                videoWrapper.setAttribute('data-video-id', video.id);
 
-                // Detect if this is iOS for specific parameters
-                const isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
-                const iOSParam = isiOS ? '&playsinline=1' : '';
-
-                // Create iframe with proper parameters for each platform
+                // Use iframe for embedded experience on all devices (mobile and desktop)
                 videoWrapper.innerHTML = `
                     <iframe
-                        src="https://www.youtube.com/embed/${video.id}?rel=0&enablejsapi=1${iOSParam}"
+                        src="https://www.youtube.com/embed/${video.id}?rel=0&enablejsapi=1"
                         title="${video.title}"
                         frameborder="0"
                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
@@ -931,204 +939,51 @@ document.addEventListener('DOMContentLoaded', function() {
                         data-video-id="${video.id}"
                         class="youtube-player">
                     </iframe>
-                    <div class="video-play-overlay" data-index="${index}">
-                        <div class="play-icon">
+                    <div class="video-thumbnail-overlay" data-video-id="${video.id}" data-loading="false" style="background-color: rgba(0, 0, 0, 0.6); opacity: ${index === 0 ? '1' : '0'};">
+                        <div class="play-icon" style="background-color: rgba(var(--primary-color-rgb), 1.0); opacity: 1;">
                             <i class="ti ti-player-play-filled"></i>
                         </div>
                     </div>
                 `;
-                videoGallery.appendChild(videoWrapper);
 
-                // Add touchend event to play overlay for better mobile support
-                const overlay = videoWrapper.querySelector('.video-play-overlay');
-                overlay.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation(); // Prevent event bubbling
+                // Add mousedown/touchstart event for overlay to prevent double-click issues
+                const overlay = videoWrapper.querySelector('.video-thumbnail-overlay');
+                const eventType = isMobile ? 'touchstart' : 'mousedown';
 
-                    // Prevent double-clicks by checking if already playing
-                    if (this.getAttribute('data-playing') === 'true') {
+                overlay.addEventListener(eventType, function(event) {
+                    // Prevent default behavior immediately
+                    event.preventDefault();
+
+                    // Check if already loading (prevents double triggers)
+                    if (this.getAttribute('data-loading') === 'true') {
                         return;
                     }
 
-                    // Mark as playing to prevent double-clicks
-                    this.setAttribute('data-playing', 'true');
+                    // Set loading state
+                    this.setAttribute('data-loading', 'true');
 
-                    // Get the index of this video
-                    const videoIndex = parseInt(this.getAttribute('data-index'));
-
-                    // If we're not on the right video
-                    // update the current index without sliding (bypass animation)
-                    if (currentVideoIndex !== videoIndex) {
-                        console.log(`Video index mismatch: current=${currentVideoIndex}, clicked=${videoIndex}`);
-                        // Set the index directly without animating
-                        currentVideoIndex = videoIndex;
-
-                        // Update the position immediately without animation
-                        const gallery = document.querySelector('.video-gallery');
-                        if (gallery) {
-                            gallery.style.transition = 'none'; // Disable transition temporarily
-                            const position = currentVideoIndex * 100;
-                            gallery.style.transform = `translateX(-${position}%)`;
-                            // Force a reflow to ensure the style change takes effect
-                            void gallery.offsetWidth;
-                            // Re-enable transition for future changes
-                            gallery.style.transition = 'transform 0.5s ease';
-                        }
-
-                        // Update UI state for the carousel
-                        updateCarousel();
-                    }
-
-                    // Hide this overlay immediately
-                    this.style.display = 'none';
-
-                    // Get current iframe
-                    const clickedIframe = this.previousElementSibling;
-                    const videoId = clickedIframe.getAttribute('data-video-id');
+                    // Make overlay transparent instead of hiding it completely
+                    this.style.backgroundColor = 'transparent';
+                    this.style.pointerEvents = 'none';
 
                     // Pause audio player if it's playing
                     if (audioPlayer && !audioPlayer.paused) {
                         pauseTrack();
                     }
 
-                    // Make sure iframe is accessible (for platforms that block iframes)
-                    clickedIframe.style.pointerEvents = 'auto';
-                    clickedIframe.style.zIndex = '10';
+                    // Get the iframe and video ID
+                    const iframe = this.previousElementSibling;
+                    const videoId = this.getAttribute('data-video-id');
 
-                    // Stop all OTHER videos (not the one we're about to play)
-                    const allIframes = document.querySelectorAll('.video-wrapper iframe');
-                    allIframes.forEach(iframe => {
-                        if (iframe !== clickedIframe) {
-                            const otherVideoId = iframe.getAttribute('data-video-id');
-                            if (otherVideoId) {
-                                iframe.src = `https://www.youtube.com/embed/${otherVideoId}?rel=0&enablejsapi=1`;
-                            }
-                        }
-                    });
-
-                    // Show all OTHER overlays
-                    const allOverlays = document.querySelectorAll('.video-play-overlay');
-                    allOverlays.forEach(otherOverlay => {
-                        if (otherOverlay !== this) {
-                            otherOverlay.style.display = '';
-                            otherOverlay.removeAttribute('data-playing');
-                        }
-                    });
-
-                    // For mobile Safari, we need to handle this differently
-                    const isMobileSafari = /iPhone|iPad|iPod/.test(navigator.userAgent) &&
-                                         !window.MSStream &&
-                                         /WebKit/.test(navigator.userAgent);
-
-                    // Add a small delay before changing the iframe src to prevent Safari double-click issues
-                    setTimeout(() => {
-                        if (isMobileSafari) {
-                            // Use a different YouTube embed format for iOS
-                            clickedIframe.src = `https://www.youtube.com/embed/${videoId}?playsinline=1&rel=0&autoplay=1&enablejsapi=1`;
-                        } else {
-                            // Standard format for other browsers
-                            clickedIframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&enablejsapi=1`;
-                        }
-                    }, 50);
-                }, { passive: false });
-
-                // Also keep click event for non-touch devices
-                overlay.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation(); // Prevent event bubbling
-
-                    // Prevent double-clicks by checking if already playing
-                    if (this.getAttribute('data-playing') === 'true') {
-                        return;
-                    }
-
-                    // Mark as playing to prevent double-clicks
-                    this.setAttribute('data-playing', 'true');
-
-                    // Get the index of this video
-                    const videoIndex = parseInt(this.getAttribute('data-index'));
-
-                    // If we're not on the right video
-                    // update the current index without sliding (bypass animation)
-                    if (currentVideoIndex !== videoIndex) {
-                        console.log(`Video index mismatch: current=${currentVideoIndex}, clicked=${videoIndex}`);
-                        // Set the index directly without animating
-                        currentVideoIndex = videoIndex;
-
-                        // Update the position immediately without animation
-                        const gallery = document.querySelector('.video-gallery');
-                        if (gallery) {
-                            gallery.style.transition = 'none'; // Disable transition temporarily
-                            const position = currentVideoIndex * 100;
-                            gallery.style.transform = `translateX(-${position}%)`;
-                            // Force a reflow to ensure the style change takes effect
-                            void gallery.offsetWidth;
-                            // Re-enable transition for future changes
-                            gallery.style.transition = 'transform 0.5s ease';
-                        }
-
-                        // Update UI state for the carousel
-                        updateCarousel();
-                    }
-
-                    // Hide this overlay immediately
-                    this.style.display = 'none';
-
-                    // Get current iframe
-                    const clickedIframe = this.previousElementSibling;
-                    const videoId = clickedIframe.getAttribute('data-video-id');
-
-                    // Pause audio player if it's playing
-                    if (audioPlayer && !audioPlayer.paused) {
-                        pauseTrack();
-                    }
-
-                    // Make sure iframe is accessible (for platforms that block iframes)
-                    clickedIframe.style.pointerEvents = 'auto';
-                    clickedIframe.style.zIndex = '10';
-
-                    // Stop all OTHER videos (not the one we're about to play)
-                    const allIframes = document.querySelectorAll('.video-wrapper iframe');
-                    allIframes.forEach(iframe => {
-                        if (iframe !== clickedIframe) {
-                            const otherVideoId = iframe.getAttribute('data-video-id');
-                            if (otherVideoId) {
-                                iframe.src = `https://www.youtube.com/embed/${otherVideoId}?rel=0&enablejsapi=1`;
-                            }
-                        }
-                    });
-
-                    // Show all OTHER overlays
-                    const allOverlays = document.querySelectorAll('.video-play-overlay');
-                    allOverlays.forEach(otherOverlay => {
-                        if (otherOverlay !== this) {
-                            otherOverlay.style.display = '';
-                            otherOverlay.removeAttribute('data-playing');
-                        }
-                    });
-
-                    // For mobile Safari, we need to handle this differently
-                    const isMobileSafari = /iPhone|iPad|iPod/.test(navigator.userAgent) &&
-                                         !window.MSStream &&
-                                         /WebKit/.test(navigator.userAgent);
-
-                    // Add a small delay before changing the iframe src to prevent Safari double-click issues
-                    setTimeout(() => {
-                        if (isMobileSafari) {
-                            // Use a different YouTube embed format for iOS
-                            clickedIframe.src = `https://www.youtube.com/embed/${videoId}?playsinline=1&rel=0&autoplay=1&enablejsapi=1`;
-                        } else {
-                            // Standard format for other browsers
-                            clickedIframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&enablejsapi=1`;
-                        }
-                    }, 50);
+                    // Update iframe src to autoplay the video immediately (no delay)
+                    iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&enablejsapi=1`;
                 });
+
+                videoGallery.appendChild(videoWrapper);
             });
 
             // Create video dots for navigation
             createVideoDots();
-
-            // No visible counter display - using dots for visual navigation
         }
 
         // Create navigation dots
@@ -1154,13 +1009,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Function to update carousel
         function updateCarousel() {
-            // Simple position calculation - each video takes 100% of container
+            // Calculate position with gap between videos
             const position = currentVideoIndex * 100;
 
-            // Update gallery position
-            videoGallery.style.transform = `translateX(-${position}%)`;
+            // Calculate percentage-based offset to match our percentage-based padding
+            // This is simpler now that we're using consistent 4% padding (3% on mobile)
+            const isMobile = window.innerWidth <= 768;
+            const gapPercentage = isMobile ? 6 : 8; // 3% on each side for mobile, 4% on each side for desktop
 
-            // Reset all overlays and update current video class
+            // Calculate the total offset as a percentage
+            const percentageOffset = currentVideoIndex * gapPercentage;
+
+            // Update gallery position using percentage-based calculations for consistency
+            videoGallery.style.transform = `translateX(-${position + percentageOffset}%)`;
+
+            // Reset all videos and update current video class
             const videoWrappers = document.querySelectorAll('.video-wrapper');
             videoWrappers.forEach((wrapper, index) => {
                 // Remove current class from all wrappers
@@ -1171,17 +1034,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     wrapper.classList.add('current');
                 }
 
-                // Reset overlay display
-                const overlay = wrapper.querySelector('.video-play-overlay');
-                if (overlay) {
-                    overlay.style.display = '';
-                }
-            });
+                // Reset iframe sources and show overlays for all devices
+                const iframe = wrapper.querySelector('iframe');
+                const overlay = wrapper.querySelector('.video-thumbnail-overlay');
 
-            // Ensure videos are clickable
-            const allIframes = document.querySelectorAll('.video-wrapper iframe');
-            allIframes.forEach(iframe => {
-                iframe.style.pointerEvents = 'auto';
+                if (iframe && overlay) {
+                    const videoId = wrapper.getAttribute('data-video-id');
+                    if (videoId) {
+                        // Reset iframe source
+                        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&enablejsapi=1`;
+
+                        // Show overlay and set opacity directly in JS
+                        overlay.style.display = '';
+
+                        // Explicitly set opacity based on whether this is the current video
+                        if (index === currentVideoIndex) {
+                            overlay.style.opacity = '1';
+                        } else {
+                            overlay.style.opacity = '0';
+                        }
+
+                        // Reset loading state
+                        overlay.setAttribute('data-loading', 'false');
+                    }
+                }
             });
 
             // Update dots
@@ -1232,6 +1108,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize
         createVideoElements();
+
+        // Add event handler to prevent page scrolling on carousel touch
+        const carousel = document.querySelector('.video-carousel');
+        if (carousel) {
+            // Prevent touch events from propagating to page
+            ['touchstart', 'touchmove', 'touchend'].forEach(eventName => {
+                carousel.addEventListener(eventName, function(e) {
+                    // Stop propagation to prevent page from receiving these events
+                    e.stopPropagation();
+
+                    // For touchmove, also prevent default to stop page scrolling
+                    if (eventName === 'touchmove') {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            });
+        }
+
         // NOTE: Both swipe support and fullscreen functionality have been intentionally removed
 
         // Videos continue playing even when scrolled away

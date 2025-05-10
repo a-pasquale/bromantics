@@ -1340,8 +1340,12 @@ body.menu-open {
 .video {
     background-color: var(--darker-bg);
     position: relative;
-    /* Prevent issues with video carousel swipe affecting page */
+    /* Prevent issues with video carousel affecting page */
+    overflow-x: hidden; /* Explicitly prevent horizontal overflow */
     overscroll-behavior: contain;
+    touch-action: manipulation;
+    isolation: isolate; /* Create a new stacking context */
+    z-index: 1;
 }
 
 /* Apply consistent section heading animations */
