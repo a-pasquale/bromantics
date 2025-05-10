@@ -44,4 +44,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 The Bromantics - [bromanticswmass@gmail.com](mailto:bromanticswmass@gmail.com)
 
-Website: [https://thebromantics.com](https://thebromantics.com)
+Website: [https://bromantics.band](https://bromantics.band)
