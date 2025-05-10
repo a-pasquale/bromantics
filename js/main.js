@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.0.3';
+const VERSION = '1.0.7';
 
 // Using 4 shows per page for optimal display balance
 
@@ -634,24 +634,32 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderShows(shows) {
         // Clear container
         showsContainer.innerHTML = '';
-        
+
         // Create show elements
         shows.forEach(show => {
             const showElement = document.createElement('div');
             showElement.className = 'show-item';
-            
+
             // Add microdata attributes for better SEO
             showElement.setAttribute('itemscope', '');
             showElement.setAttribute('itemtype', 'https://schema.org/MusicEvent');
-            
+
+            // Extract year from date for all shows in the past tab
+            const showDate = new Date(show.date);
+            const showYear = showDate.getFullYear();
+
+            // Always show year for shows in the past tab
+            const isPastShow = activeTab === 'past';
+
             showElement.innerHTML = `
                 <meta itemprop="name" content="The Bromantics at ${show.venue}">
                 <meta itemprop="startDate" content="${show.date}">
                 <meta itemprop="performer" content="The Bromantics">
-                
+
                 <div class="show-date">
                     <span class="day">${show.day}</span>
                     <span class="month">${show.month}</span>
+                    ${isPastShow ? `<span class="year">${showYear}</span>` : ''}
                 </div>
                 <div class="show-info">
                     <h3 itemprop="location" itemscope itemtype="https://schema.org/Place">
@@ -668,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             showsContainer.appendChild(showElement);
         });
-        
+
         // Generate structured data for events
         if (activeTab === 'upcoming') {
             generateEventStructuredData(shows);
@@ -726,12 +734,11 @@ document.querySelectorAll('nav a, .scroll-to, .slide-content a').forEach(anchor 
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
 
-        // Add additional offset for slider links to prevent header overlap
-        const isSliderLink = this.closest('.slide-content') !== null;
-        const headerOffset = isSliderLink ? 100 : 80;
+        // Use consistent header offset for all links
+        const headerOffset = 80; // Adjust for header height
 
         window.scrollTo({
-            top: targetElement.offsetTop - headerOffset, // Adjust for header height with extra offset for slider links
+            top: targetElement.offsetTop - headerOffset,
             behavior: 'smooth'
         });
     });

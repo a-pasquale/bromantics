@@ -1692,8 +1692,16 @@ h2 {
     color: var(--primary-color);
     font-family: 'League Gothic', sans-serif;
     letter-spacing: 2px;
+}
+
+.show-date .year {
+    font-size: 1rem;
+    color: rgba(var(--primary-color-rgb), 0.85);
+    font-family: 'League Gothic', sans-serif;
+    letter-spacing: 1px;
     text-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.4);
     margin-top: -0.2rem;
+    display: block;
 }
 
 .time {
@@ -2947,6 +2955,10 @@ footer p:last-child {
     
     .month {
         font-size: 1.8rem;
+    }
+
+    .show-date .year {
+        font-size: 1.1rem;
     }
     
     .show-links {
