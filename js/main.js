@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.1.9';
+const VERSION = '1.2.0';
 
 // Using 4 shows per page for optimal display balance
 
@@ -873,17 +873,17 @@ document.addEventListener('DOMContentLoaded', function() {
             createVideoDots();
 
             // Add counter display
-            const videoCarousel = document.querySelector('.video-carousel');
+            const carouselContainer = document.querySelector('.carousel-container');
             const counterDiv = document.createElement('div');
             counterDiv.className = 'video-counter';
             counterDiv.textContent = `1 / ${videos.length}`;
             counterDiv.setAttribute('aria-live', 'polite');
-            videoCarousel.appendChild(counterDiv);
+            carouselContainer.appendChild(counterDiv);
         }
 
         // Create navigation dots
         function createVideoDots() {
-            const videoCarousel = document.querySelector('.video-carousel');
+            const carouselContainer = document.querySelector('.carousel-container');
             const dotsContainer = document.createElement('div');
             dotsContainer.className = 'video-dots';
             dotsContainer.setAttribute('role', 'tablist');
@@ -899,7 +899,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dotsContainer.appendChild(dot);
             });
 
-            videoCarousel.appendChild(dotsContainer);
+            carouselContainer.appendChild(dotsContainer);
         }
 
         // Function to update carousel
