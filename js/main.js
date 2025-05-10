@@ -1,21 +1,42 @@
 // Version control for cache busting
-const VERSION = '1.2.1';
+const VERSION = '1.2.5';
 
 // Using 4 shows per page for optimal display balance
 
 // Global function to stop all videos
 function stopAllVideos() {
+    console.log("Stopping all videos");
     const allIframes = document.querySelectorAll('.video-wrapper iframe');
     allIframes.forEach(iframe => {
         // Get the video ID from data attribute
         const videoId = iframe.getAttribute('data-video-id');
         if (videoId) {
-            // Completely remake the src to ensure it stops
-            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            try {
+                // Method 1: Try to use YouTube API postMessage to stop the video
+                iframe.contentWindow.postMessage(JSON.stringify({
+                    event: 'command',
+                    func: 'stopVideo'
+                }), '*');
+
+                // Method 2: Force the iframe to reload with a new src
+                const currentSrc = iframe.src;
+
+                // First clear the src completely
+                iframe.src = 'about:blank';
+
+                // After a very short delay, reset the src to the proper embed URL with enablejsapi=1
+                setTimeout(() => {
+                    iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&enablejsapi=1`;
+                }, 100);
+            } catch (e) {
+                console.error("Error stopping video:", e);
+                // Fallback: just change the source directly
+                iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&enablejsapi=1`;
+            }
         }
     });
 
-    // Show all play overlays
+    // Method 3: Show all play overlays
     const overlays = document.querySelectorAll('.video-play-overlay');
     overlays.forEach(overlay => {
         overlay.style.display = '';
@@ -240,7 +261,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Explicitly stop any playing videos before playing audio
                         stopAllVideos();
 
-                        playTrack();
+                        // Longer delay to ensure videos have properly stopped
+                        setTimeout(() => {
+                            playTrack();
+                        }, 150);
                     });
                 });
             })
@@ -301,7 +325,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Explicitly stop any playing videos before playing audio
                         stopAllVideos();
 
-                        playTrack();
+                        // Longer delay to ensure videos have properly stopped
+                        setTimeout(() => {
+                            playTrack();
+                        }, 150);
                     });
                 });
             });
@@ -398,9 +425,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Always stop videos when playing audio
+            // First stop the videos immediately
             stopAllVideos();
 
-            playTrack();
+            // Then play the audio with a longer delay to ensure videos have properly stopped
+            setTimeout(() => {
+                playTrack();
+            }, 150);
         }
     });
     
@@ -439,6 +470,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // When track ends, play next track
     audioPlayer.addEventListener('ended', nextTrack);
+
+    // Ensure videos are stopped when audio starts playing
+    audioPlayer.addEventListener('play', function() {
+        console.log('Audio started playing - ensuring videos are stopped');
+        stopAllVideos();
+    });
     
     // ===== SHOWS SECTION =====
     // Shows container and UI elements
@@ -459,24 +496,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners for tab buttons
     tabButtons.forEach(btn => {
         btn.addEventListener('click', function() {
+            // If already active, do nothing
+            if (this.classList.contains('active')) return;
+
             // Update active tab
             activeTab = this.getAttribute('data-tab');
-            
+
             // Update active button styling
             tabButtons.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            
+
             // Reset to first page when changing tabs
             currentPage = 1;
-            
-            // Show loading indicator
-            showsContainer.innerHTML = '';
-            loadingIndicator.style.display = 'flex';
-            noShowsMessage.style.display = 'none';
-            paginationContainer.innerHTML = '';
-            
-            // Load shows for the selected tab
-            loadShows(activeTab);
+
+            // First fade out the current content
+            showsContainer.classList.add('fade-out');
+
+            // After fade out completes, update content
+            setTimeout(() => {
+                // Clear content and show loading indicator
+                showsContainer.innerHTML = '';
+                loadingIndicator.style.display = 'flex';
+                noShowsMessage.style.display = 'none';
+                paginationContainer.innerHTML = '';
+
+                // Load shows for the selected tab
+                loadShows(activeTab);
+            }, 300); // Match this timing with the CSS transition duration
         });
     });
     
@@ -572,11 +618,16 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.setAttribute('aria-label', 'Previous page');
         if (currentPage > 1) {
             prevBtn.addEventListener('click', () => {
-                currentPage--;
-                renderCurrentPage();
-                renderPagination();
-                // Scroll to top of shows section
-                document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+                // Add fade-out effect
+                showsContainer.classList.add('fade-out');
+
+                setTimeout(() => {
+                    currentPage--;
+                    renderCurrentPage();
+                    renderPagination();
+                    // Scroll to top of shows section
+                    document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
             });
         }
         paginationContainer.appendChild(prevBtn);
@@ -630,11 +681,16 @@ document.addEventListener('DOMContentLoaded', function() {
             pageBtn.setAttribute('aria-label', `Page ${pageNum}`);
             if (pageNum !== currentPage) {
                 pageBtn.addEventListener('click', () => {
-                    currentPage = pageNum;
-                    renderCurrentPage();
-                    renderPagination();
-                    // Scroll to top of shows section
-                    document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+                    // Add fade-out effect
+                    showsContainer.classList.add('fade-out');
+
+                    setTimeout(() => {
+                        currentPage = pageNum;
+                        renderCurrentPage();
+                        renderPagination();
+                        // Scroll to top of shows section
+                        document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
                 });
             }
             paginationContainer.appendChild(pageBtn);
@@ -660,11 +716,16 @@ document.addEventListener('DOMContentLoaded', function() {
         nextBtn.setAttribute('aria-label', 'Next page');
         if (currentPage < totalPages) {
             nextBtn.addEventListener('click', () => {
-                currentPage++;
-                renderCurrentPage();
-                renderPagination();
-                // Scroll to top of shows section
-                document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+                // Add fade-out effect
+                showsContainer.classList.add('fade-out');
+
+                setTimeout(() => {
+                    currentPage++;
+                    renderCurrentPage();
+                    renderPagination();
+                    // Scroll to top of shows section
+                    document.getElementById('shows').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
             });
         }
         paginationContainer.appendChild(nextBtn);
@@ -754,6 +815,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear container
         showsContainer.innerHTML = '';
 
+        // Make sure fade-out class is removed and add it back after rendering
+        showsContainer.classList.add('fade-out');
+
         // Create show elements
         shows.forEach(show => {
             const showElement = document.createElement('div');
@@ -800,6 +864,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (activeTab === 'upcoming') {
             generateEventStructuredData(shows);
         }
+
+        // After a brief delay, fade the content back in
+        setTimeout(() => {
+            showsContainer.classList.remove('fade-out');
+        }, 50);
     }
     
     // Initial load of shows (default to upcoming)
@@ -838,21 +907,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 const videoWrapper = document.createElement('div');
                 videoWrapper.className = 'video-wrapper';
 
-                // Create iframe with autoplay parameter removed (to prevent autoplay)
+                // Create iframe with enablejsapi=1 to allow API control
                 videoWrapper.innerHTML = `
                     <iframe
-                        src="https://www.youtube.com/embed/${video.id}?rel=0"
+                        src="https://www.youtube.com/embed/${video.id}?rel=0&enablejsapi=1"
                         title="${video.title}"
                         frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                         allowfullscreen
                         loading="lazy"
-                        data-video-id="${video.id}">
+                        data-video-id="${video.id}"
+                        class="youtube-player">
                     </iframe>
                     <div class="video-play-overlay" data-index="${index}">
                         <div class="play-icon">
                             <i class="ti ti-player-play-filled"></i>
                         </div>
+                    </div>
+                    <div class="video-controls">
+                        <button class="fullscreen-btn" aria-label="Fullscreen" data-video-id="${video.id}">
+                            <i class="ti ti-arrows-maximize"></i>
+                        </button>
                     </div>
                 `;
                 videoGallery.appendChild(videoWrapper);
@@ -861,6 +936,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const overlay = videoWrapper.querySelector('.video-play-overlay');
                 overlay.addEventListener('click', function(e) {
                     e.preventDefault();
+                    e.stopPropagation(); // Prevent event bubbling
                     const videoIndex = parseInt(this.getAttribute('data-index'));
 
                     // Hide this overlay immediately
@@ -881,7 +957,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (iframe !== clickedIframe) {
                             const otherVideoId = iframe.getAttribute('data-video-id');
                             if (otherVideoId) {
-                                iframe.src = `https://www.youtube.com/embed/${otherVideoId}?rel=0`;
+                                iframe.src = `https://www.youtube.com/embed/${otherVideoId}?rel=0&enablejsapi=1`;
                             }
                         }
                     });
@@ -896,21 +972,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // Start this video with a slight delay to ensure others are stopped
                     setTimeout(() => {
-                        clickedIframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
+                        clickedIframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&enablejsapi=1`;
                     }, 100);
+                });
+
+                // Add fullscreen button functionality
+                const fullscreenBtn = videoWrapper.querySelector('.fullscreen-btn');
+                fullscreenBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Prevent event bubbling
+
+                    const videoId = this.getAttribute('data-video-id');
+                    const iframe = videoWrapper.querySelector('iframe');
+
+                    // Check if browser supports Fullscreen API
+                    if (iframe.requestFullscreen) {
+                        iframe.requestFullscreen();
+                    } else if (iframe.webkitRequestFullscreen) { /* Safari */
+                        iframe.webkitRequestFullscreen();
+                    } else if (iframe.msRequestFullscreen) { /* IE11 */
+                        iframe.msRequestFullscreen();
+                    } else {
+                        // Fallback for browsers that don't support fullscreen API
+                        // Open video in a new tab
+                        window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+                    }
                 });
             });
 
             // Create video dots for navigation
             createVideoDots();
 
-            // Add counter display
-            const carouselContainer = document.querySelector('.carousel-container');
-            const counterDiv = document.createElement('div');
-            counterDiv.className = 'video-counter';
-            counterDiv.textContent = `1 / ${videos.length}`;
-            counterDiv.setAttribute('aria-live', 'polite');
-            carouselContainer.appendChild(counterDiv);
+            // No visible counter display - using dots for visual navigation
         }
 
         // Create navigation dots
@@ -954,11 +1047,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 iframe.style.pointerEvents = 'auto';
             });
 
-            // Update counter
-            const counter = document.querySelector('.video-counter');
-            if (counter) {
-                counter.textContent = `${currentVideoIndex + 1} / ${videos.length}`;
-            }
+            // Counter display removed - using dots for navigation
 
             // Update dots
             const dots = document.querySelectorAll('.video-dot');
@@ -1003,8 +1092,123 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // Touch swipe functionality for the carousel
+        function addSwipeSupport() {
+            const carousel = document.querySelector('.video-carousel');
+            if (!carousel) return;
+
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const minSwipeDistance = 50; // Minimum distance required for a swipe
+
+            carousel.addEventListener('touchstart', function(e) {
+                // Store starting position
+                touchStartX = e.changedTouches[0].screenX;
+
+                // Check if we're touching an interactive element
+                const isInteractive = e.target.closest('.video-play-overlay') ||
+                                     e.target.closest('.fullscreen-btn') ||
+                                     e.target.closest('.video-nav');
+
+                if (!isInteractive) {
+                    // Add swiping class for immediate feedback during touch
+                    const gallery = document.querySelector('.video-gallery');
+                    if (gallery) {
+                        gallery.classList.add('swiping');
+                    }
+                }
+
+                // Don't prevent default behavior - allows play buttons to be clicked
+            }, { passive: true });
+
+            // Add touchmove handler for visual feedback during swipe
+            carousel.addEventListener('touchmove', function(e) {
+                const isInteractive = e.target.closest('.video-play-overlay') ||
+                                     e.target.closest('.fullscreen-btn') ||
+                                     e.target.closest('.video-nav');
+
+                // Skip if we're touching interactive elements
+                if (!isInteractive) {
+                    const currentX = e.changedTouches[0].screenX;
+                    const dragDistance = currentX - touchStartX;
+
+                    // Apply subtle visual drag effect if movement is significant
+                    if (Math.abs(dragDistance) > 10) {
+                        const gallery = document.querySelector('.video-gallery');
+                        if (gallery) {
+                            const currentPosition = currentVideoIndex * 100;
+                            const dragEffect = dragDistance * 0.1; // Scale down for subtle effect
+                            gallery.style.transform = `translateX(-${currentPosition - dragEffect}%)`;
+                        }
+                    }
+                }
+            }, { passive: true });
+
+            carousel.addEventListener('touchend', function(e) {
+                // Get the ending position
+                touchEndX = e.changedTouches[0].screenX;
+
+                // Check if we're touching an interactive element
+                const isInteractive = e.target.closest('.video-play-overlay') ||
+                                     e.target.closest('.fullscreen-btn') ||
+                                     e.target.closest('.video-nav');
+
+                // Remove swiping class to restore normal transition
+                const gallery = document.querySelector('.video-gallery');
+                if (gallery) {
+                    gallery.classList.remove('swiping');
+
+                    // Reset the transform if we're not processing the swipe
+                    // or if it wasn't a significant enough swipe
+                    const swipeDistance = touchEndX - touchStartX;
+                    if (isInteractive || Math.abs(swipeDistance) < minSwipeDistance) {
+                        const currentPosition = currentVideoIndex * 100;
+                        setTimeout(() => {
+                            gallery.style.transform = `translateX(-${currentPosition}%)`;
+                        }, 10);
+                    }
+                }
+
+                // Don't process swipe if the touch target is a play overlay or control button
+                if (!isInteractive) {
+                    handleSwipe();
+                }
+            }, { passive: true });
+
+            // Handle touchcancel event for edge cases
+            carousel.addEventListener('touchcancel', function() {
+                // Reset state if touch is cancelled
+                const gallery = document.querySelector('.video-gallery');
+                if (gallery) {
+                    gallery.classList.remove('swiping');
+
+                    // Reset position
+                    const currentPosition = currentVideoIndex * 100;
+                    gallery.style.transform = `translateX(-${currentPosition}%)`;
+                }
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeDistance = touchEndX - touchStartX;
+
+                if (Math.abs(swipeDistance) >= minSwipeDistance) {
+                    // Determine swipe direction
+                    if (swipeDistance > 0) {
+                        // Swiped right (previous video)
+                        prevVideo();
+                    } else {
+                        // Swiped left (next video)
+                        nextVideo();
+                    }
+                }
+            }
+        }
+
         // Initialize
         createVideoElements();
+        addSwipeSupport();
+
+        // Videos continue playing even when scrolled away
     }
 
     // ===== UI OPTIMIZATIONS =====
