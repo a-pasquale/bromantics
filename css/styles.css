@@ -1052,109 +1052,6 @@ nav ul li a:focus::after {
     }
 }
 
-/* Instagram Feed Section */
-.instagram-feed {
-    background-color: var(--dark-bg);
-    position: relative;
-    overflow: hidden;
-    border-top: 1px solid rgba(225, 48, 108, 0.2);
-    border-bottom: 1px solid rgba(225, 48, 108, 0.2);
-}
-
-.instagram-feed::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 15% 15%, rgba(225, 48, 108, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 85% 85%, rgba(225, 48, 108, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.instagram-container {
-    position: relative;
-    z-index: 1;
-}
-
-.instagram-feed h2 {
-    color: #fff;
-    text-shadow: 
-        0 0 5px rgba(225, 48, 108, 0.7),
-        0 0 10px rgba(225, 48, 108, 0.5),
-        0 0 15px rgba(225, 48, 108, 0.3);
-    position: relative;
-    display: inline-block;
-    margin-bottom: 3rem;
-}
-
-.instagram-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.instagram-media {
-    margin: 0 !important;
-    min-width: 0 !important;
-    width: 100% !important;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
-    transition: all 0.3s ease !important;
-}
-
-.instagram-media:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
-}
-
-.insta-follow-link {
-    text-align: center;
-    margin: 3rem 0 1rem;
-}
-
-.insta-follow-link .btn {
-    background-color: rgba(225, 48, 108, 0.8);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 
-        0 0 10px rgba(225, 48, 108, 0.4),
-        4px 4px 0 rgba(0, 0, 0, 0.2);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    letter-spacing: 2px;
-    padding: 1rem 2rem;
-    transition: all 0.3s ease;
-}
-
-.insta-follow-link .btn:hover {
-    background-color: rgba(225, 48, 108, 1);
-    transform: translateY(-5px) translateX(-5px);
-    box-shadow: 
-        0 0 20px rgba(225, 48, 108, 0.6),
-        8px 8px 0 rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.7);
-}
-
-.insta-follow-link .btn i {
-    margin-right: 0.5rem;
-    font-size: 1.2em;
-}
-
-@media (max-width: 992px) {
-    .instagram-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .instagram-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* Videos Section */
 .videos {
     background-color: var(--darker-bg);
@@ -1922,4 +1819,14 @@ footer p {
         width: 100%;
         margin-bottom: 1rem;
     }
+}
+
+.logo-link {
+    display: block;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.logo-link:hover {
+    opacity: 0.9;
 }
