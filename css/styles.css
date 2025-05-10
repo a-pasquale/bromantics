@@ -47,31 +47,19 @@ h1, h2, h3, h4 {
 h2 {
     font-size: 2.8rem;
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
     position: relative;
     color: var(--light-text);
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 3px 3px 0 var(--secondary-color);
+    text-shadow: 2px 2px 0 rgba(var(--secondary-color-rgb), 0.7);
     display: inline-block;
     width: 100%;
     font-family: 'Poppins', 'Arial', sans-serif;
     font-weight: 700;
 }
 
-h2:after {
-    content: '';
-    position: absolute;
-    bottom: -1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, 
-        var(--accent-color) 0%, 
-        var(--primary-color) 50%,
-        var(--secondary-color) 100%);
-}
+/* Horizontal rule removed */
 
 h2:before {
     content: '';
