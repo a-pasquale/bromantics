@@ -607,3 +607,11 @@ document.querySelectorAll('nav a, .scroll-to').forEach(anchor => {
         });
     });
 });
+
+// Update copyright year - using a self-executing function for immediate execution
+(function() {
+    const copyrightYearElement = document.getElementById('copyright-year');
+    if (copyrightYearElement) {
+        copyrightYearElement.textContent = new Date().getFullYear();
+    }
+})();

@@ -25,7 +25,7 @@
     
     <link rel="icon" type="image/png" href="favicon/favicon.png">
     <link rel="apple-touch-icon" href="favicon/favicon.png">
-    <link rel="stylesheet" href="css/styles.css?v=1.0.1">
+    <link rel="stylesheet" href="css/styles.css?v=1.0.2">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,8 +48,9 @@
             <ul>
                 <li><a href="#music">Music</a></li>
                 <li><a href="#connect">Connect</a></li>
-                <li><a href="#videos">Videos</a></li>
+                <li><a href="#video">Video</a></li>
                 <li><a href="#shows">Shows</a></li>
+                <li><a href="#merch">Merch</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -171,12 +172,12 @@
         </div>
     </section>
 
-    <section id="videos" class="videos">
+    <section id="video" class="video">
         <div class="container">
-            <h2>Videos</h2>
+            <h2>Video</h2>
             <div class="video-gallery">
                 <div class="video-wrapper">
-                    <iframe width="800" height="450" src="https://www.youtube.com/embed/HUsfZO2Gh5s?rel=0" title="The Bromantics - I Wanna Be Sedated (Cover)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/HUsfZO2Gh5s?rel=0" title="The Bromantics - I Wanna Be Sedated (Cover)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -213,12 +214,40 @@
         </div>
     </section>
 
+    <section id="merch" class="merch">
+        <div class="container">
+            <h2>Merch</h2>
+            <p class="merch-tagline">Show Your Love</p>
+            
+            <div class="merch-items">
+                <div class="merch-item">
+                    <div class="merch-image sticker-image">
+                        <img src="img/bromantics_sticker.jpg?v=1.0.1" alt="Bromantics sticker">
+                    </div>
+                    <div class="merch-info">
+                        <h3>Band Stickers</h3>
+                        <p>Support the band with our custom stickers.</p>
+                    </div>
+                </div>
+                <div class="merch-item">
+                    <div class="merch-image shirt-image">
+                        <img src="img/bromantics_shirt.jpg?v=1.0.1" alt="Bromantics t-shirt">
+                    </div>
+                    <div class="merch-info">
+                        <h3>T-Shirts</h3>
+                        <p>Get your Bromantics tee at our next show!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="contact">
         <div class="container">
             <h2>Contact</h2>
             <div class="tip-section">
                 <h3>Support The Band</h3>
-                <p>Love our music? Consider leaving a tip!</p>
+                <p>Love our music? Leave a tip!</p>
                 <a href="https://account.venmo.com/u/AndrewPasquale" target="_blank" class="venmo-link"><i class="ti ti-coin"></i> Tip us on Venmo</a>
             </div>
             
@@ -240,12 +269,16 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 The Bromantics. All rights reserved.</p>
+            <p>&copy; <span id="copyright-year">2025</span> The Bromantics. All rights reserved.</p>
+            <p class="footer-credit">Made with <span class="heart">♥</span> by <a href="https://sweetandfizzy.com" target="_blank" rel="noopener">Sweet and Fizzy Digital</a></p>
         </div>
     </footer>
 
     <script src="js/main.js?v=1.0.1"></script>
     <script>
+        // Set copyright year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        
         // Mobile menu functionality
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
         const mainNav = document.getElementById('main-nav');

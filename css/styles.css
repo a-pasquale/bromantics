@@ -102,7 +102,7 @@ section {
 
 .btn {
     display: inline-block;
-    background-color: var(--primary-color);
+    background-color: rgba(var(--secondary-color-rgb), 0.15);
     color: var(--light-text);
     padding: 0.8rem 1.8rem;
     border-radius: 0;
@@ -110,77 +110,173 @@ section {
     letter-spacing: 2px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     margin-right: 1rem;
-    border: 2px solid var(--light-text);
+    border: 2px solid var(--primary-color);
     cursor: pointer;
     position: relative;
-    overflow: hidden;
-    z-index: 1;
-    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    text-shadow: 
+        0 0 5px rgba(var(--primary-color-rgb), 0.3),
+        0 0 10px rgba(var(--secondary-color-rgb), 0.2);
+    will-change: transform;
 }
 
-.btn:before {
+.btn::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
+    z-index: -1;
+    top: 3px;
+    left: 3px;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: all 0.6s ease;
-    z-index: -1;
+    border: 2px solid rgba(var(--secondary-color-rgb), 0.7);
+    transition: all 0.25s ease;
+    will-change: transform, top, left;
 }
+
+.btn::after {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    top: 5px;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+    will-change: transform, top, left;
+}
+
 
 .btn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px) translateX(-3px);
-    box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(var(--primary-color-rgb), 0.4) 0%, 
+        rgba(var(--secondary-color-rgb), 0.4) 100%);
+    transform: translateY(-2px) translateX(-2px);
     color: #ffffff;
-    transition: all 0.2s ease;
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: var(--primary-color);
+    text-shadow: 
+        0 0 8px rgba(var(--primary-color-rgb), 0.5),
+        0 0 12px rgba(var(--secondary-color-rgb), 0.6);
+    transition: all 0.25s ease;
 }
 
-.btn:hover:before {
-    left: 100%;
+.btn:hover::before {
+    top: 5px;
+    left: 6px;
+    border-color: rgba(var(--secondary-color-rgb), 0.8);
+    box-shadow: 0 0 6px rgba(var(--secondary-color-rgb), 0.3);
+}
+
+.btn:hover::after {
+    top: 7px;
+    left: 8px;
 }
 
 .btn:active {
-    transform: translateY(-1px) translateX(-1px);
-    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
-    background-color: #0095d6;
+    transform: translateY(0) translateX(0);
+    background: linear-gradient(135deg, 
+        rgba(var(--primary-color-rgb), 0.6) 0%, 
+        rgba(var(--secondary-color-rgb), 0.6) 100%);
+}
+
+.btn:active::before {
+    top: 2px;
+    left: 2px;
+}
+
+.btn:active::after {
+    top: 3px;
+    left: 3px;
 }
 
 .btn-small {
     font-size: 0.8rem;
     padding: 0.5rem 1rem;
     border-radius: 0; 
-    background-color: rgba(var(--primary-color-rgb), 0.1);
+    background-color: rgba(var(--secondary-color-rgb), 0.15);
     color: var(--light-text);
-    border: 1px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
     margin-right: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.25s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    text-shadow: 
+        0 0 5px rgba(var(--primary-color-rgb), 0.3),
+        0 0 10px rgba(var(--secondary-color-rgb), 0.2);
+    will-change: transform;
+}
+
+.btn-small::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 3px;
+    left: 3px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(var(--secondary-color-rgb), 0.7);
+    transition: all 0.25s ease;
+    will-change: transform, top, left;
+}
+
+.btn-small::after {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    top: 5px;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+    will-change: transform, top, left;
 }
 
 .btn-small:hover {
-    background-color: var(--primary-color);
-    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
-    transform: translateY(-3px) translateX(-3px);
+    background: linear-gradient(135deg, 
+        rgba(var(--primary-color-rgb), 0.4) 0%, 
+        rgba(var(--secondary-color-rgb), 0.4) 100%);
+    transform: translateY(-2px) translateX(-2px);
     color: #ffffff;
-    transition: all 0.2s ease;
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--primary-color);
+    text-shadow: 
+        0 0 8px rgba(var(--primary-color-rgb), 0.5),
+        0 0 12px rgba(var(--secondary-color-rgb), 0.6);
+    transition: all 0.25s ease;
+}
+
+.btn-small:hover::before {
+    top: 5px;
+    left: 6px;
+    border-color: rgba(var(--secondary-color-rgb), 0.8);
+    box-shadow: 0 0 6px rgba(var(--secondary-color-rgb), 0.3);
+}
+
+.btn-small:hover::after {
+    top: 7px;
+    left: 8px;
 }
 
 .btn-small:active {
-    transform: translateY(-1px) translateX(-1px);
-    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
-    background-color: #e0005c;
+    transform: translateY(0) translateX(0);
+    background: linear-gradient(135deg, 
+        rgba(var(--primary-color-rgb), 0.6) 0%, 
+        rgba(var(--secondary-color-rgb), 0.6) 100%);
+}
+
+.btn-small:active::before {
+    top: 2px;
+    left: 2px;
+}
+
+.btn-small:active::after {
+    top: 3px;
+    left: 3px;
 }
 
 /* Header */
@@ -355,6 +451,7 @@ body.menu-open {
     width: 80%;
     max-width: 800px;
 }
+
 
 /* Ensure slide 3 content is vertically centered */
 #slide-3 .slide-content {
@@ -827,6 +924,10 @@ body.menu-open {
     .break-after {
         display: block;
     }
+    
+    .connect h2 .break-after {
+        display: block;
+    }
 }
 
 .connect {
@@ -1037,7 +1138,29 @@ body.menu-open {
         0 0 10px rgba(255, 0, 128, 0.5),
         0 0 15px rgba(255, 0, 128, 0.3),
         0 0 20px rgba(255, 0, 128, 0.2);
-    animation: neon-pulse 2s infinite alternate;
+    animation: neon-pulse-connect 2s infinite alternate;
+}
+
+.connect h2 .break-after {
+    display: inline-block;
+    animation: neon-pulse-connect 2s infinite alternate;
+}
+
+@keyframes neon-pulse-connect {
+    0% {
+        text-shadow: 
+            0 0 5px rgba(255, 0, 128, 0.8),
+            0 0 10px rgba(255, 0, 128, 0.5),
+            0 0 15px rgba(255, 0, 128, 0.3),
+            0 0 20px rgba(255, 0, 128, 0.2);
+    }
+    100% {
+        text-shadow: 
+            0 0 10px rgba(255, 0, 128, 1),
+            0 0 20px rgba(255, 0, 128, 0.8),
+            0 0 30px rgba(255, 0, 128, 0.6),
+            0 0 40px rgba(255, 0, 128, 0.4);
+    }
 }
 
 @keyframes neon-pulse {
@@ -1198,36 +1321,145 @@ body.menu-open {
     }
 }
 
-/* Videos Section */
-.videos {
+/* Video Section */
+.video {
     background-color: var(--darker-bg);
+    position: relative;
+}
+
+/* Apply consistent section heading animations */
+h2 {
+    text-shadow: 
+        3px 3px 0 var(--secondary-color),
+        0 0 10px rgba(var(--primary-color-rgb), 0.8),
+        0 0 20px rgba(var(--primary-color-rgb), 0.4);
+    animation: sectionTitleGlow 3s infinite alternate;
+}
+
+@keyframes sectionTitleGlow {
+    0% {
+        text-shadow: 
+            3px 3px 0 var(--secondary-color),
+            0 0 10px rgba(var(--primary-color-rgb), 0.8),
+            0 0 20px rgba(var(--primary-color-rgb), 0.4);
+    }
+    100% {
+        text-shadow: 
+            3px 3px 0 var(--primary-color),
+            0 0 15px rgba(var(--secondary-color-rgb), 0.8),
+            0 0 30px rgba(var(--secondary-color-rgb), 0.4);
+    }
 }
 
 .video-wrapper {
     margin: 0 auto;
     max-width: 800px;
     position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
-    height: 0;
-    overflow: hidden;
+    padding: 8px;
+    overflow: visible;
+    border-radius: 10px;
 }
 
-.video-wrapper iframe {
+.video-wrapper::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
     border-radius: 10px;
+    border: 3px solid transparent;
+    background: linear-gradient(45deg, 
+        var(--primary-color), 
+        var(--secondary-color), 
+        var(--primary-color), 
+        var(--secondary-color)) border-box;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    box-shadow:
+        0 0 10px rgba(var(--primary-color-rgb), 0.6),
+        0 0 20px rgba(var(--primary-color-rgb), 0.3),
+        0 0 30px rgba(var(--secondary-color-rgb), 0.2);
+    animation: videoBorderGlow 3s infinite alternate;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes videoBorderGlow {
+    0% {
+        box-shadow:
+            0 0 10px rgba(var(--primary-color-rgb), 0.6),
+            0 0 20px rgba(var(--primary-color-rgb), 0.3),
+            0 0 30px rgba(var(--primary-color-rgb), 0.2);
+    }
+    100% {
+        box-shadow:
+            0 0 15px rgba(var(--secondary-color-rgb), 0.6),
+            0 0 25px rgba(var(--secondary-color-rgb), 0.3),
+            0 0 35px rgba(var(--secondary-color-rgb), 0.2);
+    }
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 6px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     background-color: #000;
+    z-index: 1;
+    border: none;
+    display: block;
+    position: relative;
 }
 
 
 /* Shows Section */
 .shows {
     background-color: var(--dark-bg);
+}
+
+/* Map button adjustments */
+.shows .btn-small::before {
+    border-color: rgba(var(--secondary-color-rgb), 0.5);
+}
+
+/* Reset and apply new approach for map buttons */
+.shows .btn-small {
+    /* Reset to default */
+    transform: none !important;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+}
+
+.shows .btn-small::before {
+    border-color: rgba(var(--secondary-color-rgb), 0.4); /* More transparent blue */
+    /* Don't change position on hover */
+    top: 2px !important;
+    left: 2px !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.shows .btn-small::after {
+    /* Don't change position on hover */
+    top: 3px !important;
+    left: 3px !important;
+    transition: background-color 0.25s ease !important;
+}
+
+.shows .btn-small:hover {
+    background-color: rgba(var(--secondary-color-rgb), 0.25); /* Slightly more subtle */
+    color: white;
+}
+
+.shows .btn-small:hover::before {
+    border-color: rgba(var(--secondary-color-rgb), 0.6); /* Middle ground blue */
+    box-shadow: 0 0 4px rgba(var(--secondary-color-rgb), 0.2); /* More subtle glow */
+}
+
+.shows .btn-small:hover::after {
+    background-color: rgba(0, 0, 0, 0.15); /* Lighter shadow */
 }
 
 /* Show tabs styling */
@@ -1516,6 +1748,407 @@ body.menu-open {
 
 .show-links {
     margin-left: 2rem;
+}
+
+/* Merch Section */
+.merch {
+    background-color: var(--darker-bg);
+    position: relative;
+    overflow: hidden;
+    background-image: 
+        linear-gradient(to right, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)),
+        url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="60" height="60" fill="none" stroke="%2368008d" stroke-width="1.5" stroke-opacity="0.1"/><path d="M15 0 L45 60" stroke="%23ff0080" stroke-width="1" stroke-opacity="0.07"/><path d="M45 0 L15 60" stroke="%2300b8ff" stroke-width="1" stroke-opacity="0.07"/></svg>');
+}
+
+.merch::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 85% 15%, rgba(var(--secondary-color-rgb), 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(var(--primary-color-rgb), 0.2) 0%, transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.merch h2 {
+    position: relative;
+    z-index: 1;
+    animation: neon-pulse-merch 3s infinite alternate;
+}
+
+@keyframes neon-pulse-merch {
+    0% {
+        text-shadow: 
+            0 0 5px rgba(var(--secondary-color-rgb), 0.8),
+            0 0 10px rgba(var(--secondary-color-rgb), 0.5),
+            0 0 15px rgba(var(--secondary-color-rgb), 0.3);
+    }
+    100% {
+        text-shadow: 
+            0 0 10px rgba(var(--secondary-color-rgb), 1),
+            0 0 20px rgba(var(--secondary-color-rgb), 0.8),
+            0 0 30px rgba(var(--secondary-color-rgb), 0.5),
+            0 0 40px rgba(var(--secondary-color-rgb), 0.3);
+    }
+}
+
+.merch-tagline {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--light-text);
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 10px rgba(var(--primary-color-rgb), 0.6),
+        0 0 20px rgba(var(--primary-color-rgb), 0.4);
+}
+
+.merch-items {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.merch-item {
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid transparent;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.merch-item::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--primary-color), 
+        var(--secondary-color), 
+        var(--accent-color), 
+        var(--secondary-color), 
+        var(--primary-color));
+    background-size: 400% 400%;
+    z-index: -1;
+    border-radius: 10px;
+    opacity: 0.5;
+    transition: all 0.5s ease;
+    animation: gradient 15s ease infinite;
+    filter: blur(2px);
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.merch-item:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+
+.merch-item:hover::before {
+    opacity: 1;
+    filter: blur(3px);
+}
+
+.merch-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.merch-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.sticker-image img {
+    object-position: center 80%;
+}
+
+/* Enhanced blue neon glow for sticker image */
+.sticker-image::after {
+    background: 
+        linear-gradient(to bottom, 
+            rgba(0, 0, 0, 0) 70%, 
+            rgba(var(--secondary-color-rgb), 0.4) 100%),
+        linear-gradient(120deg, 
+            rgba(var(--secondary-color-rgb), 0.25) 0%, 
+            rgba(var(--accent-color-rgb), 0.2) 50%,
+            rgba(var(--secondary-color-rgb), 0.25) 100%);
+    box-shadow: 
+        inset 0 0 25px rgba(var(--secondary-color-rgb), 0.35),
+        inset 0 0 40px rgba(var(--secondary-color-rgb), 0.25);
+}
+
+.sticker-image::before {
+    background: 
+        radial-gradient(
+            circle at 70% 30%, 
+            rgba(var(--secondary-color-rgb), 0.35) 0%, 
+            transparent 60%
+        ),
+        radial-gradient(
+            circle at 20% 70%,
+            rgba(var(--secondary-color-rgb), 0.2) 0%,
+            transparent 50%
+        );
+}
+
+.merch-item:hover .sticker-image::after {
+    background: 
+        linear-gradient(to bottom, 
+            rgba(0, 0, 0, 0) 65%, 
+            rgba(var(--secondary-color-rgb), 0.5) 100%),
+        linear-gradient(120deg, 
+            rgba(var(--secondary-color-rgb), 0.3) 0%, 
+            rgba(var(--accent-color-rgb), 0.25) 50%,
+            rgba(var(--secondary-color-rgb), 0.3) 100%);
+    box-shadow: 
+        inset 0 0 30px rgba(var(--secondary-color-rgb), 0.45),
+        inset 0 0 50px rgba(var(--secondary-color-rgb), 0.3);
+}
+
+.merch-item:hover .sticker-image::before {
+    background: 
+        radial-gradient(
+            circle at 70% 30%, 
+            rgba(var(--secondary-color-rgb), 0.45) 0%, 
+            transparent 65%
+        ),
+        radial-gradient(
+            circle at 20% 70%,
+            rgba(var(--secondary-color-rgb), 0.3) 0%,
+            transparent 55%
+        );
+}
+
+/* Reduced pink glow for shirt image */
+.shirt-image::after {
+    background: 
+        linear-gradient(to bottom, 
+            rgba(0, 0, 0, 0) 75%, 
+            rgba(var(--primary-color-rgb), 0.2) 100%),
+        linear-gradient(120deg, 
+            rgba(var(--primary-color-rgb), 0.15) 0%, 
+            rgba(var(--secondary-color-rgb), 0.15) 50%,
+            rgba(var(--accent-color-rgb), 0.15) 100%);
+    box-shadow: 
+        inset 0 0 15px rgba(var(--primary-color-rgb), 0.2),
+        inset 0 0 25px rgba(var(--secondary-color-rgb), 0.1);
+}
+
+.shirt-image::before {
+    background: 
+        radial-gradient(
+            circle at 70% 30%, 
+            rgba(var(--primary-color-rgb), 0.2) 0%, 
+            transparent 60%
+        ),
+        radial-gradient(
+            circle at 20% 70%,
+            rgba(var(--secondary-color-rgb), 0.1) 0%,
+            transparent 50%
+        );
+}
+
+.merch-item:hover .shirt-image::after {
+    background: 
+        linear-gradient(to bottom, 
+            rgba(0, 0, 0, 0) 75%, 
+            rgba(var(--primary-color-rgb), 0.3) 100%),
+        linear-gradient(120deg, 
+            rgba(var(--primary-color-rgb), 0.2) 0%, 
+            rgba(var(--secondary-color-rgb), 0.2) 50%,
+            rgba(var(--accent-color-rgb), 0.2) 100%);
+    box-shadow: 
+        inset 0 0 20px rgba(var(--primary-color-rgb), 0.25),
+        inset 0 0 30px rgba(var(--secondary-color-rgb), 0.15);
+}
+
+.merch-item:hover .merch-image img {
+    transform: scale(1.02);
+}
+
+.merch-item:hover .merch-image::after {
+    background: 
+        linear-gradient(to bottom, 
+            rgba(0, 0, 0, 0) 70%, 
+            rgba(var(--primary-color-rgb), 0.4) 100%),
+        linear-gradient(120deg, 
+            rgba(var(--primary-color-rgb), 0.25) 0%, 
+            rgba(var(--secondary-color-rgb), 0.25) 50%,
+            rgba(var(--accent-color-rgb), 0.25) 100%);
+    box-shadow: 
+        inset 0 0 25px rgba(var(--primary-color-rgb), 0.3),
+        inset 0 0 40px rgba(var(--secondary-color-rgb), 0.2);
+    mix-blend-mode: soft-light;
+}
+
+.merch-item:hover .merch-image::before {
+    background: 
+        radial-gradient(
+            circle at 70% 30%, 
+            rgba(var(--primary-color-rgb), 0.35) 0%, 
+            transparent 65%
+        ),
+        radial-gradient(
+            circle at 20% 70%,
+            rgba(var(--secondary-color-rgb), 0.25) 0%,
+            transparent 55%
+        );
+    animation: neon-pulse 2s infinite alternate;
+}
+
+@keyframes neon-pulse {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+.merch-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(to bottom, 
+            rgba(0, 0, 0, 0) 70%, 
+            rgba(var(--primary-color-rgb), 0.3) 100%),
+        linear-gradient(120deg, 
+            rgba(var(--primary-color-rgb), 0.2) 0%, 
+            rgba(var(--secondary-color-rgb), 0.2) 50%,
+            rgba(var(--accent-color-rgb), 0.2) 100%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    box-shadow: 
+        inset 0 0 20px rgba(var(--primary-color-rgb), 0.25),
+        inset 0 0 30px rgba(var(--secondary-color-rgb), 0.15);
+}
+
+.merch-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(
+            circle at 70% 30%, 
+            rgba(var(--primary-color-rgb), 0.25) 0%, 
+            transparent 60%
+        ),
+        radial-gradient(
+            circle at 20% 70%,
+            rgba(var(--secondary-color-rgb), 0.15) 0%,
+            transparent 50%
+        );
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+.merch-info {
+    padding: 1.5rem;
+    text-align: center;
+    background-color: rgba(10, 10, 10, 0.8);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.merch-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+    color: var(--light-text);
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 5px rgba(var(--primary-color-rgb), 0.7),
+        0 0 10px rgba(var(--primary-color-rgb), 0.4);
+}
+
+.merch-item:hover .merch-info h3 {
+    color: var(--primary-color);
+    text-shadow: 
+        0 0 10px rgba(var(--primary-color-rgb), 0.8),
+        0 0 20px rgba(var(--primary-color-rgb), 0.5),
+        0 0 30px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.merch-info p {
+    margin-bottom: 0;
+    font-size: 1rem;
+    color: var(--gray-text);
+}
+
+/* Mobile styles for merch section */
+@media (max-width: 768px) {
+    .merch-items {
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+    }
+    
+    .merch-item {
+        width: 80%;
+        max-width: 300px;
+    }
+    
+    .merch-image {
+        height: 220px;
+    }
+    
+    .merch-tagline {
+        font-size: 1.2rem;
+        margin-bottom: 2.5rem;
+        padding: 0 1rem;
+    }
+    
+    .merch-info h3 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .merch-item {
+        width: 90%;
+    }
+    
+    .merch-tagline {
+        font-size: 1.1rem;
+    }
 }
 
 /* Contact Section */
@@ -2054,8 +2687,66 @@ footer {
 }
 
 footer p {
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
     font-size: 0.9rem;
+}
+
+footer p:last-child {
+    margin-bottom: 0;
+}
+
+.footer-credit {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer-credit:hover {
+    opacity: 1;
+}
+
+.footer-credit a {
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.footer-credit a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.footer-credit a:hover {
+    color: var(--primary-color);
+    text-shadow: 0 0 8px rgba(var(--primary-color-rgb), 0.4);
+}
+
+.footer-credit a:hover::after {
+    width: 100%;
+    background-color: var(--primary-color);
+}
+
+.heart {
+    color: var(--primary-color);
+    display: inline-block;
+    margin: 0 2px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    5% { transform: scale(1.2); }
+    10% { transform: scale(1); }
+    15% { transform: scale(1.2); }
+    20% { transform: scale(1); }
+    100% { transform: scale(1); }
 }
 
 /* Responsive Design */
@@ -2154,6 +2845,7 @@ footer p {
     nav.active ul li:nth-child(3) { --i: 3; }
     nav.active ul li:nth-child(4) { --i: 4; }
     nav.active ul li:nth-child(5) { --i: 5; }
+    nav.active ul li:nth-child(6) { --i: 6; }
     
     @keyframes slideIn {
         to {
@@ -2234,9 +2926,13 @@ footer p {
     }
     
     .video-wrapper {
-        padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio */
         margin: 0 1rem;
         width: auto; /* Let it size according to parent with margins */
+        padding: 6px;
+    }
+    
+    .video-wrapper::before {
+        border-width: 2px;
     }
     
     .show-item {
@@ -2336,7 +3032,7 @@ footer p {
         width: auto;
         min-width: 120px;
         max-width: 80%;
-        margin: 0 auto 0.8rem;
+        margin: 0 0.5rem 0.8rem;
         padding: 0.6rem 1.2rem;
         font-size: 0.85rem;
         display: inline-block;
@@ -2442,7 +3138,7 @@ footer p {
         min-width: 100px;
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
-        margin-bottom: 0.6rem;
+        margin: 0 0.4rem 0.6rem;
     }
     
     /* Make mobile menu even more compact */
