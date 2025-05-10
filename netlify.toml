@@ -1,0 +1,40 @@
+[build]
+  publish = "/"
+  command = ""
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/audio/*"
+    [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/img/*"
+    [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Handle audio files with proper content types
+[[headers]]
+  for = "*.mp3"
+    [headers.values]
+    Content-Type = "audio/mpeg"
+
+[[headers]]
+  for = "*.m4a"
+    [headers.values]
+    Content-Type = "audio/mp4"
+
+[[headers]]
+  for = "*.wav"
+    [headers.values]
+    Content-Type = "audio/wav"
+
+# Redirect to index.html for SPA-like navigation
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
