@@ -8,7 +8,8 @@
       "location": "9 Pearl St, Northampton",
       "time": "7:00 - 9:30 PM",
       "support": "Join us at this great brewery in downtown Northampton.",
-      "mapQuery": "Progression+Brewing+Company+9+Pearl+St+Northampton"
+      "mapQuery": "Progression+Brewing+Company+9+Pearl+St+Northampton",
+      "ageRestriction": "18+"
     },
     {
       "date": "2025-06-06",
@@ -18,7 +19,8 @@
       "location": "125A Pleasant St, Northampton",
       "time": "6:00 - 9:00 PM",
       "support": "We'll be outside on the patio playing your favorite tunes!",
-      "mapQuery": "The+Deck+125A+Pleasant+St+Northampton"
+      "mapQuery": "The+Deck+125A+Pleasant+St+Northampton",
+      "ageRestriction": "All ages"
     },
     {
       "date": "2025-09-05",
@@ -28,7 +30,8 @@
       "location": "125A Pleasant St, Northampton",
       "time": "6:00 - 9:00 PM",
       "support": "Join us for an outdoor end-of-summer show!",
-      "mapQuery": "The+Deck+125A+Pleasant+St+Northampton"
+      "mapQuery": "The+Deck+125A+Pleasant+St+Northampton",
+      "ageRestriction": "All ages"
     },
     {
       "date": "2025-11-01",
@@ -38,7 +41,8 @@
       "location": "180 Pleasant St, Easthampton",
       "time": "7:00 - 10:00 PM",
       "support": "Our third annual Halloween show! Wear your costume and celebrate the Day of the Dead!",
-      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton"
+      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
+      "ageRestriction": ""
     },
     {
       "date": "2024-12-31",
@@ -48,7 +52,8 @@
       "location": "390 Dwight St, Holyoke",
       "time": "9:00 PM - late",
       "support": "Ring in the New Year with us!",
-      "mapQuery": "The+Guilded+Brick+390+Dwight+St+Holyoke"
+      "mapQuery": "The+Guilded+Brick+390+Dwight+St+Holyoke",
+      "ageRestriction": "All ages"
     },
     {
       "date": "2025-03-08",
@@ -58,7 +63,8 @@
       "location": "390 Dwight St, Holyoke",
       "time": "8:00 - 12:00 PM",
       "support": "Party with us at the Guilded Brick!",
-      "mapQuery": "The+Guilded+Brick+390+Dwight+St+Holyoke"
+      "mapQuery": "The+Guilded+Brick+390+Dwight+St+Holyoke",
+      "ageRestriction": "All ages"
     },
     {
       "date": "2025-04-11",
@@ -68,7 +74,8 @@
       "location": "180 Pleasant St, Easthampton",
       "time": "7:00 - 10:00 PM",
       "support": "Join us on the dance floor!",
-      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton"
+      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
+      "ageRestriction": ""
     }
   ]
 }

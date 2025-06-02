@@ -867,6 +867,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </h3>
                     <p class="location">${show.location}</p>
                     <p class="time" itemprop="doorTime">${show.time}</p>
+                    ${show.ageRestriction ? `<p class="age-restriction">${show.ageRestriction}</p>` : ''}
                     <p class="support" itemprop="description">${show.support}</p>
                 </div>
                 <div class="show-links">
