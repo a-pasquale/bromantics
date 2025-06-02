@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (targetElement) {
             // Wait a bit for page to settle
             setTimeout(() => {
-                const headerOffset = 80;
+                const header = document.querySelector('header');
+                const headerOffset = header.offsetHeight;
                 window.scrollTo({
                     top: targetElement.offsetTop - headerOffset,
                     behavior: 'smooth'
@@ -1168,8 +1169,9 @@ document.querySelectorAll('nav a, .scroll-to, .slide-content a').forEach(anchor 
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
 
-        // Use consistent header offset for all links
-        const headerOffset = 80; // Adjust for header height
+        // Use actual header height for offset
+        const header = document.querySelector('header');
+        const headerOffset = header.offsetHeight;
 
         window.scrollTo({
             top: targetElement.offsetTop - headerOffset,
