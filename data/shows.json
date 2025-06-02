@@ -9,7 +9,8 @@
       "time": "7:00 - 9:30 PM",
       "support": "Join us at this great brewery in downtown Northampton.",
       "mapQuery": "Progression+Brewing+Company+9+Pearl+St+Northampton",
-      "ageRestriction": "18+"
+      "ageRestriction": "18+",
+      "poster": "img/posters/499925617_686518470797957_6394401088638227033_n.jpg"
     },
     {
       "date": "2025-06-06",
@@ -20,7 +21,8 @@
       "time": "6:00 - 9:00 PM",
       "support": "We'll be outside on the patio playing your favorite tunes!",
       "mapQuery": "The+Deck+125A+Pleasant+St+Northampton",
-      "ageRestriction": "All ages"
+      "ageRestriction": "All ages",
+      "poster": "img/posters/495267113_694047346711736_6360273799697144046_n.jpg"
     },
     {
       "date": "2025-09-05",
@@ -31,7 +33,8 @@
       "time": "6:00 - 9:00 PM",
       "support": "Join us for an outdoor end-of-summer show!",
       "mapQuery": "The+Deck+125A+Pleasant+St+Northampton",
-      "ageRestriction": "All ages"
+      "ageRestriction": "All ages",
+      "poster": ""
     },
     {
       "date": "2025-11-01",
@@ -42,7 +45,8 @@
       "time": "7:00 - 10:00 PM",
       "support": "Our third annual Halloween show! Wear your costume and celebrate the Day of the Dead!",
       "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
-      "ageRestriction": ""
+      "ageRestriction": "",
+      "poster": "img/70B6DBEF-4FE9-41F5-834E-D8845C5876F3_1_105_c.jpeg"
     },
     {
       "date": "2024-12-31",
@@ -53,7 +57,8 @@
       "time": "9:00 PM - late",
       "support": "Ring in the New Year with us!",
       "mapQuery": "The+Guilded+Brick+390+Dwight+St+Holyoke",
-      "ageRestriction": "All ages"
+      "ageRestriction": "All ages",
+      "poster": ""
     },
     {
       "date": "2025-03-08",
@@ -64,7 +69,8 @@
       "time": "8:00 - 12:00 PM",
       "support": "Party with us at the Guilded Brick!",
       "mapQuery": "The+Guilded+Brick+390+Dwight+St+Holyoke",
-      "ageRestriction": "All ages"
+      "ageRestriction": "All ages",
+      "poster": "img/posters/481081290_631593892957082_5195344355733748861_n.jpg"
     },
     {
       "date": "2025-04-11",
@@ -75,7 +81,20 @@
       "time": "7:00 - 10:00 PM",
       "support": "Join us on the dance floor!",
       "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
-      "ageRestriction": ""
+      "ageRestriction": "",
+      "poster": "img/posters/489340347_17966342126896765_6712979962750057889_n.jpg"
+    },
+    {
+      "date": "2025-03-22",
+      "day": "22",
+      "month": "MAR",
+      "venue": "Se7ens",
+      "location": "75 Cottage St, Easthampton",
+      "time": "9:00 - 12:00 PM",
+      "support": "Join us on the dance floor!",
+      "mapQuery": "Se7ens+Sports+Bar+and+Grill+75+Cottage+St+Easthampton",
+      "ageRestriction": "21+",
+      "poster": "img/posters/485160569_640575795392225_4550974469313893059_n.jpg"
     }
   ]
 }

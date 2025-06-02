@@ -6,8 +6,7 @@
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    overflow-x: hidden; /* Explicitly prevent horizontal overflow */
-    overflow-y: visible; /* Allow vertical overflow for navigation elements */
+    overflow: hidden; /* Prevent all overflow */
     /* Block all touch actions in the container */
     touch-action: none;
     /* Prevent scroll chaining */
@@ -35,14 +34,12 @@
     width: 100%;
     overflow-x: hidden; /* Prevent horizontal overflow */
     box-sizing: border-box; /* Include padding in width calculation */
-    padding: 0 5px; /* Reduced padding for better gap visibility */
 }
 
 .video-gallery {
     display: flex;
     transition: transform 0.5s ease;
-    width: calc(100% + 10px); /* Add a bit of extra width to account for margins */
-    column-gap: 10px; /* Add column gap for more spacing control */
+    width: 100%;
 }
 
 /* Swipe animation class */
@@ -53,7 +50,7 @@
 .video-wrapper {
     min-width: 100%;
     flex: 0 0 100%;
-    padding: 0 4%; /* Reduced padding to create visual gap */
+    padding: 0;
     box-sizing: border-box;
     transition: all 0.5s ease;
     position: relative;
@@ -62,20 +59,19 @@
 
 @media (max-width: 768px) {
     .video-wrapper {
-        padding: 0 4px; /* Add a little padding on mobile */
-        margin: 0 6px; /* Slightly larger gap on mobile to ensure visibility */
+        padding: 0;
+        margin: 0;
         box-sizing: border-box;
-        max-width: calc(100% - 12px); /* Account for margins */
+        min-width: 100%;
+        flex: 0 0 100%;
     }
 
     .video-gallery {
-        width: calc(100% + 24px); /* Ensure we have room for proper spacing */
-        column-gap: 12px; /* More gap on mobile */
+        width: 100%;
     }
 
     .carousel-container {
-        overflow-x: hidden; /* Prevent horizontal overflow */
-        overflow-y: visible; /* Allow vertical overflow if needed */
+        overflow: hidden; /* Prevent all overflow */
         padding: 0 25px; /* Add more side padding to accommodate the larger buttons */
         margin: 0 auto;
         position: relative; /* Ensure proper stacking context */
@@ -89,8 +85,8 @@
 .video-play-overlay, .video-thumbnail-overlay {
     position: absolute;
     top: 0;
-    left: 4%;
-    right: 4%;
+    left: 0;
+    right: 0;
     bottom: 0;
     display: flex;
     align-items: center;
@@ -113,8 +109,8 @@
 @media (max-width: 768px) {
     .video-play-overlay, .video-thumbnail-overlay {
         opacity: 0; /* Start transparent */
-        left: 3%;
-        right: 3%;
+        left: 0;
+        right: 0;
         background-color: rgba(0, 0, 0, 0.6); /* Darker background for better contrast */
         z-index: 25; /* Very high z-index to ensure it's above everything */
         pointer-events: auto !important; /* Ensure it captures clicks */
@@ -196,7 +192,7 @@
 
 /* Override video wrapper frame styles from main CSS */
 .video-carousel .video-wrapper {
-    padding: 0 4%; /* Reduced padding to create visual gap between videos */
+    padding: 0;
     overflow: hidden;
     border-radius: 0;
     margin: 0;
@@ -217,7 +213,7 @@
 
 @media (max-width: 768px) {
     .video-carousel .video-wrapper {
-        padding: 0 3%; /* Slightly smaller padding on mobile but still maintain gap */
+        padding: 0;
     }
 
     .video-carousel .video-wrapper iframe {
@@ -225,8 +221,8 @@
     }
 
     .video-play-overlay {
-        left: 3%;
-        right: 3%;
+        left: 0;
+        right: 0;
         border-radius: 4px;
     }
 }

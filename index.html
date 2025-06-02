@@ -56,10 +56,10 @@
         </div>
         <nav id="main-nav">
             <ul>
-                <li><a href="#music">Music</a></li>
-                <li><a href="#connect">Connect</a></li>
-                <li><a href="#video">Video</a></li>
                 <li><a href="#shows">Shows</a></li>
+                <li><a href="#connect">Connect</a></li>
+                <li><a href="#music">Music</a></li>
+                <li><a href="#video">Video</a></li>
                 <li><a href="#merch">Merch</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -117,26 +117,34 @@
         </div>
     </section>
 
-    <section id="music" class="music">
+    <section id="shows" class="shows">
         <div class="container">
-            <h2>Music</h2>
-            <div class="audio-player">
-                <div class="playlist" id="audio-playlist">
-                    <!-- Audio tracks will be loaded dynamically via JavaScript -->
+            <h2>Shows</h2>
+            
+            <div class="shows-tabs">
+                <button class="tab-btn active" data-tab="upcoming">
+                    <i class="ti ti-calendar-event"></i>
+                    <span>Upcoming Shows</span>
+                </button>
+                <button class="tab-btn" data-tab="past">
+                    <i class="ti ti-calendar-stats"></i>
+                    <span>Past Shows</span>
+                </button>
+            </div>
+            
+            <div class="shows-list" id="shows-container">
+                <div class="loading-indicator">
+                    <div class="spinner"></div>
+                    <p>Loading shows...</p>
                 </div>
-                <div class="player-controls">
-                    <div class="now-playing">
-                        <span class="song-title">Select a song to play</span>
-                    </div>
-                    <div class="controls">
-                        <button id="prev-btn" aria-label="Previous track"><i class="ti ti-player-track-prev"></i></button>
-                        <button id="play-pause-btn" aria-label="Play"><i class="ti ti-player-play"></i></button>
-                        <button id="next-btn" aria-label="Next track"><i class="ti ti-player-track-next"></i></button>
-                    </div>
-                    <div class="progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" aria-label="Audio progress">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
+            </div>
+            
+            <div class="pagination" id="pagination-container">
+                <!-- Pagination will be generated dynamically via JavaScript -->
+            </div>
+            
+            <div class="no-shows-message" style="display: none;">
+                <p>No shows to display at this time. Check back soon!</p>
             </div>
         </div>
     </section>
@@ -183,6 +191,30 @@
         </div>
     </section>
 
+    <section id="music" class="music">
+        <div class="container">
+            <h2>Music</h2>
+            <div class="audio-player">
+                <div class="playlist" id="audio-playlist">
+                    <!-- Audio tracks will be loaded dynamically via JavaScript -->
+                </div>
+                <div class="player-controls">
+                    <div class="now-playing">
+                        <span class="song-title">Select a song to play</span>
+                    </div>
+                    <div class="controls">
+                        <button id="prev-btn" aria-label="Previous track"><i class="ti ti-player-track-prev"></i></button>
+                        <button id="play-pause-btn" aria-label="Play"><i class="ti ti-player-play"></i></button>
+                        <button id="next-btn" aria-label="Next track"><i class="ti ti-player-track-next"></i></button>
+                    </div>
+                    <div class="progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" aria-label="Audio progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="video" class="video">
         <div class="container">
             <h2>Video</h2>
@@ -196,37 +228,6 @@
                     <button class="video-nav prev" aria-label="Previous video"><i class="ti ti-chevron-left"></i></button>
                     <button class="video-nav next" aria-label="Next video"><i class="ti ti-chevron-right"></i></button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="shows" class="shows">
-        <div class="container">
-            <h2>Shows</h2>
-            
-            <div class="show-tabs">
-                <button class="tab-btn active" data-tab="upcoming">
-                    <i class="ti ti-calendar-event"></i> Upcoming
-                </button>
-                <button class="tab-btn" data-tab="past">
-                    <i class="ti ti-calendar-stats"></i> Past
-                </button>
-            </div>
-            
-            <div class="shows-list" id="shows-container">
-                <!-- Shows will be loaded dynamically via JavaScript -->
-                <div class="loading-indicator">
-                    <div class="spinner"></div>
-                    <p>Loading shows...</p>
-                </div>
-            </div>
-            
-            <div class="pagination" id="pagination-container">
-                <!-- Pagination will be generated dynamically via JavaScript -->
-            </div>
-            
-            <div class="no-shows-message" style="display: none;">
-                <p>No shows to display at this time. Check back soon!</p>
             </div>
         </div>
     </section>

@@ -828,52 +828,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to render shows
     function renderShows(shows) {
-        // Clear container
+        const showsContainer = document.querySelector('.shows-list');
+        if (!showsContainer) {
+            console.error('Shows container not found');
+            return;
+        }
+
         showsContainer.innerHTML = '';
 
-        // Make sure fade-out class is removed and add it back after rendering
-        showsContainer.classList.add('fade-out');
-
-        // Create show elements
         shows.forEach(show => {
             const showElement = document.createElement('div');
             showElement.className = 'show-item';
-
-            // Add microdata attributes for better SEO
-            showElement.setAttribute('itemscope', '');
-            showElement.setAttribute('itemtype', 'https://schema.org/MusicEvent');
-
-            // Extract year from date for all shows in the past tab
+            
+            // Use default image if no poster is provided
+            const posterSrc = show.poster || 'img/default-show-poster.jpg';
+            
+            // Extract year from date for past events
             const showDate = new Date(show.date);
-            const showYear = showDate.getFullYear();
-
-            // Always show year for shows in the past tab
-            const isPastShow = activeTab === 'past';
-
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const isPast = showDate < today;
+            const year = showDate.getFullYear();
+            
             showElement.innerHTML = `
-                <meta itemprop="name" content="The Bromantics at ${show.venue}">
-                <meta itemprop="startDate" content="${show.date}">
-                <meta itemprop="performer" content="The Bromantics">
-
-                <div class="show-date">
-                    <span class="day">${show.day}</span>
-                    <span class="month">${show.month}</span>
-                    ${isPastShow ? `<span class="year">${showYear}</span>` : ''}
+                <div class="show-poster-column">
+                    <div class="show-date">
+                        <span class="day">${show.day}</span>
+                        <span class="month">${show.month}</span>
+                        ${isPast ? `<span class="year">${year}</span>` : ''}
+                    </div>
+                    <div class="show-poster">
+                        <img src="${posterSrc}" alt="Show poster" loading="lazy">
+                    </div>
                 </div>
                 <div class="show-info">
-                    <h3 itemprop="location" itemscope itemtype="https://schema.org/Place">
-                        <span itemprop="name">${show.venue}</span>
-                        <meta itemprop="address" content="${show.location}">
-                    </h3>
-                    <p class="location">${show.location}</p>
-                    <p class="time" itemprop="doorTime">${show.time}</p>
+                    <h3>${show.venue}</h3>
+                    <p>${show.location}</p>
+                    <p>${show.time}</p>
+                    ${show.support ? `<p>${show.support}</p>` : ''}
                     ${show.ageRestriction ? `<p class="age-restriction">${show.ageRestriction}</p>` : ''}
-                    <p class="support" itemprop="description">${show.support}</p>
-                </div>
-                <div class="show-links">
-                    <a href="https://maps.google.com/?q=${show.mapQuery}" target="_blank" class="btn-small"><i class="ti ti-map-pin"></i> Map</a>
+                    ${show.mapQuery ? `
+                        <div class="show-links">
+                            <a href="https://www.google.com/maps/search/?api=1&query=${show.mapQuery}" target="_blank" class="map-link">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Map
+                            </a>
+                        </div>
+                    ` : ''}
                 </div>
             `;
+            
             showsContainer.appendChild(showElement);
         });
 
@@ -1010,19 +1014,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Function to update carousel
         function updateCarousel() {
-            // Calculate position with gap between videos
+            // Calculate position - each video is 100% width, so move by 100% increments
             const position = currentVideoIndex * 100;
 
-            // Calculate percentage-based offset to match our percentage-based padding
-            // This is simpler now that we're using consistent 4% padding (3% on mobile)
-            const isMobile = window.innerWidth <= 768;
-            const gapPercentage = isMobile ? 6 : 8; // 3% on each side for mobile, 4% on each side for desktop
-
-            // Calculate the total offset as a percentage
-            const percentageOffset = currentVideoIndex * gapPercentage;
-
-            // Update gallery position using percentage-based calculations for consistency
-            videoGallery.style.transform = `translateX(-${position + percentageOffset}%)`;
+            // Update gallery position - no offset needed since videos are full width
+            videoGallery.style.transform = `translateX(-${position}%)`;
 
             // Reset all videos and update current video class
             const videoWrappers = document.querySelectorAll('.video-wrapper');
@@ -1247,3 +1243,33 @@ window.addEventListener('scroll', function() {
         copyrightYearElement.textContent = new Date().getFullYear();
     }
 })();
+
+// Mouse-following gradient effect
+document.addEventListener('DOMContentLoaded', function() {
+    // Create the mouse gradient element
+    const mouseGradient = document.createElement('div');
+    mouseGradient.className = 'mouse-gradient';
+    document.body.appendChild(mouseGradient);
+
+    // Track mouse movement
+    let mouseX = 50;
+    let mouseY = 50;
+    
+    document.addEventListener('mousemove', function(e) {
+        mouseX = (e.clientX / window.innerWidth) * 100;
+        mouseY = (e.clientY / window.innerHeight) * 100;
+        
+        document.documentElement.style.setProperty('--mouse-x', mouseX + '%');
+        document.documentElement.style.setProperty('--mouse-y', mouseY + '%');
+    });
+
+    // Hide gradient when mouse leaves window
+    document.addEventListener('mouseleave', function() {
+        mouseGradient.style.opacity = '0.3';
+    });
+
+    // Show gradient when mouse enters window
+    document.addEventListener('mouseenter', function() {
+        mouseGradient.style.opacity = '0.6';
+    });
+});
