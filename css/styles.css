@@ -555,6 +555,10 @@ body.menu-open {
     letter-spacing: 1px;
 }
 
+.slide-content .btn {
+    margin-bottom: 1.5rem;
+}
+
 .arrows {
     position: absolute;
     top: 50%;
@@ -1329,7 +1333,7 @@ body.menu-open {
     flex-direction: column;
     justify-content: center; /* Center content vertically */
     align-items: center; /* Center content horizontally */
-    padding: 2rem 0; /* Add consistent top and bottom padding */
+    padding: 2.5rem 1rem; /* Increased padding for better spacing */
     text-align: center; /* Center all text */
 }
 
@@ -1883,6 +1887,11 @@ h2 {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+}
+
+.sticker-image img {
+    object-fit: cover;
+    object-position: center 80%;
 }
 
 .merch-item:hover .merch-image img {
