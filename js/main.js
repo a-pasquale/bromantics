@@ -790,6 +790,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         "name": `The Bromantics at ${show.venue}`,
                         "startDate": startTime || show.date,
                         "endDate": endTime || show.date,
+                        "image": show.poster ? `https://bromantics.band/${show.poster}` : "https://bromantics.band/img/default-show-poster.jpg",
                         "location": {
                             "@type": "Place",
                             "name": show.venue,
