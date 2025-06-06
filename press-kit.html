@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press Kit - The Bromantics</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Press Kit - The Bromantics">
+    <meta name="description" content="Press kit for The Bromantics - High-resolution photos, band bio, technical info, and press contacts for media and booking inquiries.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bromantics.band/press-kit.html">
+    <meta property="og:title" content="Press Kit - The Bromantics">
+    <meta property="og:description" content="Press kit for The Bromantics - High-resolution photos, band bio, technical info, and press contacts for media and booking inquiries.">
+    <meta property="og:image" content="https://bromantics.band/img/IMG_5040.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://bromantics.band/press-kit.html">
+    <meta property="twitter:title" content="Press Kit - The Bromantics">
+    <meta property="twitter:description" content="Press kit for The Bromantics - High-resolution photos, band bio, technical info, and press contacts for media and booking inquiries.">
+    <meta property="twitter:image" content="https://bromantics.band/img/IMG_5040.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="keywords" content="The Bromantics, press kit, band photos, bio, technical rider, booking, media, new wave, post-punk">
+    <meta name="author" content="The Bromantics">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://bromantics.band/press-kit.html">
+    
+    <link rel="icon" type="image/png" href="favicon/favicon.png">
+    <link rel="apple-touch-icon" href="favicon/favicon.png">
+    <link rel="stylesheet" href="css/styles.css?v=1.0.17">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Bangers&family=Special+Elite&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Press kit specific styles */
+        .press-kit-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('img/IMG_5040.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 10rem 0 6rem;
+            text-align: center;
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .press-kit-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 0, 128, 0.1) 0%, rgba(143, 0, 255, 0.1) 100%);
+            pointer-events: none;
+        }
+        
+        .press-kit-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .press-kit-hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 128, 0.5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .press-kit-hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: var(--light-text);
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+            font-weight: 300;
+        }
+        
+        .hero-subtitle {
+            background: rgba(255, 0, 128, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 0, 128, 0.3);
+            display: inline-block;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-subtitle a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .hero-subtitle a:hover {
+            color: var(--secondary-color);
+            text-shadow: 0 0 8px rgba(var(--secondary-color-rgb), 0.6);
+        }
+        
+        /* Scroll offset for navigation links */
+        .press-section[id] {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Section separators */
+        .highlight-section {
+            border-top: 2px solid transparent;
+            border-image: linear-gradient(90deg, 
+                rgba(143, 0, 255, 0), 
+                rgba(143, 0, 255, 0.5), 
+                rgba(255, 0, 128, 0.5), 
+                rgba(0, 184, 255, 0.5), 
+                rgba(0, 184, 255, 0)) 1;
+        }
+        
+        .page-footer {
+            border-top: 2px solid transparent;
+            border-image: linear-gradient(90deg, 
+                rgba(143, 0, 255, 0), 
+                rgba(143, 0, 255, 0.5), 
+                rgba(255, 0, 128, 0.5), 
+                rgba(0, 184, 255, 0.5), 
+                rgba(0, 184, 255, 0)) 1;
+        }
+        
+        .press-section {
+            padding: 4rem 0;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, 
+                rgba(143, 0, 255, 0), 
+                rgba(143, 0, 255, 0.5), 
+                rgba(255, 0, 128, 0.5), 
+                rgba(0, 184, 255, 0.5), 
+                rgba(0, 184, 255, 0));
+            border-image-slice: 1;
+        }
+        
+        .press-section:last-child {
+            border-bottom: none;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            align-items: start;
+        }
+        
+        .photo-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .logo-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-item img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        .photo-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+        }
+        
+        .photo-info h4 {
+            margin: 0 0 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .photo-info p {
+            margin: 0 0 0.8rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .image-download-btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .image-download-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+        
+        .image-download-btn i {
+            margin-right: 0.3rem;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .download-btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .press-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .contact-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.5);
+        }
+        
+        .main-contact-grid {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .main-contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid rgba(var(--primary-color-rgb), 0.3);
+            box-shadow: 0 0 20px rgba(var(--primary-color-rgb), 0.15);
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .main-contact-card i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.7);
+        }
+        
+        .press-section > .container > p {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .highlight-section {
+            background: linear-gradient(135deg, 
+                rgba(var(--primary-color-rgb), 0.15) 0%, 
+                rgba(var(--secondary-color-rgb), 0.15) 50%, 
+                rgba(var(--accent-color-rgb), 0.15) 100%);
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, 
+                rgba(143, 0, 255, 0), 
+                rgba(143, 0, 255, 0.5), 
+                rgba(255, 0, 128, 0.5), 
+                rgba(0, 184, 255, 0.5), 
+                rgba(0, 184, 255, 0));
+            border-image-slice: 1;
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 0;
+        }
+        
+        .highlight-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(var(--primary-color-rgb), 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(var(--secondary-color-rgb), 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(var(--accent-color-rgb), 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .highlight-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .highlight-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            animation: none;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        
+        .highlight-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--light-text);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-weight: 400;
+        }
+        
+        .contact-card a {
+            color: var(--light-text);
+            text-decoration: none;
+        }
+        
+        .contact-card a:hover {
+            color: var(--primary-color);
+        }
+        
+        .tech-rider-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .tech-specs {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        .tech-specs ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .tech-specs li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tech-specs li:last-child {
+            border-bottom: none;
+        }
+        
+        .fact-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .fact-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        
+        .fact-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+        
+        .fact-label {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .stage-plot-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .stage-plot {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .stage-plot-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        
+        .poster-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .poster-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .poster-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .poster-item img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .press-kit-hero {
+                padding: 8rem 0 4rem;
+                background-attachment: scroll;
+                min-height: 50vh;
+            }
+            
+            .press-kit-hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .press-kit-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-subtitle {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .press-contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .poster-grid {
+                column-count: 1;
+            }
+            
+            .tech-rider-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .poster-grid {
+                column-count: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    <header>
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <img src="img/Bromantics-horizontal-white.png?v=1.0.2" alt="The Bromantics" class="logo">
+            </a>
+        </div>
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html#shows">Shows</a></li>
+                <li><a href="index.html#connect">Connect</a></li>
+                <li><a href="index.html#music">Music</a></li>
+                <li><a href="index.html#video">Video</a></li>
+                <li><a href="index.html#merch">Merch</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="press-kit-hero">
+            <div class="container">
+                <h1>Press Kit</h1>
+                <p>High-voltage new wave energy from Western Massachusetts</p>
+                <div class="hero-subtitle">
+                    <a href="#photos">Photos</a> • <a href="#bio">Bio</a> • <a href="#logos">Logos</a> • <a href="#social">Social</a> • <a href="#technical">Technical Info</a> • <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="press-section highlight-section">
+            <div class="container">
+                <div class="highlight-content">
+                    <p>Based in Western Massachusetts, The Bromantics have been electrifying venues across New England with their authentic recreation of the new wave and post-punk sound that defined a generation. Their commitment to both musical precision and explosive live performance has earned them a devoted following and consistent bookings at premier venues throughout the region.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="press-section" id="bio">
+            <div class="container">
+                <h2>Band Bio</h2>
+                <p>The Bromantics explode onto stage as a high-voltage, six-piece powerhouse transforming venues into electric time machines. With infectious rhythms and angular guitar hooks, they deliver sets that splice the DNA of icons like Talking Heads, The Clash, and The Cure with the raw energy of R.E.M. and U2.</p>
+                
+                <p>Seamlessly blending dance-floor anthems with moody post-punk atmospherics, The Bromantics perform both masterful covers and original compositions. Whether you're a Gen-X veteran or new convert, their shows prove these sounds aren't just of their time – they're timeless.</p>
+            </div>
+        </section>
+
+        <section class="press-section">
+            <div class="container">
+                <h2>Band Facts</h2>
+                <div class="fact-list">
+                    <div class="fact-item">
+                        <span class="fact-number">6</span>
+                        <div class="fact-label">Band Members</div>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-number">2020</span>
+                        <div class="fact-label">Formed</div>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-number">MA</span>
+                        <div class="fact-label">Based in Western Mass</div>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-number">80s</span>
+                        <div class="fact-label">Era Sound</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="press-section" id="photos">
+            <div class="container">
+                <h2>High-Res Photos</h2>
+                <p>Professional photos available for media use. Contact us for higher resolution versions.</p>
+                
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <img src="img/IMG_5040.jpg" alt="The Bromantics live performance">
+                        <div class="photo-info">
+                            <h4>Live Performance</h4>
+                            <p>Full band on stage</p>
+                            <a href="img/IMG_5040.jpg" download="Bromantics-Live-Performance.jpg" class="image-download-btn">
+                                <i class="ti ti-download"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-item">
+                        <img src="img/493192276_679999838116487_5447985041527752407_n.jpg" alt="The Bromantics group photo">
+                        <div class="photo-info">
+                            <h4>Band Portrait</h4>
+                            <p>Professional group shot</p>
+                            <a href="img/493192276_679999838116487_5447985041527752407_n.jpg" download="Bromantics-Band-Portrait.jpg" class="image-download-btn">
+                                <i class="ti ti-download"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-item">
+                        <img src="img/70B6DBEF-4FE9-41F5-834E-D8845C5876F3_1_105_c.jpeg" alt="The Bromantics performance">
+                        <div class="photo-info">
+                            <h4>Stage Performance</h4>
+                            <p>Energy in action</p>
+                            <a href="img/70B6DBEF-4FE9-41F5-834E-D8845C5876F3_1_105_c.jpeg" download="Bromantics-Stage-Performance.jpeg" class="image-download-btn">
+                                <i class="ti ti-download"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="mailto:bromanticswmass@gmail.com" class="download-btn">
+                    <i class="ti ti-download"></i> Request High-Res Photos
+                </a>
+            </div>
+        </section>
+
+        <section class="press-section" id="logos">
+            <div class="container">
+                <h2>Logos</h2>
+                <p>Official band logos for promotional use.</p>
+                
+                <div class="logo-grid">
+                    <div class="logo-item">
+                        <img src="img/Bromantics-horizontal-white.png" alt="Bromantics horizontal logo">
+                        <div class="photo-info">
+                            <h4>Horizontal Logo</h4>
+                            <p>White on transparent</p>
+                            <a href="img/Bromantics-horizontal-white.png" download="Bromantics-Logo-Horizontal.png" class="image-download-btn">
+                                <i class="ti ti-download"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="logo-item">
+                        <img src="img/bromantics-stacked-white.png" alt="Bromantics stacked logo">
+                        <div class="photo-info">
+                            <h4>Stacked Logo</h4>
+                            <p>White on transparent</p>
+                            <a href="img/bromantics-stacked-white.png" download="Bromantics-Logo-Stacked.png" class="image-download-btn">
+                                <i class="ti ti-download"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="press-section" id="social">
+            <div class="container">
+                <h2>Social Media</h2>
+                <p>Connect with The Bromantics on social media to promote our shows.</p>
+                
+                <div class="press-contact-grid">
+                    <div class="contact-card">
+                        <h4>Instagram</h4>
+                        <p><i class="fab fa-instagram" style="font-size: 3rem; color: #E4405F;"></i></p>
+                        <a href="https://www.instagram.com/bromanticsband/" target="_blank">@bromanticsband</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4>Facebook</h4>
+                        <p><i class="fab fa-facebook" style="font-size: 3rem; color: #1877F2;"></i></p>
+                        <a href="https://www.facebook.com/TheBromanticsBand" target="_blank">TheBromanticsBand</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4>YouTube</h4>
+                        <p><i class="fab fa-youtube" style="font-size: 3rem; color: #FF0000;"></i></p>
+                        <a href="https://www.youtube.com/@thebromanticsband" target="_blank">@thebromanticsband</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="press-section">
+            <div class="container">
+                <h2>Show Posters</h2>
+                <p>A collection of our recent promotional materials.</p>
+                
+                <div class="poster-grid">
+                    <div class="poster-item">
+                        <img src="img/posters/499925617_686518470797957_6394401088638227033_n.jpg" alt="Progression Brewing Company show poster">
+                    </div>
+                    
+                    <div class="poster-item">
+                        <img src="img/posters/495267113_694047346711736_6360273799697144046_n.jpg" alt="The Deck show poster">
+                    </div>
+                    
+                    <div class="poster-item">
+                        <img src="img/posters/501274134_690914830358321_3095866032442759949_n.jpg" alt="The Deck September show poster">
+                    </div>
+                    
+                    <div class="poster-item">
+                        <img src="img/posters/489340347_17966342126896765_6712979962750057889_n.jpg" alt="New City Brewery show poster">
+                    </div>
+                    
+                    <div class="poster-item">
+                        <img src="img/posters/485160569_640575795392225_4550974469313893059_n.jpg" alt="Se7ens show poster">
+                    </div>
+                    
+                    <div class="poster-item">
+                        <img src="img/posters/481081290_631593892957082_5195344355733748861_n.jpg" alt="The Guilded Brick show poster">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="press-section" id="technical">
+            <div class="container">
+                <h2>Technical Rider</h2>
+                <div class="tech-rider-grid">
+                    <div class="tech-specs">
+                        <h3>Venue Requirements</h3>
+                        <ul>
+                            <li><strong>Stage Size:</strong> Minimum 16' x 12' preferred</li>
+                            <li><strong>Power:</strong> Standard 110V outlets (6-8 required)</li>
+                            <li><strong>Setup Time:</strong> 45-60 minutes</li>
+                            <li><strong>Sound Check:</strong> 15-20 minutes</li>
+                            <li><strong>Performance Duration:</strong> 1-3 hours (1-2 sets)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-specs">
+                        <h3>Equipment</h3>
+                        <ul>
+                            <li><strong>Instruments:</strong> 3 Vocals, 3 Electric Guitars, 1 Acoustic Guitar, Bass, Keyboard, Synth, Drums</li>
+                            <li><strong>Amplification:</strong> Band provides all instruments and amps (3 guitar amps, 1 bass amp). Venue to provide direct box for acoustic guitar</li>
+                            <li><strong>PA System:</strong> Venue to provide house PA and sound engineer or band can provide own PA</li>
+                            <li><strong>Monitors:</strong> 4 stage monitors preferred (including drum monitor)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="stage-plot-container">
+                    <h2>Stage Plot</h2>
+                    
+                    <svg class="stage-plot" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Stage Background -->
+                        <rect x="50" y="50" width="700" height="300" fill="#2a2a2a" stroke="#ff0080" stroke-width="3" rx="10"/>
+                        <text x="400" y="40" text-anchor="middle" fill="#ff0080" font-family="Arial, sans-serif" font-size="18" font-weight="bold">STAGE</text>
+                        
+                        <!-- Monitor Wedges (positioned in front of vocals) -->
+                        <polygon points="150,310 200,310 175,325" fill="#8f00ff" stroke="#fff" stroke-width="1"/>
+                        <polygon points="380,310 430,310 405,325" fill="#8f00ff" stroke="#fff" stroke-width="1"/>
+                        <polygon points="580,310 630,310 605,325" fill="#8f00ff" stroke="#fff" stroke-width="1"/>
+                        <!-- Drum Monitor (to the left of drums) -->
+                        <polygon points="320,80 360,80 340,95" fill="#8f00ff" stroke="#fff" stroke-width="1"/>
+                        
+                        <!-- Drum Kit (Back Center) -->
+                        <g id="drums" transform="translate(400, 100)">
+                            <!-- Kick Drum -->
+                            <circle cx="0" cy="0" r="25" fill="#444" stroke="#fff" stroke-width="2"/>
+                            <!-- Snare -->
+                            <circle cx="-15" cy="-30" r="12" fill="#555" stroke="#fff" stroke-width="1"/>
+                            <!-- Hi-hat -->
+                            <circle cx="-35" cy="-35" r="8" fill="#666" stroke="#fff" stroke-width="1"/>
+                            <!-- Toms -->
+                            <circle cx="20" cy="-25" r="10" fill="#555" stroke="#fff" stroke-width="1"/>
+                            <circle cx="35" cy="-20" r="10" fill="#555" stroke="#fff" stroke-width="1"/>
+                            <!-- Cymbals -->
+                            <circle cx="10" cy="-45" r="6" fill="#ffcc00" stroke="#fff" stroke-width="1"/>
+                            <circle cx="40" cy="-40" r="6" fill="#ffcc00" stroke="#fff" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Acoustic DI Box (Evenly spaced left of drums) -->
+                        <rect x="260" y="90" width="30" height="20" fill="none" stroke="#fff" stroke-width="2" rx="3"/>
+                        
+                        <!-- Guitar Amp 1 (Evenly spaced left of drums) -->
+                        <rect x="160" y="80" width="60" height="40" fill="#333" stroke="#fff" stroke-width="2" rx="4"/>
+                        <circle cx="180" cy="100" r="8" fill="#222"/>
+                        <circle cx="200" cy="100" r="8" fill="#222"/>
+                        
+                        <!-- Bass Amp (Closest to drums, right side) -->
+                        <rect x="470" y="80" width="60" height="40" fill="#333" stroke="#fff" stroke-width="2" rx="4"/>
+                        <circle cx="490" cy="100" r="8" fill="#222"/>
+                        <circle cx="510" cy="100" r="8" fill="#222"/>
+                        
+                        <!-- Guitar Amp 2 (Further right) -->
+                        <rect x="550" y="80" width="60" height="40" fill="#333" stroke="#fff" stroke-width="2" rx="4"/>
+                        <circle cx="570" cy="100" r="8" fill="#222"/>
+                        <circle cx="590" cy="100" r="8" fill="#222"/>
+                        
+                        <!-- Guitar Amp 3 (Far right) -->
+                        <rect x="630" y="80" width="60" height="40" fill="#333" stroke="#fff" stroke-width="2" rx="4"/>
+                        <circle cx="650" cy="100" r="8" fill="#222"/>
+                        <circle cx="670" cy="100" r="8" fill="#222"/>
+                        
+                        <!-- Keyboard (Stage Left, no stand) -->
+                        <rect x="135" y="260" width="80" height="20" fill="#000" stroke="#fff" stroke-width="2" rx="4"/>
+                        <rect x="145" y="270" width="60" height="5" fill="#fff"/>
+                        
+                        <!-- Microphones with Better Symbolic Design -->
+                        <!-- Keyboard Vocal (Left front) -->
+                        <g transform="translate(175, 235)">
+                            <!-- Mic Stand -->
+                            <line x1="0" y1="0" x2="0" y2="-35" stroke="#555" stroke-width="3"/>
+                            <!-- Mic Body -->
+                            <ellipse cx="0" cy="-39" rx="3" ry="6" fill="#222" stroke="#fff" stroke-width="1"/>
+                            <!-- Mic Grille -->
+                            <ellipse cx="0" cy="-42" rx="3" ry="3" fill="#00b8ff" stroke="#fff" stroke-width="1"/>
+                            <!-- Grille Details -->
+                            <line x1="-2" y1="-42" x2="2" y2="-42" stroke="#fff" stroke-width="0.5"/>
+                            <line x1="-1.5" y1="-44" x2="1.5" y2="-44" stroke="#fff" stroke-width="0.5"/>
+                            <line x1="-1.5" y1="-40" x2="1.5" y2="-40" stroke="#fff" stroke-width="0.5"/>
+                        </g>
+                        
+                        <!-- Lead Vocal (Center Front) -->
+                        <g transform="translate(405, 260)">
+                            <!-- Mic Stand -->
+                            <line x1="0" y1="0" x2="0" y2="-60" stroke="#555" stroke-width="4"/>
+                            <!-- Mic Body -->
+                            <ellipse cx="0" cy="-65" rx="4" ry="8" fill="#222" stroke="#fff" stroke-width="1"/>
+                            <!-- Mic Grille -->
+                            <ellipse cx="0" cy="-69" rx="4" ry="4" fill="#00b8ff" stroke="#fff" stroke-width="1"/>
+                            <!-- Grille Details -->
+                            <line x1="-3" y1="-69" x2="3" y2="-69" stroke="#fff" stroke-width="0.5"/>
+                            <line x1="-2" y1="-71" x2="2" y2="-71" stroke="#fff" stroke-width="0.5"/>
+                            <line x1="-2" y1="-67" x2="2" y2="-67" stroke="#fff" stroke-width="0.5"/>
+                        </g>
+                        
+                        <!-- Backing Vocal (Right) -->
+                        <g transform="translate(605, 260)">
+                            <!-- Mic Stand -->
+                            <line x1="0" y1="0" x2="0" y2="-35" stroke="#555" stroke-width="3"/>
+                            <!-- Mic Body -->
+                            <ellipse cx="0" cy="-39" rx="3" ry="6" fill="#222" stroke="#fff" stroke-width="1"/>
+                            <!-- Mic Grille -->
+                            <ellipse cx="0" cy="-42" rx="3" ry="3" fill="#00b8ff" stroke="#fff" stroke-width="1"/>
+                            <!-- Grille Details -->
+                            <line x1="-2" y1="-42" x2="2" y2="-42" stroke="#fff" stroke-width="0.5"/>
+                            <line x1="-1.5" y1="-44" x2="1.5" y2="-44" stroke="#fff" stroke-width="0.5"/>
+                            <line x1="-1.5" y1="-40" x2="1.5" y2="-40" stroke="#fff" stroke-width="0.5"/>
+                        </g>
+                        
+                        <!-- Drum Overhead Mic -->
+                        <g transform="translate(400, 120)">
+                            <!-- Mic Stand -->
+                            <line x1="0" y1="0" x2="0" y2="-40" stroke="#555" stroke-width="2"/>
+                            <!-- Mic Body -->
+                            <ellipse cx="0" cy="-43" rx="2" ry="4" fill="#222" stroke="#fff" stroke-width="1"/>
+                            <!-- Mic Grille -->
+                            <ellipse cx="0" cy="-45" rx="2" ry="2" fill="#00b8ff" stroke="#fff" stroke-width="1"/>
+                            <!-- Grille Details -->
+                            <line x1="-1" y1="-45" x2="1" y2="-45" stroke="#fff" stroke-width="0.3"/>
+                        </g>
+                        
+                        <!-- Equipment Labels -->
+                        <text x="500" y="135" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">BASS</text>
+                        <text x="175" y="295" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">KEYS</text>
+                        <text x="400" y="140" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">DRUMS</text>
+                        <text x="275" y="125" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10">ACOUSTIC DI</text>
+                        <text x="190" y="135" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">GTR 1</text>
+                        <text x="580" y="135" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">GTR 2</text>
+                        <text x="660" y="135" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">GTR 3</text>
+                        
+                        <!-- Microphone Labels -->
+                        <text x="175" y="250" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">VOX</text>
+                        <text x="405" y="285" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">LEAD VOX</text>
+                        <text x="605" y="285" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12">VOX</text>
+                        
+                        <!-- Monitor Labels -->
+                        <text x="175" y="340" text-anchor="middle" fill="#8f00ff" font-family="Arial, sans-serif" font-size="10">MONITOR</text>
+                        <text x="405" y="340" text-anchor="middle" fill="#8f00ff" font-family="Arial, sans-serif" font-size="10">MONITOR</text>
+                        <text x="605" y="340" text-anchor="middle" fill="#8f00ff" font-family="Arial, sans-serif" font-size="10">MONITOR</text>
+                        <text x="340" y="110" text-anchor="middle" fill="#8f00ff" font-family="Arial, sans-serif" font-size="10">MONITOR</text>
+                        
+                        <!-- Power Requirements -->
+                        <g transform="translate(60, 380)">
+                            <rect x="0" y="0" width="120" height="60" fill="none" stroke="#666" stroke-width="1" stroke-dasharray="5,5"/>
+                            <text x="60" y="15" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="14" font-weight="bold">POWER</text>
+                            <text x="60" y="30" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="12">6-8 Outlets</text>
+                            <text x="60" y="45" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="12">110V Standard</text>
+                        </g>
+                        
+                        <!-- Dimensions -->
+                        <text x="400" y="365" text-anchor="middle" fill="#ff0080" font-family="Arial, sans-serif" font-size="12">16' minimum</text>
+                        
+                        <text x="25" y="215" text-anchor="middle" fill="#ff0080" font-family="Arial, sans-serif" font-size="12" transform="rotate(-90, 25, 200)">12' minimum</text>
+                        
+                        
+                    </svg>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="press-section" id="contact">
+            <div class="container">
+                <h2>Contact</h2>
+                <div class="main-contact-grid">
+                    <div class="main-contact-card">
+                        <i class="ti ti-mail"></i>
+                        <h4>All Inquiries</h4>
+                        <p>General, Booking, Media Relations</p>
+                        <a href="mailto:bromanticswmass@gmail.com">bromanticswmass@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="page-footer">
+        <div class="container">
+            <p>&copy; <span id="copyright-year">2025</span> The Bromantics</p>
+            <p class="footer-credit">Made with <span class="heart">♥</span> by <a href="https://sweetandfizzy.com" target="_blank" rel="noopener">Sweet and Fizzy Digital</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Set copyright year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        
+        // Mobile menu functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            
+            if (!mainNav.classList.contains('active')) {
+                setTimeout(() => {
+                    mainNav.classList.add('active');
+                }, 50);
+            } else {
+                mainNav.classList.remove('active');
+            }
+            
+            document.body.classList.toggle('menu-open');
+        });
+        
+        // Close menu when a link is clicked
+        document.querySelectorAll('#main-nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (mainNav.classList.contains('active') && 
+                !mainNav.contains(event.target) && 
+                !mobileMenuToggle.contains(event.target)) {
+                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+        
+        // Close menu when scrolling
+        window.addEventListener('scroll', function() {
+            if (mainNav.classList.contains('active') && window.scrollY > 50) {
+                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+    </script>
+</body>
+</html>

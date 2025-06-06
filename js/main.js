@@ -1165,27 +1165,34 @@ document.addEventListener('DOMContentLoaded', function() {
 // Smooth scrolling for navigation links and any element with scroll-to class
 document.querySelectorAll('nav a, .scroll-to, .slide-content a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-
         const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
+        
+        // Only apply smooth scrolling to hash links (internal page links)
+        if (targetId && targetId.startsWith('#')) {
+            e.preventDefault();
+            
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Use actual header height for offset
+                const header = document.querySelector('header');
+                const headerOffset = header.offsetHeight;
 
-        // Use actual header height for offset
-        const header = document.querySelector('header');
-        const headerOffset = header.offsetHeight;
+                window.scrollTo({
+                    top: targetElement.offsetTop - headerOffset,
+                    behavior: 'smooth'
+                });
 
-        window.scrollTo({
-            top: targetElement.offsetTop - headerOffset,
-            behavior: 'smooth'
-        });
-
-        // Update URL with hash without triggering a page jump
-        if (history.pushState) {
-            history.pushState(null, null, targetId);
-        } else {
-            // Fallback for older browsers
-            window.location.hash = targetId;
+                // Update URL with hash without triggering a page jump
+                if (history.pushState) {
+                    history.pushState(null, null, targetId);
+                } else {
+                    // Fallback for older browsers
+                    window.location.hash = targetId;
+                }
+            }
         }
+        // For external links (like press-kit.html), let the default behavior proceed
     });
 });
 
