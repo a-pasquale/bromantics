@@ -1654,6 +1654,7 @@ h2 {
         0 10px 20px rgba(0, 0, 0, 0.2),
         0 0 15px rgba(var(--primary-color-rgb), 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
 }
 
 .show-item:hover {
@@ -1697,7 +1698,7 @@ h2 {
 }
 
 .show-date .month {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     color: var(--primary-color);
     font-family: 'League Gothic', sans-serif;
     letter-spacing: 2px;
@@ -1708,7 +1709,7 @@ h2 {
 }
 
 .show-date .year {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     color: var(--secondary-color);
     font-family: 'League Gothic', sans-serif;
     letter-spacing: 1px;
@@ -1731,7 +1732,7 @@ h2 {
 .show-poster img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: top;
     display: block;
     transition: transform 0.3s ease;
@@ -1754,19 +1755,43 @@ h2 {
     margin-bottom: 0.5rem;
 }
 
-.show-info .age-restriction {
-    display: inline-block;
+.show-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.show-meta .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.show-meta .map-link:hover {
+    color: var(--accent-color);
+}
+
+.age-restriction-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     background-color: rgba(var(--primary-color-rgb), 0.15);
     color: var(--primary-color);
     font-size: 0.8rem;
     font-weight: 600;
     padding: 0.3rem 0.8rem;
     border-radius: 3px;
-    margin-top: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border: 1px solid rgba(var(--primary-color-rgb), 0.3);
     box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.1);
+    z-index: 10;
 }
 
 @media (max-width: 768px) {
@@ -1811,8 +1836,76 @@ h2 {
     }
 
     .show-date .month {
-        font-size: 1.4rem;
+        font-size: 2rem;
     }
+
+    .show-date .year {
+        font-size: 2rem;
+    }
+}
+
+/* Support Description Accordion */
+.support-accordion {
+    margin: 0.5rem 0;
+}
+
+.support-accordion .support-preview {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.support-accordion .support-preview p {
+    color: white;
+}
+
+.support-accordion .support-full {
+    color: white;
+    margin-bottom: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+}
+
+.support-accordion .support-full p {
+    color: white;
+}
+
+.support-accordion.expanded .support-full {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.support-accordion.expanded .support-preview {
+    display: none;
+}
+
+.support-toggle {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: 500;
+    text-decoration: underline;
+    padding: 0;
+    margin: 0;
+    transition: color 0.2s ease;
+    display: inline;
+}
+
+.support-toggle:hover {
+    color: var(--accent-color);
+}
+
+.support-toggle:focus {
+    outline: 1px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.support-text {
+    color: white;
+    margin: 0.5rem 0;
 }
 
 /* Merch Section */

@@ -1,6 +1,30 @@
 {
   "shows": [
     {
+      "date": "2025-12-5",
+      "day": "5",
+      "month": "DEC",
+      "venue": "Pulaski Club",
+      "location": "79 Maple St, Easthampton",
+      "time": "7:00 - 10:00 PM",
+      "support": "Join us for a wild night of music and dancing at the Pulaski Club! get your pierogi fix and dance the night away with us. We'll be playing a mix of our favorite songs and some new ones.",
+      "mapQuery": "79+Maple+St+Easthampton",
+      "ageRestriction": "21+",
+      "poster": "img/default-show-poster.jpg"
+    },
+    {
+      "date": "2025-07-19",
+      "day": "25",
+      "month": "JUNE",
+      "venue": "Back to the River",
+      "location": "49 Aqua Vitae Rd, Hadley",
+      "time": "3:00 - 8:30 PM",
+      "support": "<p>It’s a day of music, food, swimming, and good vibes at the river!</p><p>Enjoy summer with great music from The Bromantics, Mass Resistor, Cookie Club, Everdeen, and more bands to be announced.</p> <p>Bring your swimsuit, towel, and water toys and have fun in the water. There is a nice swimming spot along the Connecticut River.</p> <p>Let’s have dinner together. Bring food or a beverage to share, a plate, utensils, and a cup. There will be a grill and plenty of ice. Don't have anything to contribute? No problem, we'll have plenty to share.</p> <p>Other logistics: All ages welcome! We’ll be outside, there are a good number of chairs, but bring your own if it’s easy. We recommend bug spray. Please leave dogs at home.</p>",
+      "mapQuery": "49+Aqua+Vitae+Rd+Hadley",
+      "ageRestriction": "All ages",
+      "poster": "img/posters/back-to-the-river.png"
+    },
+    {
       "date": "2025-05-24",
       "day": "24",
       "month": "MAY",

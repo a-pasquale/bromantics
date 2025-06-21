@@ -828,6 +828,39 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(script);
     }
 
+    // Function to create support description with accordion functionality
+    function createSupportAccordion(supportText, showIndex) {
+        // Strip HTML tags to get text content for length calculation, replacing with spaces
+        const textContent = supportText.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+        const threshold = 180;
+        
+        // If text is short, just return it normally
+        if (textContent.length <= threshold) {
+            return `<div class="support-text">${supportText}</div>`;
+        }
+        
+        // For long text, create accordion
+        let previewText = textContent.substring(0, threshold);
+        // Break on word boundary to avoid cutting words in half
+        const lastSpaceIndex = previewText.lastIndexOf(' ');
+        if (lastSpaceIndex > threshold * 0.8) { // Only use word break if it's not too short
+            previewText = previewText.substring(0, lastSpaceIndex);
+        }
+        const accordionId = `support-${showIndex}`;
+        
+        return `
+            <div class="support-accordion" id="${accordionId}">
+                <div class="support-preview">
+                    <p>${previewText}... <button class="support-toggle" data-accordion="${accordionId}"><span class="toggle-text">Read more</span></button></p>
+                </div>
+                <div class="support-full">
+                    ${supportText}
+                    <button class="support-toggle" data-accordion="${accordionId}"><span class="toggle-text">Read less</span></button>
+                </div>
+            </div>
+        `;
+    }
+
     // Function to render shows
     function renderShows(shows) {
         const showsContainer = document.querySelector('.shows-list');
@@ -853,6 +886,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const year = showDate.getFullYear();
             
             showElement.innerHTML = `
+                ${show.ageRestriction ? `<div class="age-restriction-badge">${show.ageRestriction}</div>` : ''}
                 <div class="show-poster-column">
                     <div class="show-date">
                         <span class="day">${show.day}</span>
@@ -867,16 +901,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3>${show.venue}</h3>
                     <p>${show.location}</p>
                     <p>${show.time}</p>
-                    ${show.support ? `<p>${show.support}</p>` : ''}
-                    ${show.ageRestriction ? `<p class="age-restriction">${show.ageRestriction}</p>` : ''}
-                    ${show.mapQuery ? `
-                        <div class="show-links">
+                    ${show.support ? createSupportAccordion(show.support, shows.indexOf(show)) : ''}
+                    <div class="show-meta">
+                        ${show.mapQuery ? `
                             <a href="https://www.google.com/maps/search/?api=1&query=${show.mapQuery}" target="_blank" class="map-link">
                                 <i class="fas fa-map-marker-alt"></i>
                                 Map
                             </a>
-                        </div>
-                    ` : ''}
+                        ` : ''}
+                    </div>
                 </div>
             `;
             
@@ -896,6 +929,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initial load of shows (default to upcoming)
     loadShows(activeTab);
+    
+    // ===== SUPPORT ACCORDION EVENT HANDLERS =====
+    function initSupportAccordions() {
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.support-toggle')) {
+                const toggleBtn = e.target.closest('.support-toggle');
+                const accordionId = toggleBtn.getAttribute('data-accordion');
+                const accordion = document.getElementById(accordionId);
+                
+                if (accordion) {
+                    accordion.classList.toggle('expanded');
+                }
+            }
+        });
+    }
+    
+    // Initialize accordion handlers
+    initSupportAccordions();
     
     // ===== VIDEO CAROUSEL =====
     function initVideoCarousel() {
