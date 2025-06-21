@@ -848,14 +848,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const accordionId = `support-${showIndex}`;
         
+        const contentId = `support-content-${showIndex}`;
+        
         return `
             <div class="support-accordion" id="${accordionId}">
                 <div class="support-preview">
-                    <p>${previewText}... <button class="support-toggle" data-accordion="${accordionId}"><span class="toggle-text">Read more</span></button></p>
+                    <p>${previewText}... 
+                        <button class="support-toggle" 
+                                data-accordion="${accordionId}"
+                                aria-expanded="false"
+                                aria-controls="${contentId}"
+                                aria-label="Read more about this show">
+                            <span class="toggle-text">Read more</span>
+                        </button>
+                    </p>
                 </div>
-                <div class="support-full">
+                <div class="support-full" 
+                     id="${contentId}"
+                     aria-hidden="true">
                     ${supportText}
-                    <button class="support-toggle" data-accordion="${accordionId}"><span class="toggle-text">Read less</span></button>
+                    <button class="support-toggle" 
+                            data-accordion="${accordionId}"
+                            aria-expanded="true"
+                            aria-controls="${contentId}"
+                            aria-label="Read less about this show">
+                        <span class="toggle-text">Read less</span>
+                    </button>
                 </div>
             </div>
         `;
@@ -934,15 +952,60 @@ document.addEventListener('DOMContentLoaded', function() {
     function initSupportAccordions() {
         document.addEventListener('click', function(e) {
             if (e.target.closest('.support-toggle')) {
-                const toggleBtn = e.target.closest('.support-toggle');
-                const accordionId = toggleBtn.getAttribute('data-accordion');
-                const accordion = document.getElementById(accordionId);
-                
-                if (accordion) {
-                    accordion.classList.toggle('expanded');
-                }
+                handleAccordionToggle(e.target.closest('.support-toggle'));
             }
         });
+        
+        // Keyboard support
+        document.addEventListener('keydown', function(e) {
+            if (e.target.closest('.support-toggle') && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                handleAccordionToggle(e.target.closest('.support-toggle'));
+            }
+        });
+    }
+    
+    function handleAccordionToggle(toggleBtn) {
+        const accordionId = toggleBtn.getAttribute('data-accordion');
+        const accordion = document.getElementById(accordionId);
+        const contentId = toggleBtn.getAttribute('aria-controls');
+        const content = document.getElementById(contentId);
+        
+        if (accordion && content) {
+            const isExpanded = accordion.classList.contains('expanded');
+            
+            // Toggle state
+            accordion.classList.toggle('expanded');
+            
+            // Update ARIA attributes
+            const allToggles = accordion.querySelectorAll('.support-toggle');
+            allToggles.forEach(toggle => {
+                toggle.setAttribute('aria-expanded', !isExpanded);
+            });
+            content.setAttribute('aria-hidden', isExpanded);
+            
+            // Announce to screen readers
+            const announcement = isExpanded ? 'Content collapsed' : 'Content expanded';
+            announceToScreenReader(announcement);
+        }
+    }
+    
+    // Utility function for screen reader announcements
+    function announceToScreenReader(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('aria-atomic', 'true');
+        announcement.className = 'sr-only';
+        announcement.textContent = message;
+        
+        document.body.appendChild(announcement);
+        
+        // Remove after announcement
+        setTimeout(() => {
+            if (document.body.contains(announcement)) {
+                document.body.removeChild(announcement);
+            }
+        }, 1000);
     }
     
     // Initialize accordion handlers

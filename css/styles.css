@@ -1842,6 +1842,12 @@ h2 {
     .show-date .year {
         font-size: 2rem;
     }
+    
+    .age-restriction-badge {
+        top: auto;
+        bottom: 1rem;
+        right: 1rem;
+    }
 }
 
 /* Support Description Accordion */
@@ -1872,7 +1878,7 @@ h2 {
 }
 
 .support-accordion.expanded .support-full {
-    max-height: 500px;
+    max-height: 1000px;
     opacity: 1;
 }
 
@@ -1906,6 +1912,19 @@ h2 {
 .support-text {
     color: white;
     margin: 0.5rem 0;
+}
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
 
 /* Merch Section */
