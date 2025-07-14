@@ -1,13 +1,25 @@
 {
   "shows": [
     {
+      "date": "2025-09-28",
+      "day": "28",
+      "month": "SEP",
+      "venue": "Bright Ideas Brewing",
+      "location": "109 Apremont Way, Westfield",
+      "time": "1:00 - 4:00 PM",
+      "support": "We're excited to play at this great brewery! Get your new wave fix!",
+      "mapQuery": "109+Apremont+Way,+Westfield",
+      "ageRestriction": "",
+      "poster": "img/default-show-poster.jpg"
+    },
+    {
       "date": "2025-12-05",
       "day": "5",
       "month": "DEC",
       "venue": "Pulaski Club",
       "location": "79 Maple St, Easthampton",
       "time": "7:00 - 10:00 PM",
-      "support": "Join us for a wild night of music and dancing at the Pulaski Club! get your pierogi fix and dance the night away with us. We'll be playing a mix of our favorite songs and some new ones.",
+      "support": "Join us for a wild night of music and dancing at the Pulaski Club! Get your pierogi fix and dance the night away with us. We'll be playing a mix of our favorite songs and some new ones.",
       "mapQuery": "79+Maple+St+Easthampton",
       "ageRestriction": "21+",
       "poster": "img/default-show-poster.jpg"
