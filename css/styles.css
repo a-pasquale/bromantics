@@ -67,6 +67,12 @@ body {
     padding: 0 2rem;
 }
 
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+}
+
 h1, h2, h3, h4 {
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -1778,9 +1784,7 @@ h2 {
 }
 
 .age-restriction-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    display: inline-block;
     background-color: rgba(var(--primary-color-rgb), 0.15);
     color: var(--primary-color);
     font-size: 0.8rem;
@@ -1791,7 +1795,7 @@ h2 {
     letter-spacing: 0.5px;
     border: 1px solid rgba(var(--primary-color-rgb), 0.3);
     box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.1);
-    z-index: 10;
+    margin: 0;
 }
 
 @media (max-width: 768px) {

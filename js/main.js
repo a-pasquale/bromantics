@@ -982,7 +982,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const year = showDate.getFullYear();
             
             showElement.innerHTML = `
-                ${show.ageRestriction ? `<div class="age-restriction-badge">${show.ageRestriction}</div>` : ''}
                 <div class="show-poster-column">
                     <div class="show-date">
                         <span class="day">${show.day}</span>
@@ -995,7 +994,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="show-info">
                     <h3>${show.venue}</h3>
-                    <p>${show.location}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <p style="margin: 0;">${show.location}</p>
+                        ${show.ageRestriction ? `<span class="age-restriction-badge" style="white-space: nowrap;">${show.ageRestriction}</span>` : ''}
+                    </div>
                     <p>${show.time}</p>
                     ${show.support ? createSupportAccordion(show.support, shows.indexOf(show)) : ''}
                     <div class="show-meta">
@@ -1006,8 +1008,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             </a>
                         ` : ''}
                         ${!isPast ? `
-                            <a href="${generateICSLink(show)}" download="${show.venue.replace(/\s+/g, '-')}-${show.date}.ics" class="btn btn-small" style="color: var(--primary-color);">
-                                <i class="fas fa-calendar-plus" style="margin-right: 0.5rem;"></i>Add to Calendar
+                            <a href="${generateICSLink(show)}" download="${show.venue.replace(/\s+/g, '-')}-${show.date}.ics" class="btn btn-small" style="color: var(--primary-color); white-space: nowrap; font-size: 0.9rem;">
+                                <i class="fas fa-calendar-plus" style="margin-right: 0.5rem;"></i>Calendar
                             </a>
                         ` : ''}
                     </div>
