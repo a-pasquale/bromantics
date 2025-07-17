@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.4.7';
+const VERSION = '1.4.8';
 
 // Using 4 shows per page for optimal display balance
 
@@ -46,6 +46,84 @@ function stopAllVideos() {
 // Helper function to add version to URLs
 function getVersionedUrl(url) {
     return `${url}?v=${VERSION}`;
+}
+
+// Generate iCal link for show
+function generateICSLink(show) {
+  const [startTime, endTime] = show.time.split(' - ');
+  
+  // Check if the full time string has PM/AM to determine period
+  const timeString = show.time.toUpperCase();
+  const hasPM = timeString.includes('PM');
+  const hasAM = timeString.includes('AM');
+  
+  const parseTime = (timeStr, isEndTime = false) => {
+    const [hour, minutePart] = timeStr.trim().split(':');
+    const cleanMinute = parseInt((minutePart || '0').replace(/[AP]M/i, '').trim()) || 0;
+    let parsedHour = parseInt(hour);
+    
+    // If this specific time has AM/PM, use it
+    const localPM = timeStr.toUpperCase().includes('PM');
+    const localAM = timeStr.toUpperCase().includes('AM');
+    
+    if (localPM || (hasPM && !localAM)) {
+      // Use PM if this time has PM, or if the overall time range is PM and this doesn't explicitly say AM
+      if (parsedHour !== 12) parsedHour += 12;
+    } else if (localAM) {
+      if (parsedHour === 12) parsedHour = 0;
+    } else if (hasAM) {
+      // Default to AM if the time range specifies AM
+      if (parsedHour === 12) parsedHour = 0;
+    } else {
+      // Default assumption: if no AM/PM specified anywhere, assume PM for evening shows
+      if (parsedHour < 12) parsedHour += 12;
+    }
+    
+    return { hour: parsedHour, minute: cleanMinute };
+  };
+  
+  const startParsed = parseTime(startTime, false);
+  const endParsed = parseTime(endTime || startTime, true);
+  
+  // Create start date/time in Eastern timezone
+  const startDate = new Date(show.date + 'T00:00:00-05:00');
+  startDate.setHours(startParsed.hour, startParsed.minute, 0, 0);
+  
+  // Create end date/time in Eastern timezone  
+  const endDate = new Date(show.date + 'T00:00:00-05:00');
+  endDate.setHours(endParsed.hour, endParsed.minute, 0, 0);
+  
+  // Format for ICS (UTC format)
+  const formatICSDate = (date) => {
+    return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  };
+  
+  // Use full venue name and location for calendar, properly escaped
+  // Add MA if no state is specified (assume Massachusetts for local shows)
+  let locationWithState = show.location;
+  if (!locationWithState.match(/,\s*[A-Z]{2}(\s|$)/)) {
+    locationWithState += ', MA';
+  }
+  const fullLocation = `${show.venue}, ${locationWithState}`.replace(/([,\\])/g, '\\$1');
+  
+  const icsData = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//The Bromantics//Show Calendar//EN',
+    'BEGIN:VEVENT',
+    `UID:${show.date}-${show.venue.replace(/\s+/g, '-')}@bromantics.band`,
+    `DTSTAMP:${formatICSDate(new Date())}`,
+    `DTSTART:${formatICSDate(startDate)}`,
+    `DTEND:${formatICSDate(endDate)}`,
+    `SUMMARY:The Bromantics at ${show.venue}`,
+    `DESCRIPTION:${show.support ? show.support.replace(/<[^>]*>/g, '').replace(/([,\\;])/g, '\\$1') : 'The Bromantics live show'}`,
+    `LOCATION:${fullLocation}`,
+    `URL:https://bromantics.band`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  
+  return `data:text/calendar;charset=utf8,${encodeURIComponent(icsData)}`;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -925,6 +1003,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             <a href="https://www.google.com/maps/search/?api=1&query=${show.mapQuery}" target="_blank" class="map-link">
                                 <i class="fas fa-map-marker-alt"></i>
                                 Map
+                            </a>
+                        ` : ''}
+                        ${!isPast ? `
+                            <a href="${generateICSLink(show)}" download="${show.venue.replace(/\s+/g, '-')}-${show.date}.ics" class="btn btn-small" style="color: var(--primary-color);">
+                                <i class="fas fa-calendar-plus" style="margin-right: 0.5rem;"></i>Add to Calendar
                             </a>
                         ` : ''}
                     </div>
