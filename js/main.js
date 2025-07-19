@@ -639,6 +639,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 allShows = data.shows.filter(show => {
                     const showDate = new Date(show.date);
                     showDate.setHours(0, 0, 0, 0);
+                    // Show is considered past only if it's before today (not including today)
                     const isPast = showDate < today;
                     return tabType === 'upcoming' ? !isPast : isPast;
                 });
