@@ -637,8 +637,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Filter shows based on tab type and current date
                 allShows = data.shows.filter(show => {
-                    const showDate = new Date(show.date);
-                    showDate.setHours(0, 0, 0, 0);
+                    // Create show date in local timezone to match today's timezone
+                    const showDate = new Date(show.date + 'T00:00:00');
                     // Show is considered past only if it's before today (not including today)
                     const isPast = showDate < today;
                     return tabType === 'upcoming' ? !isPast : isPast;
@@ -830,7 +830,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to generate structured data for events
     function generateEventStructuredData(shows) {
         // Only include upcoming shows
-        const upcomingShows = shows.filter(show => new Date(show.date) >= new Date());
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const upcomingShows = shows.filter(show => {
+            const showDate = new Date(show.date + 'T00:00:00');
+            return showDate >= today;
+        });
 
         if (upcomingShows.length === 0) return;
 
@@ -976,7 +981,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const posterSrc = show.poster || 'img/default-show-poster.jpg';
             
             // Extract year from date for past events
-            const showDate = new Date(show.date);
+            const showDate = new Date(show.date + 'T00:00:00');
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             const isPast = showDate < today;
