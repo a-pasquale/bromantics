@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "logo": "https://bromantics.band/img/bromantics-stacked-white.png",
             "image": "https://bromantics.band/img/IMG_5040.jpg",
             "genre": "New Wave / Post-Punk",
-            "email": "bromanticswmass@gmail.com",
+            "email": "hello@bromantics.band",
             "sameAs": [
                 "https://www.instagram.com/bromanticsband/",
                 "https://www.facebook.com/TheBromanticsBand",

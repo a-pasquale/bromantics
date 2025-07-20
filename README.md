@@ -42,6 +42,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-The Bromantics - [bromanticswmass@gmail.com](mailto:bromanticswmass@gmail.com)
+The Bromantics - [hello@bromantics.band](mailto:hello@bromantics.band)
 
 Website: [https://bromantics.band](https://bromantics.band)
