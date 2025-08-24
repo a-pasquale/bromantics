@@ -1,6 +1,18 @@
 {
   "shows": [
     {
+      "date": "2025-10-04",
+      "day": "4",
+      "month": "OCT",
+      "venue": "Easthampton Porchfest",
+      "location": "",
+      "time": "TBD",
+      "support": "Check us out on a porch near you!",
+      "mapQuery": "",
+      "ageRestriction": "All ages",
+      "poster": "img/default-show-poster.jpg"
+    },
+    {
       "date": "2025-09-28",
       "day": "28",
       "month": "SEP",
@@ -87,7 +99,7 @@
     {
       "date": "2024-12-31",
       "day": "31",
-      "month": "JAN",
+      "month": "DEC",
       "venue": "The Guilded Brick",
       "location": "390 Dwight St, Holyoke",
       "time": "9:00 PM - late",

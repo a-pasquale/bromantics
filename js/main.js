@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.4.9';
+const VERSION = '1.5.0';
 
 // Using 4 shows per page for optimal display balance
 
@@ -50,6 +50,12 @@ function getVersionedUrl(url) {
 
 // Generate iCal link for show
 function generateICSLink(show) {
+  // Handle TBD or missing time
+  if (!show.time || show.time === 'TBD') {
+    // For TBD times, just return empty string (no calendar link)
+    return '';
+  }
+  
   const [startTime, endTime] = show.time.split(' - ');
   
   // Check if the full time string has PM/AM to determine period
@@ -87,10 +93,18 @@ function generateICSLink(show) {
   
   // Create start date/time in Eastern timezone
   const startDate = new Date(show.date + 'T00:00:00-05:00');
+  if (isNaN(startDate.getTime())) {
+    console.error('Invalid date in generateICSLink for show:', show.venue, 'Date:', show.date);
+    return '#'; // Return invalid link
+  }
   startDate.setHours(startParsed.hour, startParsed.minute, 0, 0);
   
   // Create end date/time in Eastern timezone  
   const endDate = new Date(show.date + 'T00:00:00-05:00');
+  if (isNaN(endDate.getTime())) {
+    console.error('Invalid date in generateICSLink for show:', show.venue, 'Date:', show.date);
+    return '#'; // Return invalid link
+  }
   endDate.setHours(endParsed.hour, endParsed.minute, 0, 0);
   
   // Format for ICS (UTC format)
@@ -623,25 +637,43 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to load shows from JSON file
     function loadShows(tabType = 'upcoming') {
-        fetch(getVersionedUrl('data/shows.json'))
+        console.log('loadShows called with tab:', tabType);
+        const url = getVersionedUrl('data/shows.json');
+        console.log('Fetching:', url);
+        
+        fetch(url)
             .then(response => {
+                console.log('Response received, status:', response.status);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
             })
             .then(data => {
+                console.log('JSON parsed, number of shows:', data.shows ? data.shows.length : 0);
                 // Get current date (at the start of day to compare dates properly)
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
                 
                 // Filter shows based on tab type and current date
                 allShows = data.shows.filter(show => {
-                    // Create show date in local timezone to match today's timezone
-                    const showDate = new Date(show.date + 'T00:00:00');
-                    // Show is considered past only if it's before today (not including today)
-                    const isPast = showDate < today;
-                    return tabType === 'upcoming' ? !isPast : isPast;
+                    try {
+                        // Create show date in local timezone to match today's timezone
+                        const showDate = new Date(show.date + 'T00:00:00');
+                        
+                        // Check if date is valid
+                        if (isNaN(showDate.getTime())) {
+                            console.error('Invalid date for show:', show.venue, 'Date:', show.date);
+                            return false; // Skip this show
+                        }
+                        
+                        // Show is considered past only if it's before today (not including today)
+                        const isPast = showDate < today;
+                        return tabType === 'upcoming' ? !isPast : isPast;
+                    } catch (error) {
+                        console.error('Error processing show date:', show.venue, 'Date:', show.date, 'Error:', error);
+                        return false; // Skip this show
+                    }
                 });
                 
                 // Sort shows by date
@@ -676,6 +708,16 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error loading shows:', error);
+                console.error('Error stack:', error.stack);
+                console.error('Error type:', error.constructor.name);
+                console.error('Error message:', error.message);
+                
+                // Try to identify where the error occurred
+                if (error.stack) {
+                    const lines = error.stack.split('\n');
+                    console.error('Error location:', lines[1] || 'Unknown');
+                }
+                
                 loadingIndicator.style.display = 'none';
                 showsContainer.innerHTML = '<div class="error-message">Sorry, there was an error loading the shows. Please try again later.</div>';
                 paginationContainer.innerHTML = '';
@@ -982,6 +1024,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Extract year from date for past events
             const showDate = new Date(show.date + 'T00:00:00');
+            if (isNaN(showDate.getTime())) {
+                console.error('Invalid date in renderShows for show:', show.venue, 'Date:', show.date);
+                return; // Skip this show
+            }
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             const isPast = showDate < today;
@@ -1013,7 +1059,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 Map
                             </a>
                         ` : ''}
-                        ${!isPast ? `
+                        ${!isPast && generateICSLink(show) ? `
                             <a href="${generateICSLink(show)}" download="${show.venue.replace(/\s+/g, '-')}-${show.date}.ics" class="btn btn-small" style="color: var(--primary-color); white-space: nowrap; font-size: 0.9rem;">
                                 <i class="fas fa-calendar-plus" style="margin-right: 0.5rem;"></i>Calendar
                             </a>
