@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+  <title>The Bromantics - Show Updates</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      font-family: Arial, sans-serif;
+      line-height: 1.4;
+      width: 100%;
+      min-height: 100vh;
+    }
+    
+    .email-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: transparent;
+    }
+    
+    @media only screen and (max-width: 600px) {
+      .email-container {
+        width: 100% !important;
+        padding: 0 !important;
+      }
+      
+      /* Header adjustments */
+      h1 { 
+        font-size: 24px !important; 
+        letter-spacing: 1px !important;
+        text-shadow: 1px 1px 0 #00b8ff !important;
+      }
+      h2 { 
+        font-size: 20px !important; 
+        letter-spacing: 1px !important;
+        text-shadow: 1px 1px 0 #00b8ff !important;
+      }
+      h3 { 
+        font-size: 22px !important; 
+        text-shadow: 0 0 8px rgba(0, 184, 255, 0.3) !important;
+      }
+      
+      /* Show items mobile adjustments */
+      .show-item {
+        margin: 0 0 20px 0 !important;
+      }
+      
+      /* Social links mobile */
+      .social-link {
+        display: block !important;
+        width: 85% !important;
+        margin: 10px auto !important;
+        text-align: center !important;
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+      }
+      
+      /* Featured section mobile */
+      .featured-title {
+        font-size: 26px !important;
+        letter-spacing: 1px !important;
+      }
+      
+      .featured-message {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        max-width: 100% !important;
+      }
+      
+      .featured-image {
+        max-width: 100% !important;
+        margin-bottom: 20px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    
+    <!-- Preheader -->
+    <div style="display: none; font-size: 1px; color: #121212; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+      The Bromantics upcoming shows and updates - New Wave/Post-Punk band from Western Massachusetts
+    </div>
+    
+    <!-- Header -->
+    <div style="padding: 30px 20px; background-color: #0a0a0a; text-align: center;">
+      <img src="data:image/png;base64,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" alt="The Bromantics - New Wave Post-Punk Band" style="width: 100%; max-width: 350px; height: auto; display: block; margin: 0 auto;">
+    </div>
+    
+    <!-- Section Divider -->
+    <div style="margin: 0; padding: 0;">
+      <div style="height: 2px; background-color: #ff0080; margin: 0; line-height: 0; font-size: 0;"></div>
+      <div style="height: 2px; background-color: #00b8ff; margin: 0; line-height: 0; font-size: 0;"></div>
+    </div>
+    
+    
+    <!-- Featured Section -->
+    <div style="padding: 40px 20px; background-color: #0a0a0a; text-align: center;">
+      <img src="https://bromantics.band/img/posters/back-to-the-river-party.png" alt="Featured Content" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px; margin-bottom: 25px; display: block; margin-left: auto; margin-right: auto; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);">
+      <h1 style="color: #ff0080; font-family: Arial, sans-serif; font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 20px 0; line-height: 1.2; text-shadow: 2px 2px 0 #00b8ff;">See you at the River!</h1>
+      <p style="color: #adb5bd; font-size: 18px; line-height: 1.6; margin: 0; text-align: center; max-width: 600px; margin: 0 auto;">It’s a day of music, food, swimming, and good vibes at the river!</p>
+    </div>
+    
+    <!-- Section Divider -->
+    <div style="margin: 0; padding: 0;">
+      <div style="height: 2px; background-color: #ff0080; margin: 0; line-height: 0; font-size: 0;"></div>
+      <div style="height: 2px; background-color: #00b8ff; margin: 0; line-height: 0; font-size: 0;"></div>
+    </div>
+    
+    
+    <!-- Shows Section -->
+    <div style="padding: 40px 20px; background-color: transparent;">
+      <h2 style="color: #ff0080; font-family: Arial, sans-serif; font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 30px 0; line-height: 1.2; text-align: center; text-shadow: 2px 2px 0 #00b8ff;">Upcoming Shows</h2>
+      
+      
+      <!-- Show Item -->
+      <div class="show-item" style="background-color: rgba(0, 0, 0, 0.6); border-radius: 10px; border: 2px solid rgba(143, 0, 255, 0.3); margin: 0 0 25px 0; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 0, 128, 0.1);">
+        
+        <!-- Poster Section -->
+        <div style="width: 100%;">
+          <!-- Date Header -->
+          <div style="background-color: rgba(255, 0, 128, 0.1); padding: 12px; text-align: center; border-bottom: 1px solid rgba(255, 0, 128, 0.2);">
+            <span style="color: #f8f9fa; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 0, 128, 0.3);">05</span>
+            <span style="color: #ff0080; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; margin-left: 8px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 0, 128, 0.4);">SEP</span>
+          </div>
+          <!-- Poster Image -->
+          <img src="https://bromantics.band/img/default-show-poster.jpg" alt="Show poster for The Deck" style="width: 100%; height: auto; display: block;">
+        </div>
+        
+        <!-- Info Section -->
+        <div style="padding: 24px;">
+          <!-- Venue and Age Restriction Row -->
+          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px;">
+            <tr>
+              <td>
+                <h3 style="color: #00b8ff; font-size: 24px; margin: 0; font-weight: 600; font-family: Arial, sans-serif; line-height: 1.2; text-shadow: 0 0 10px rgba(0, 184, 255, 0.3);">The Deck</h3>
+              </td>
+              
+              <td align="right" style="padding-left: 10px;">
+                <span style="display: inline-block; background-color: rgba(255, 0, 128, 0.15); color: #ff0080; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255, 0, 128, 0.3); box-shadow: 0 0 10px rgba(255, 0, 128, 0.1); white-space: nowrap;">All ages</span>
+              </td>
+              
+            </tr>
+          </table>
+          
+          <!-- Location -->
+          <p style="color: #adb5bd; margin: 0 0 6px 0; font-size: 16px; line-height: 1.4;">125A Pleasant St, Northampton</p>
+          
+          <!-- Time -->
+          <p style="color: #adb5bd; margin: 0 0 16px 0; font-size: 16px; line-height: 1.4;">6:00 - 9:00 PM</p>
+          
+          <!-- Support Text -->
+          <div style="color: #f8f9fa; margin: 0 0 20px 0; font-size: 15px; line-height: 1.5;">Join us for an outdoor end-of-summer show!</div>
+          
+          <!-- Action Buttons -->
+          <div style="text-align: center;">
+            
+            <a href="https://maps.google.com/maps?q=The+Deck+125A+Pleasant+St+Northampton" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); white-space: nowrap; margin: 4px;" target="_blank">📍 Map</a>
+            
+            <a href="data:text/calendar;charset=utf8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-%2F%2FThe%20Bromantics%2F%2FShow%20Calendar%2F%2FEN%0D%0ABEGIN%3AVEVENT%0D%0AUID%3A2025-09-05-The-Deck%40bromantics.band%0D%0ADTSTAMP%3A20250720T232207Z%0D%0ADTSTART%3A20250905T220000Z%0D%0ADTEND%3A20250906T010000Z%0D%0ASUMMARY%3AThe%20Bromantics%20at%20The%20Deck%0D%0ADESCRIPTION%3AJoin%20us%20for%20an%20outdoor%20end-of-summer%20show!%0D%0ALOCATION%3AThe%20Deck%5C%2C%20125A%20Pleasant%20St%5C%2C%20Northampton%5C%2C%20MA%0D%0AURL%3Ahttps%3A%2F%2Fbromantics.band%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR" download="The-Deck-2025-09-05.ics" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); white-space: nowrap; margin: 4px;">📅 Calendar</a>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Show Item -->
+      <div class="show-item" style="background-color: rgba(0, 0, 0, 0.6); border-radius: 10px; border: 2px solid rgba(143, 0, 255, 0.3); margin: 0 0 25px 0; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 0, 128, 0.1);">
+        
+        <!-- Poster Section -->
+        <div style="width: 100%;">
+          <!-- Date Header -->
+          <div style="background-color: rgba(255, 0, 128, 0.1); padding: 12px; text-align: center; border-bottom: 1px solid rgba(255, 0, 128, 0.2);">
+            <span style="color: #f8f9fa; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 0, 128, 0.3);">28</span>
+            <span style="color: #ff0080; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; margin-left: 8px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 0, 128, 0.4);">SEP</span>
+          </div>
+          <!-- Poster Image -->
+          <img src="https://bromantics.band/img/default-show-poster.jpg" alt="Show poster for Bright Ideas Brewing" style="width: 100%; height: auto; display: block;">
+        </div>
+        
+        <!-- Info Section -->
+        <div style="padding: 24px;">
+          <!-- Venue and Age Restriction Row -->
+          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px;">
+            <tr>
+              <td>
+                <h3 style="color: #00b8ff; font-size: 24px; margin: 0; font-weight: 600; font-family: Arial, sans-serif; line-height: 1.2; text-shadow: 0 0 10px rgba(0, 184, 255, 0.3);">Bright Ideas Brewing</h3>
+              </td>
+              
+              <td align="right" style="padding-left: 10px;">
+                <span style="display: inline-block; background-color: rgba(255, 0, 128, 0.15); color: #ff0080; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255, 0, 128, 0.3); box-shadow: 0 0 10px rgba(255, 0, 128, 0.1); white-space: nowrap;">All ages</span>
+              </td>
+              
+            </tr>
+          </table>
+          
+          <!-- Location -->
+          <p style="color: #adb5bd; margin: 0 0 6px 0; font-size: 16px; line-height: 1.4;">109 Apremont Way, Westfield</p>
+          
+          <!-- Time -->
+          <p style="color: #adb5bd; margin: 0 0 16px 0; font-size: 16px; line-height: 1.4;">2:00 - 5:00 PM</p>
+          
+          <!-- Support Text -->
+          <div style="color: #f8f9fa; margin: 0 0 20px 0; font-size: 15px; line-height: 1.5;">We're excited to play at this great brewery! Get your new wave fix!</div>
+          
+          <!-- Action Buttons -->
+          <div style="text-align: center;">
+            
+            <a href="https://maps.google.com/maps?q=109+Apremont+Way,+Westfield" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); white-space: nowrap; margin: 4px;" target="_blank">📍 Map</a>
+            
+            <a href="data:text/calendar;charset=utf8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-%2F%2FThe%20Bromantics%2F%2FShow%20Calendar%2F%2FEN%0D%0ABEGIN%3AVEVENT%0D%0AUID%3A2025-09-28-Bright-Ideas-Brewing%40bromantics.band%0D%0ADTSTAMP%3A20250720T232207Z%0D%0ADTSTART%3A20250928T180000Z%0D%0ADTEND%3A20250928T210000Z%0D%0ASUMMARY%3AThe%20Bromantics%20at%20Bright%20Ideas%20Brewing%0D%0ADESCRIPTION%3AWe're%20excited%20to%20play%20at%20this%20great%20brewery!%20Get%20your%20new%20wave%20fix!%0D%0ALOCATION%3ABright%20Ideas%20Brewing%5C%2C%20109%20Apremont%20Way%5C%2C%20Westfield%5C%2C%20MA%0D%0AURL%3Ahttps%3A%2F%2Fbromantics.band%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR" download="Bright-Ideas-Brewing-2025-09-28.ics" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); white-space: nowrap; margin: 4px;">📅 Calendar</a>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Show Item -->
+      <div class="show-item" style="background-color: rgba(0, 0, 0, 0.6); border-radius: 10px; border: 2px solid rgba(143, 0, 255, 0.3); margin: 0 0 25px 0; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 0, 128, 0.1);">
+        
+        <!-- Poster Section -->
+        <div style="width: 100%;">
+          <!-- Date Header -->
+          <div style="background-color: rgba(255, 0, 128, 0.1); padding: 12px; text-align: center; border-bottom: 1px solid rgba(255, 0, 128, 0.2);">
+            <span style="color: #f8f9fa; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 0, 128, 0.3);">01</span>
+            <span style="color: #ff0080; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; margin-left: 8px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 0, 128, 0.4);">NOV</span>
+          </div>
+          <!-- Poster Image -->
+          <img src="https://bromantics.band/img/70B6DBEF-4FE9-41F5-834E-D8845C5876F3_1_105_c.jpeg" alt="Show poster for New City Brewery" style="width: 100%; height: auto; display: block;">
+        </div>
+        
+        <!-- Info Section -->
+        <div style="padding: 24px;">
+          <!-- Venue and Age Restriction Row -->
+          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px;">
+            <tr>
+              <td>
+                <h3 style="color: #00b8ff; font-size: 24px; margin: 0; font-weight: 600; font-family: Arial, sans-serif; line-height: 1.2; text-shadow: 0 0 10px rgba(0, 184, 255, 0.3);">New City Brewery</h3>
+              </td>
+              
+            </tr>
+          </table>
+          
+          <!-- Location -->
+          <p style="color: #adb5bd; margin: 0 0 6px 0; font-size: 16px; line-height: 1.4;">180 Pleasant St, Easthampton</p>
+          
+          <!-- Time -->
+          <p style="color: #adb5bd; margin: 0 0 16px 0; font-size: 16px; line-height: 1.4;">7:00 - 10:00 PM</p>
+          
+          <!-- Support Text -->
+          <div style="color: #f8f9fa; margin: 0 0 20px 0; font-size: 15px; line-height: 1.5;">Our third annual Halloween show! Wear your costume and celebrate the Day of the Dead!</div>
+          
+          <!-- Action Buttons -->
+          <div style="text-align: center;">
+            
+            <a href="https://maps.google.com/maps?q=New+City+Brewery+180+Pleasant+St+Easthampton" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); white-space: nowrap; margin: 4px;" target="_blank">📍 Map</a>
+            
+            <a href="data:text/calendar;charset=utf8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-%2F%2FThe%20Bromantics%2F%2FShow%20Calendar%2F%2FEN%0D%0ABEGIN%3AVEVENT%0D%0AUID%3A2025-11-01-New-City-Brewery%40bromantics.band%0D%0ADTSTAMP%3A20250720T232207Z%0D%0ADTSTART%3A20251101T230000Z%0D%0ADTEND%3A20251102T020000Z%0D%0ASUMMARY%3AThe%20Bromantics%20at%20New%20City%20Brewery%0D%0ADESCRIPTION%3AOur%20third%20annual%20Halloween%20show!%20Wear%20your%20costume%20and%20celebrate%20the%20Day%20of%20the%20Dead!%0D%0ALOCATION%3ANew%20City%20Brewery%5C%2C%20180%20Pleasant%20St%5C%2C%20Easthampton%5C%2C%20MA%0D%0AURL%3Ahttps%3A%2F%2Fbromantics.band%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR" download="New-City-Brewery-2025-11-01.ics" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); white-space: nowrap; margin: 4px;">📅 Calendar</a>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Show Item -->
+      <div class="show-item" style="background-color: rgba(0, 0, 0, 0.6); border-radius: 10px; border: 2px solid rgba(143, 0, 255, 0.3); margin: 0 0 25px 0; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 0, 128, 0.1);">
+        
+        <!-- Poster Section -->
+        <div style="width: 100%;">
+          <!-- Date Header -->
+          <div style="background-color: rgba(255, 0, 128, 0.1); padding: 12px; text-align: center; border-bottom: 1px solid rgba(255, 0, 128, 0.2);">
+            <span style="color: #f8f9fa; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 0, 128, 0.3);">5</span>
+            <span style="color: #ff0080; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; margin-left: 8px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 0, 128, 0.4);">DEC</span>
+          </div>
+          <!-- Poster Image -->
+          <img src="https://bromantics.band/img/default-show-poster.jpg" alt="Show poster for Pulaski Club" style="width: 100%; height: auto; display: block;">
+        </div>
+        
+        <!-- Info Section -->
+        <div style="padding: 24px;">
+          <!-- Venue and Age Restriction Row -->
+          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px;">
+            <tr>
+              <td>
+                <h3 style="color: #00b8ff; font-size: 24px; margin: 0; font-weight: 600; font-family: Arial, sans-serif; line-height: 1.2; text-shadow: 0 0 10px rgba(0, 184, 255, 0.3);">Pulaski Club</h3>
+              </td>
+              
+              <td align="right" style="padding-left: 10px;">
+                <span style="display: inline-block; background-color: rgba(255, 0, 128, 0.15); color: #ff0080; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255, 0, 128, 0.3); box-shadow: 0 0 10px rgba(255, 0, 128, 0.1); white-space: nowrap;">21+</span>
+              </td>
+              
+            </tr>
+          </table>
+          
+          <!-- Location -->
+          <p style="color: #adb5bd; margin: 0 0 6px 0; font-size: 16px; line-height: 1.4;">79 Maple St, Easthampton</p>
+          
+          <!-- Time -->
+          <p style="color: #adb5bd; margin: 0 0 16px 0; font-size: 16px; line-height: 1.4;">7:00 - 10:00 PM</p>
+          
+          <!-- Support Text -->
+          <div style="color: #f8f9fa; margin: 0 0 20px 0; font-size: 15px; line-height: 1.5;">Join us for a wild night of music and dancing at the Pulaski Club! Get your pierogi fix and dance the night away with us. We'll be playing a mix of our favorite songs and some new ones.</div>
+          
+          <!-- Action Buttons -->
+          <div style="text-align: center;">
+            
+            <a href="https://maps.google.com/maps?q=79+Maple+St+Easthampton" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); white-space: nowrap; margin: 4px;" target="_blank">📍 Map</a>
+            
+            <a href="data:text/calendar;charset=utf8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-%2F%2FThe%20Bromantics%2F%2FShow%20Calendar%2F%2FEN%0D%0ABEGIN%3AVEVENT%0D%0AUID%3A2025-12-05-Pulaski-Club%40bromantics.band%0D%0ADTSTAMP%3A20250720T232207Z%0D%0ADTSTART%3A20251206T000000Z%0D%0ADTEND%3A20251206T030000Z%0D%0ASUMMARY%3AThe%20Bromantics%20at%20Pulaski%20Club%0D%0ADESCRIPTION%3AJoin%20us%20for%20a%20wild%20night%20of%20music%20and%20dancing%20at%20the%20Pulaski%20Club!%20Get%20your%20pierogi%20fix%20and%20dance%20the%20night%20away%20with%20us.%20We'll%20be%20playing%20a%20mix%20of%20our%20favorite%20songs%20and%20some%20new%20ones.%0D%0ALOCATION%3APulaski%20Club%5C%2C%2079%20Maple%20St%5C%2C%20Easthampton%5C%2C%20MA%0D%0AURL%3Ahttps%3A%2F%2Fbromantics.band%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR" download="Pulaski-Club-2025-12-05.ics" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); white-space: nowrap; margin: 4px;">📅 Calendar</a>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Section Divider -->
+    <div style="margin: 0; padding: 0;">
+      <div style="height: 2px; background-color: #ff0080; margin: 0; line-height: 0; font-size: 0;"></div>
+      <div style="height: 2px; background-color: #00b8ff; margin: 0; line-height: 0; font-size: 0;"></div>
+    </div>
+    
+    <!-- Share Section -->
+    <div style="padding: 40px 20px; background-color: transparent; text-align: center;">
+      <div style="background-color: rgba(0, 0, 0, 0.6); border-radius: 10px; border: 2px solid rgba(143, 0, 255, 0.3); padding: 30px; margin: 0 auto; max-width: 500px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 0, 128, 0.1);">
+        <h2 style="color: #ff0080; font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 20px 0; line-height: 1.2; text-shadow: 2px 2px 0 #00b8ff;">Love New Wave Music?</h2>
+        <p style="color: #adb5bd; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
+          Know someone who would dig The Bromantics' sound? Share this email with friends who love new wave and post-punk music! They can join our mailing list to stay updated on all our shows and music.
+        </p>
+        <a href="https://bromantics.band/#connect" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); margin: 8px;" target="_blank">🎵 Join Our Mailing List</a>
+      </div>
+    </div>
+    
+    <!-- Section Divider -->
+    <div style="margin: 0; padding: 0;">
+      <div style="height: 2px; background-color: #ff0080; margin: 0; line-height: 0; font-size: 0;"></div>
+      <div style="height: 2px; background-color: #00b8ff; margin: 0; line-height: 0; font-size: 0;"></div>
+    </div>
+    
+    <!-- Footer -->
+    <div style="padding: 40px 20px; background-color: #0a0a0a; text-align: center;">
+      <h2 style="color: #ff0080; font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 25px 0; line-height: 1.2; text-shadow: 2px 2px 0 #00b8ff;">Stay Connected</h2>
+      
+      <!-- Action Buttons -->
+      <div style="margin-bottom: 30px; text-align: center;">
+        <a href="https://bromantics.band" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); margin: 8px;">Visit Website</a>
+        <a href="mailto:hello@bromantics.band" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none; text-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(0, 184, 255, 0.2); box-shadow: 3px 3px 0 rgba(0, 184, 255, 0.7), 5px 5px 0 rgba(0, 0, 0, 0.15); margin: 8px;">Email Us</a>
+      </div>
+      
+      <!-- Social Links -->
+      <div style="margin-bottom: 30px; text-align: center;">
+        <a href="https://youtube.com/@thebromantics" class="social-link" style="display: inline-block; padding: 10px 14px; background-color: rgba(255, 0, 0, 0.2); color: #ffffff; text-decoration: none; border-radius: 4px; border: 1px solid rgba(255, 0, 0, 0.5); font-size: 13px; font-weight: bold; margin: 4px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">YouTube</a>
+        <a href="https://facebook.com/thebromantics" class="social-link" style="display: inline-block; padding: 10px 14px; background-color: rgba(66, 103, 178, 0.2); color: #ffffff; text-decoration: none; border-radius: 4px; border: 1px solid rgba(66, 103, 178, 0.5); font-size: 13px; font-weight: bold; margin: 4px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">Facebook</a>
+        <a href="https://instagram.com/thebromantics" class="social-link" style="display: inline-block; padding: 10px 14px; background-color: rgba(225, 48, 108, 0.2); color: #ffffff; text-decoration: none; border-radius: 4px; border: 1px solid rgba(225, 48, 108, 0.5); font-size: 13px; font-weight: bold; margin: 4px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">Instagram</a>
+      </div>
+      
+      <!-- Legal -->
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px;">
+        <p style="color: #6c757d; font-size: 12px; margin: 0 0 10px 0; line-height: 1.4;">
+          © 2025 The Bromantics. All rights reserved.
+        </p>
+        <p style="color: #6c757d; font-size: 12px; margin: 0; line-height: 1.4;">
+          You received this email because you subscribed to our mailing list.<br>
+          <a href="{unsubscribe_url}" style="color: #6c757d; text-decoration: underline;">Unsubscribe</a> | 
+          <a href="{update_profile_url}" style="color: #6c757d; text-decoration: underline;">Update Preferences</a>
+        </p>
+      </div>
+      
+    </div>
+    
+  </div>
+</body>
+</html>

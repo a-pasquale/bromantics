@@ -24,6 +24,10 @@ yarn-error.log
 .env.local
 .env.*.local
 
+# Campaign settings
+.last-campaign-settings.json
+.last-send-settings.json
+
 # Build files
 dist/
 build/ 
