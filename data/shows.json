@@ -5,10 +5,10 @@
       "day": "4",
       "month": "OCT",
       "venue": "Easthampton Porchfest",
-      "location": "",
-      "time": "TBD",
-      "support": "Check us out on a porch near you!",
-      "mapQuery": "",
+      "location": "76 Garfield Ave, Easthampton",
+      "time": "2:00 - 3:00 PM",
+      "support": "Check us out on a porch near you! And don't forget to checkout <a href='https://www.easthamptonporchfest.com/'>the other amazing bands playing!</a>",
+      "mapQuery": "76+Garfield+Ave+Easthampton",
       "ageRestriction": "All ages",
       "poster": "img/default-show-poster.jpg"
     },
@@ -82,7 +82,7 @@
       "support": "Join us for an outdoor end-of-summer show!",
       "mapQuery": "The+Deck+125A+Pleasant+St+Northampton",
       "ageRestriction": "All ages",
-      "poster": "img/default-show-poster.jpg"
+      "poster": "img/posters/bromantics_the_deck-9-5-2025.jpg"
     },
     {
       "date": "2025-11-01",

@@ -5,7 +5,6 @@ const VERSION = '1.5.0';
 
 // Global function to stop all videos
 function stopAllVideos() {
-    console.log("Stopping all videos");
 
     // Handle all videos on all devices
     const allIframes = document.querySelectorAll('.video-wrapper iframe');
@@ -359,17 +358,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add click events to the new track elements
                 tracks.forEach(track => {
                     track.addEventListener('click', function() {
-                        console.log('Track clicked - will play track');
                         const index = Array.from(tracks).indexOf(this);
-                        loadTrack(index);
-
-                        // Explicitly stop any playing videos before playing audio
-                        stopAllVideos();
-
-                        // Longer delay to ensure videos have properly stopped
-                        setTimeout(() => {
-                            playTrack();
-                        }, 150);
+                        
+                        // If clicking on the same track that's currently loaded
+                        if (index === currentTrackIndex) {
+                            if (isPlaying) {
+                                // Pause if currently playing
+                                pauseTrack();
+                            } else {
+                                // Resume if paused (don't reload the track)
+                                stopAllVideos();
+                                setTimeout(() => {
+                                    playTrack();
+                                }, 150);
+                            }
+                        } else {
+                            // Load and play a different track
+                            loadTrack(index);
+                            // Explicitly stop any playing videos before playing audio
+                            stopAllVideos();
+                            // Longer delay to ensure videos have properly stopped
+                            setTimeout(() => {
+                                playTrack();
+                            }, 150);
+                        }
                     });
                 });
             })
@@ -427,17 +439,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add click events to the new track elements
                 tracks.forEach(track => {
                     track.addEventListener('click', function() {
-                        console.log('Track clicked - will play track');
                         const index = Array.from(tracks).indexOf(this);
-                        loadTrack(index);
-
-                        // Explicitly stop any playing videos before playing audio
-                        stopAllVideos();
-
-                        // Longer delay to ensure videos have properly stopped
-                        setTimeout(() => {
-                            playTrack();
-                        }, 150);
+                        
+                        // If clicking on the same track that's currently loaded
+                        if (index === currentTrackIndex) {
+                            if (isPlaying) {
+                                // Pause if currently playing
+                                pauseTrack();
+                            } else {
+                                // Resume if paused (don't reload the track)
+                                stopAllVideos();
+                                setTimeout(() => {
+                                    playTrack();
+                                }, 150);
+                            }
+                        } else {
+                            // Load and play a different track
+                            loadTrack(index);
+                            // Explicitly stop any playing videos before playing audio
+                            stopAllVideos();
+                            // Longer delay to ensure videos have properly stopped
+                            setTimeout(() => {
+                                playTrack();
+                            }, 150);
+                        }
                     });
                 });
             });
@@ -463,7 +488,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Play track function
     function playTrack() {
-        console.log('Play track called - stopping videos');
         // Stop any playing videos first
         stopAllVideos();
 
@@ -582,7 +606,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Ensure videos are stopped when audio starts playing
     audioPlayer.addEventListener('play', function() {
-        console.log('Audio started playing - ensuring videos are stopped');
         stopAllVideos();
     });
     
@@ -637,20 +660,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to load shows from JSON file
     function loadShows(tabType = 'upcoming') {
-        console.log('loadShows called with tab:', tabType);
         const url = getVersionedUrl('data/shows.json');
-        console.log('Fetching:', url);
         
         fetch(url)
             .then(response => {
-                console.log('Response received, status:', response.status);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
             })
             .then(data => {
-                console.log('JSON parsed, number of shows:', data.shows ? data.shows.length : 0);
                 // Get current date (at the start of day to compare dates properly)
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
@@ -1533,4 +1552,56 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('mouseenter', function() {
         mouseGradient.style.opacity = '0.6';
     });
+
+    // ===== ACTIVE MENU HIGHLIGHTING =====
+    function initActiveMenuHighlighting() {
+        const navLinks = document.querySelectorAll('#main-nav a[href^="#"]');
+        const sections = Array.from(navLinks).map(link => {
+            const href = link.getAttribute('href');
+            return document.querySelector(href);
+        }).filter(section => section !== null);
+
+        function updateActiveMenu() {
+            const scrollPos = window.scrollY + 200; // Increased offset for better detection
+            
+            let currentSection = null;
+            
+            // Find which section we're currently in
+            for (const section of sections) {
+                if (section.offsetTop <= scrollPos) {
+                    currentSection = section;
+                }
+            }
+            
+            // If we're at the very top (hero section), don't activate any menu item
+            if (window.scrollY < 100) {
+                currentSection = null;
+            }
+            
+            // Update nav links
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (currentSection && href === `#${currentSection.id}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Listen for scroll events with throttling
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(updateActiveMenu, 10);
+        });
+
+        // Initial call
+        updateActiveMenu();
+    }
+
+    // Initialize active menu highlighting
+    initActiveMenuHighlighting();
 });
