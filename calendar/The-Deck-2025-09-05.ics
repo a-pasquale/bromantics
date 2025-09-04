@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2025-09-05-The-Deck@bromantics.band
+DTSTAMP:20250902T014122Z
+DTSTART:20250905T220000Z
+DTEND:20250906T010000Z
+SUMMARY:The Bromantics at The Deck
+DESCRIPTION:Join us for an outdoor end-of-summer show!
+LOCATION:The Deck\, 125A Pleasant St\, Northampton\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR

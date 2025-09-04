@@ -66,11 +66,11 @@ function isUpcoming(dateString) {
   return showDate >= today;
 }
 
-function generateICSLink(show) {
+function generateICSFile(show) {
   // Handle TBD or missing time
   if (!show.time || show.time === 'TBD') {
-    // For TBD times, just return empty string (no calendar link)
-    return '';
+    // For TBD times, return null (no calendar file)
+    return null;
   }
   
   const [startTime, endTime] = show.time.split(' - ');
@@ -147,7 +147,18 @@ function generateICSLink(show) {
     'END:VCALENDAR'
   ].join('\r\n');
   
-  return `data:text/calendar;charset=utf8,${encodeURIComponent(icsData)}`;
+  return {
+    filename: `${show.venue.replace(/[\s\/\\]/g, '-')}-${show.date}.ics`,
+    content: icsData
+  };
+}
+
+function generateICSLink(show) {
+  const icsFile = generateICSFile(show);
+  if (!icsFile) return '';
+  
+  // Return hosted URL instead of data URI for better email client compatibility
+  return `https://bromantics.band/calendar/${icsFile.filename}`;
 }
 
 // Function to get file size in bytes
@@ -201,6 +212,24 @@ function prepareImagesForEmail(shows, featuredImage) {
 function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage) {
   const upcomingShows = shows.filter(show => isUpcoming(show.date))
     .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  // Create calendar directory if it doesn't exist
+  const calendarDir = path.join(__dirname, 'calendar');
+  if (!fs.existsSync(calendarDir)) {
+    fs.mkdirSync(calendarDir, { recursive: true });
+  }
+
+  // Generate ICS files for all shows
+  const icsFiles = [];
+  upcomingShows.forEach(show => {
+    const icsFile = generateICSFile(show);
+    if (icsFile) {
+      const icsPath = path.join(calendarDir, icsFile.filename);
+      fs.writeFileSync(icsPath, icsFile.content, 'utf8');
+      icsFiles.push(icsFile.filename);
+      console.log(`   📅 Generated calendar file: ${icsFile.filename}`);
+    }
+  });
 
   // Prepare images for embedding
   const embeddedImages = prepareImagesForEmail(shows, featuredImage);
@@ -298,6 +327,8 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="x-apple-disable-message-reformatting">
   <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light">
   <title>The Bromantics - Show Updates</title>
   <style>
     body {
@@ -306,6 +337,18 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
       font-family: Arial, sans-serif;
       line-height: 1.4;
       width: 100%;
+      background-color: #121212 !important;
+      color-scheme: light only;
+    }
+    
+    /* Dark mode override styles for email clients */
+    @media (prefers-color-scheme: dark) {
+      .email-wrapper,
+      .email-container,
+      body {
+        background-color: #121212 !important;
+        color: #ffffff !important;
+      }
     }
     
     /* Force link colors for Outlook */
