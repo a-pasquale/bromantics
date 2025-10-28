@@ -1,6 +1,18 @@
 {
   "shows": [
     {
+      "date": "2026-01-24",
+      "day": "24",
+      "month": "JAN",
+      "venue": "Progression Brewing Company",
+      "location": "9 Pearl St, Northampton",
+      "time": "6:00 - 9:00 PM",
+      "support": "Join us at this great brewery in downtown Northampton.",
+      "mapQuery": "Progression+Brewing+Company+9+Pearl+St+Northampton",
+      "ageRestriction": "18+",
+      "poster": "img/default-show-poster.jpg"
+    },
+    {
       "date": "2025-10-04",
       "day": "4",
       "month": "OCT",
@@ -94,7 +106,7 @@
       "support": "Our third annual Halloween show! Wear your costume and celebrate the Day of the Dead!",
       "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
       "ageRestriction": "",
-      "poster": "img/70B6DBEF-4FE9-41F5-834E-D8845C5876F3_1_105_c.jpeg"
+      "poster": "img/posters/halloween_2025.jpg"
     },
     {
       "date": "2024-12-31",
