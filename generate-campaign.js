@@ -248,10 +248,10 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
 
   const featuredSection = featuredTitle || featuredMessage || featuredImage ? `
     <!-- Featured Section -->
-    <div style="padding: 40px 20px; background-color: #0a0a0a; text-align: center;">
+    <div class="gmail-darker-section" style="padding: 40px 20px; background: #0a0a0a; background-image: linear-gradient(#0a0a0a, #0a0a0a); text-align: center;">
       ${featuredImage ? `<img src="${getImageSrc(featuredImage)}" alt="Featured Content" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px; margin-bottom: 25px; display: block; margin-left: auto; margin-right: auto; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);">` : ''}
       ${featuredTitle ? `<h1 style="color: #ff0080; font-family: Arial, sans-serif; font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 20px 0; line-height: 1.2; text-shadow: 2px 2px 0 #00b8ff;">${featuredTitle}</h1>` : ''}
-      ${featuredMessage ? `<p style="color: #adb5bd; font-size: 18px; line-height: 1.6; margin: 0; text-align: center; max-width: 600px; margin: 0 auto;">${featuredMessage}</p>` : ''}
+      ${featuredMessage ? `<p class="gmail-text-white" style="color: #ffffff; font-size: 18px; line-height: 1.6; margin: 0; text-align: center; max-width: 600px; margin: 0 auto;">${featuredMessage}</p>` : ''}
     </div>
     
     <!-- Section Divider -->
@@ -262,18 +262,18 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
 
   const showsSection = upcomingShows.length > 0 ? `
     <!-- Shows Section -->
-    <div style="padding: 40px 20px; background-color: transparent;">
+    <div style="padding: 40px 20px;">
       <h2 style="color: #ff0080; font-family: Arial, sans-serif; font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 30px 0; line-height: 1.2; text-align: center; text-shadow: 2px 2px 0 #00b8ff;">Upcoming Shows</h2>
       
       ${upcomingShows.map(show => `
       <!-- Show Item -->
-      <div class="show-item" style="background-color: #1a1a1a; background-color: rgba(0, 0, 0, 0.6); border-radius: 10px; border: 2px solid #8f00ff; border: 2px solid rgba(143, 0, 255, 0.3); margin: 0 0 25px 0; overflow: hidden;">
+      <div class="show-item gmail-dark-section" style="background: #1a1a1a; background-image: linear-gradient(#1a1a1a, #1a1a1a); border-radius: 10px; border: 2px solid rgba(143, 0, 255, 0.3); margin: 0 0 25px 0; overflow: hidden;">
         
         <!-- Poster Section -->
         <div style="width: 100%;">
           <!-- Date Header -->
-          <div style="background-color: #0a0a0a; padding: 12px; text-align: center; border-bottom: 2px solid #ff0080;">
-            <span style="color: #ffffff !important; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; text-decoration: none !important;">${show.day}</span>
+          <div class="gmail-darker-section" style="background: #0a0a0a; background-image: linear-gradient(#0a0a0a, #0a0a0a); padding: 12px; text-align: center; border-bottom: 2px solid #ff0080;">
+            <span class="gmail-text-blue" style="color: #00b8ff !important; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; text-decoration: none !important;">${show.day}</span>
             <span style="color: #ff0080 !important; font-size: 32px; font-weight: bold; line-height: 1; font-family: Arial, sans-serif; margin-left: 8px; text-transform: uppercase; letter-spacing: 2px; text-decoration: none !important;">${show.month}</span>
           </div>
           <!-- Poster Image -->
@@ -286,32 +286,32 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px;">
             <tr>
               <td>
-                <h3 style="color: #00b8ff; font-size: 24px; margin: 0; font-weight: 600; font-family: Arial, sans-serif; line-height: 1.2; text-shadow: 0 0 10px rgba(0, 184, 255, 0.3);">${show.venue}</h3>
+                <h3 class="gmail-text-blue" style="color: #00b8ff; font-size: 24px; margin: 0; font-weight: 600; font-family: Arial, sans-serif; line-height: 1.2; text-shadow: 0 0 10px rgba(0, 184, 255, 0.3);">${show.venue}</h3>
               </td>
               ${show.ageRestriction ? `
               <td align="right" style="padding-left: 10px;">
-                <span style="display: inline-block; background-color: #ff0080; color: #ffffff !important; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid #ff0080; white-space: nowrap; text-decoration: none !important;">${show.ageRestriction}</span>
+                <span class="gmail-text-white" style="display: inline-block; background-color: #ff0080; color: #ffffff !important; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid #ff0080; white-space: nowrap; text-decoration: none !important;">${show.ageRestriction}</span>
               </td>
               ` : ''}
             </tr>
           </table>
           
           <!-- Location -->
-          <p style="color: #adb5bd; margin: 0 0 6px 0; font-size: 16px; line-height: 1.4;">${show.location}</p>
+          <p class="gmail-text-white" style="color: #ffffff; margin: 0 0 6px 0; font-size: 16px; line-height: 1.4;">${show.location}</p>
           
           <!-- Time -->
-          <p style="color: #adb5bd; margin: 0 0 16px 0; font-size: 16px; line-height: 1.4;">${show.time}</p>
+          <p class="gmail-text-white" style="color: #ffffff; margin: 0 0 16px 0; font-size: 16px; line-height: 1.4;">${show.time}</p>
           
           <!-- Support Text -->
-          ${show.support ? `<div style="color: #f8f9fa; margin: 0 0 20px 0; font-size: 15px; line-height: 1.5;">${show.support}</div>` : ''}
+          ${show.support ? `<div class="gmail-text-white" style="color: #ffffff; margin: 0 0 20px 0; font-size: 15px; line-height: 1.5;">${show.support}</div>` : ''}
           
           <!-- Action Buttons -->
           <div style="text-align: center;">
             ${show.mapQuery ? `
-            <a href="https://maps.google.com/maps?q=${show.mapQuery}" style="display: inline-block; background-color: #0a1a2e; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa !important; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none !important; white-space: nowrap; margin: 4px;" target="_blank">📍 Map</a>
+            <a href="https://maps.google.com/maps?q=${show.mapQuery}" class="gmail-button" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #ffffff; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none !important; white-space: nowrap; margin: 4px;" target="_blank">📍 Map</a>
             ` : ''}
             ${generateICSLink(show) ? `
-            <a href="${generateICSLink(show)}" download="${show.venue.replace(/\s+/g, '-')}-${show.date}.ics" style="display: inline-block; background-color: #0a1a2e; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa !important; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none !important; white-space: nowrap; margin: 4px;">📅 Calendar</a>
+            <a href="${generateICSLink(show)}" download="${show.venue.replace(/\s+/g, '-')}-${show.date}.ics" class="gmail-button" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #ffffff; padding: 8px 16px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; font-size: 12px; border: 2px solid #ff0080; text-decoration: none !important; white-space: nowrap; margin: 4px;">📅 Calendar</a>
             ` : ''}
           </div>
         </div>
@@ -327,8 +327,6 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="x-apple-disable-message-reformatting">
   <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
-  <meta name="color-scheme" content="light only">
-  <meta name="supported-color-schemes" content="light">
   <title>The Bromantics - Show Updates</title>
   <style>
     body {
@@ -337,15 +335,62 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
       font-family: Arial, sans-serif;
       line-height: 1.4;
       width: 100%;
-      background-color: #121212 !important;
-      color-scheme: light only;
     }
     
-    /* Dark mode override styles for email clients */
+    /* Default dark theme for most email clients */
+    .email-wrapper {
+      background: #121212;
+      background-image: linear-gradient(#121212, #121212);
+    }
+    
+    .email-container {
+      background: #121212;
+      background-image: linear-gradient(#121212, #121212);
+      color: #ffffff;
+    }
+    
+    /* Gmail-specific light theme that will be inverted to dark */
+    u + .body .email-wrapper {
+      background: #ffffff !important;
+    }
+    
+    u + .body .email-container {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+    
+    u + .body .gmail-dark-section {
+      background: #ffffff !important;
+    }
+    
+    u + .body .gmail-darker-section {
+      background: #ffffff !important;
+    }
+    
+    u + .body .gmail-text-white {
+      color: #000000 !important;
+    }
+    
+    u + .body .gmail-text-pink {
+      color: #ff0080 !important;
+    }
+    
+    u + .body .gmail-text-blue {
+      color: #00b8ff !important;
+    }
+    
+    u + .body .gmail-button {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+    
+    /* Dark mode support for other clients */
     @media (prefers-color-scheme: dark) {
-      .email-wrapper,
-      .email-container,
-      body {
+      .email-wrapper {
+        background-color: #121212 !important;
+      }
+      
+      .email-container {
         background-color: #121212 !important;
         color: #ffffff !important;
       }
@@ -361,14 +406,12 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
     
     .email-wrapper {
       width: 100%;
-      background-color: #121212;
     }
     
     .email-container {
       width: 100%;
       max-width: 600px;
       margin: 0 auto;
-      background-color: transparent;
     }
     
     @media only screen and (max-width: 600px) {
@@ -427,9 +470,16 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
     }
   </style>
 </head>
-<body>
-  <div class="email-wrapper">
-    <div class="email-container">
+<body class="body">
+  <!--[if mso | IE]>
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #000001;">
+    <tr>
+      <td>
+  <![endif]-->
+  <div class="email-wrapper" style="background: #121212; background-image: linear-gradient(#121212, #121212);">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="email-container" style="background: #121212; background-image: linear-gradient(#121212, #121212); margin: 0 auto; max-width: 600px; width: 100%; color: #ffffff;">
+      <tr>
+        <td>
     
     <!-- Preheader -->
     <div style="display: none; font-size: 1px; color: #121212; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
@@ -437,8 +487,8 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
     </div>
     
     <!-- Header -->
-    <div style="padding: 30px 20px; background-color: #0a0a0a; text-align: center;">
-      <img src="${getImageSrc('img/Bromantics-horizontal-white.png')}" alt="The Bromantics - New Wave Post-Punk Band" style="width: 100%; max-width: 350px; height: auto; display: block; margin: 0 auto;">
+    <div class="gmail-darker-section" style="padding: 30px 20px; background: #0a0a0a; background-image: linear-gradient(#0a0a0a, #0a0a0a); text-align: center;">
+      <img src="${getImageSrc('img/Bromantics-horizontal-white.jpg')}" alt="The Bromantics - New Wave Post-Punk Band" style="width: 100%; max-width: 350px; height: auto; display: block; margin: 0 auto;">
     </div>
     
     <!-- Section Divider -->
@@ -458,13 +508,13 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
     </div>
     
     <!-- Share Section -->
-    <div style="padding: 40px 20px; background-color: transparent; text-align: center;">
-      <div style="background-color: #1a1a1a; background-color: rgba(0, 0, 0, 0.6); border-radius: 10px; border: 2px solid #8f00ff; border: 2px solid rgba(143, 0, 255, 0.3); padding: 30px; margin: 0 auto; max-width: 500px;">
+    <div style="padding: 40px 20px; text-align: center;">
+      <div class="gmail-dark-section" style="background: #1a1a1a; background-image: linear-gradient(#1a1a1a, #1a1a1a); border-radius: 10px; border: 2px solid rgba(143, 0, 255, 0.3); padding: 30px; margin: 0 auto; max-width: 500px;">
         <h2 style="color: #ff0080; font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 20px 0; line-height: 1.2; text-shadow: 2px 2px 0 #00b8ff;">Love New Wave Music?</h2>
-        <p style="color: #adb5bd; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
+        <p class="gmail-text-white" style="color: #ffffff; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
           Know someone who would dig The Bromantics' sound? Share this email with friends who love new wave and post-punk music! They can join our mailing list to stay updated on all our shows and music.
         </p>
-        <a href="https://bromantics.band/#connect" style="display: inline-block; background-color: #0a1a2e; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa !important; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none !important; margin: 8px;" target="_blank">Join Our Mailing List</a>
+        <a href="https://bromantics.band/#connect" class="gmail-button" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #ffffff; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none !important; margin: 8px;" target="_blank">Join Our Mailing List</a>
       </div>
     </div>
     
@@ -475,38 +525,45 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
     </div>
     
     <!-- Footer -->
-    <div style="padding: 40px 20px; background-color: #0a0a0a; text-align: center;">
+    <div class="gmail-darker-section" style="padding: 40px 20px; background: #0a0a0a; background-image: linear-gradient(#0a0a0a, #0a0a0a); text-align: center;">
       <h2 style="color: #ff0080; font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 25px 0; line-height: 1.2; text-shadow: 2px 2px 0 #00b8ff;">Stay Connected</h2>
       
       <!-- Action Buttons -->
       <div style="margin-bottom: 30px; text-align: center;">
-        <a href="https://bromantics.band" style="display: inline-block; background-color: #0a1a2e; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa !important; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none !important; margin: 8px;">Visit Website</a>
-        <a href="mailto:hello@bromantics.band" style="display: inline-block; background-color: #0a1a2e; background-color: rgba(0, 184, 255, 0.15); color: #f8f9fa !important; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none !important; margin: 8px;">Email Us</a>
+        <a href="https://bromantics.band" class="gmail-button" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #ffffff; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none !important; margin: 8px;">Visit Website</a>
+        <a href="mailto:hello@bromantics.band" class="gmail-button" style="display: inline-block; background-color: rgba(0, 184, 255, 0.15); color: #ffffff; padding: 12px 24px; border-radius: 0; text-transform: uppercase; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 600; border: 2px solid #ff0080; text-decoration: none !important; margin: 8px;">Email Us</a>
       </div>
       
       <!-- Social Links -->
       <div style="margin-bottom: 30px; text-align: center;">
-        <a href="https://youtube.com/@thebromantics" class="social-link" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #f8f9fa !important; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">YouTube</a>
-        <a href="https://facebook.com/thebromantics" class="social-link" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #f8f9fa !important; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">Facebook</a>
-        <a href="https://instagram.com/thebromantics" class="social-link" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #f8f9fa !important; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">Instagram</a>
+        <a href="https://youtube.com/@thebromantics" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">YouTube</a>
+        <a href="https://facebook.com/thebromantics" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">Facebook</a>
+        <a href="https://instagram.com/thebromantics" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">Instagram</a>
       </div>
       
       <!-- Legal -->
       <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px;">
-        <p style="color: #6c757d; font-size: 12px; margin: 0 0 10px 0; line-height: 1.4;">
+        <p class="gmail-text-white" style="color: #ffffff; font-size: 12px; margin: 0 0 10px 0; line-height: 1.4;">
           © 2025 The Bromantics. All rights reserved.
         </p>
-        <p style="color: #6c757d; font-size: 12px; margin: 0; line-height: 1.4;">
+        <p class="gmail-text-white" style="color: #ffffff; font-size: 12px; margin: 0; line-height: 1.4;">
           You received this email because you subscribed to our mailing list.<br>
-          <a href="{unsubscribe_url}" style="color: #6c757d; text-decoration: underline;">Unsubscribe</a> | 
-          <a href="{update_profile_url}" style="color: #6c757d; text-decoration: underline;">Update Preferences</a>
+          <a href="{unsubscribe_url}" class="gmail-text-white" style="color: #ffffff; text-decoration: underline;">Unsubscribe</a> | 
+          <a href="{update_profile_url}" class="gmail-text-white" style="color: #ffffff; text-decoration: underline;">Update Preferences</a>
         </p>
       </div>
       
     </div>
     
-    </div>
+        </td>
+      </tr>
+    </table>
   </div>
+  <!--[if mso | IE]>
+      </td>
+    </tr>
+  </table>
+  <![endif]-->
 </body>
 </html>`;
 }
