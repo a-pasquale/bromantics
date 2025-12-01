@@ -536,9 +536,9 @@ function generateEmailHTML(shows, featuredTitle, featuredMessage, featuredImage)
       
       <!-- Social Links -->
       <div style="margin-bottom: 30px; text-align: center;">
-        <a href="https://youtube.com/@thebromantics" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">YouTube</a>
-        <a href="https://facebook.com/thebromantics" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">Facebook</a>
-        <a href="https://instagram.com/thebromantics" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">Instagram</a>
+        <a href="https://youtube.com/@thebromanticsband" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">YouTube</a>
+        <a href="https://facebook.com/TheBromanticsBand" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">Facebook</a>
+        <a href="https://instagram.com/bromanticsband" class="social-link gmail-button" style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #ffffff; text-decoration: none !important; border: 2px solid #00b8ff; font-size: 14px; font-weight: 600; margin: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">Instagram</a>
       </div>
       
       <!-- Legal -->
