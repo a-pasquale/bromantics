@@ -40,13 +40,13 @@
       "date": "2025-12-05",
       "day": "5",
       "month": "DEC",
-      "venue": "Pulaski Club",
+      "venue": "Pulaski Pub",
       "location": "79 Maple St, Easthampton",
       "time": "8:00 - 11:00 PM",
-      "support": "Join us for a wild night of music and dancing at the Pulaski Club! Get your pierogi fix and dance the night away with us. We'll be playing a mix of our favorite songs and some new ones.",
+      "support": "Join us for a wild night of music and dancing at the Pulaski Pub! Get your pierogi fix and dance the night away with us. We'll be playing a mix of our favorite songs and some new ones.",
       "mapQuery": "79+Maple+St+Easthampton",
       "ageRestriction": "21+",
-      "poster": "img/default-show-poster.jpg"
+      "poster": "img/posters/bromantics-pulaski-pub.jpg"
     },
     {
       "date": "2025-07-19",

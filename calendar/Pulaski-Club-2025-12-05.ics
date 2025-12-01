@@ -3,9 +3,9 @@ VERSION:2.0
 PRODID:-//The Bromantics//Show Calendar//EN
 BEGIN:VEVENT
 UID:2025-12-05-Pulaski-Club@bromantics.band
-DTSTAMP:20250922T130649Z
-DTSTART:20251206T000000Z
-DTEND:20251206T030000Z
+DTSTAMP:20251028T155349Z
+DTSTART:20251205T010000Z
+DTEND:20251205T040000Z
 SUMMARY:The Bromantics at Pulaski Club
 DESCRIPTION:Join us for a wild night of music and dancing at the Pulaski Club! Get your pierogi fix and dance the night away with us. We'll be playing a mix of our favorite songs and some new ones.
 LOCATION:Pulaski Club\, 79 Maple St\, Easthampton\, MA

@@ -3,9 +3,9 @@ VERSION:2.0
 PRODID:-//The Bromantics//Show Calendar//EN
 BEGIN:VEVENT
 UID:2025-11-01-New-City-Brewery@bromantics.band
-DTSTAMP:20250922T130649Z
-DTSTART:20251101T230000Z
-DTEND:20251102T020000Z
+DTSTAMP:20251028T155349Z
+DTSTART:20251102T000000Z
+DTEND:20251102T030000Z
 SUMMARY:The Bromantics at New City Brewery
 DESCRIPTION:Our third annual Halloween show! Wear your costume and celebrate the Day of the Dead!
 LOCATION:New City Brewery\, 180 Pleasant St\, Easthampton\, MA
