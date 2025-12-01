@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2025-12-05-Pulaski-Pub@bromantics.band
+DTSTAMP:20251201T013129Z
+DTSTART:20251206T010000Z
+DTEND:20251206T040000Z
+SUMMARY:The Bromantics at Pulaski Pub
+DESCRIPTION:Join us for a wild night of music and dancing at the Pulaski Pub! Get your pierogi fix and dance the night away with us. We'll be playing a mix of our favorite songs and some new ones.
+LOCATION:Pulaski Pub\, 79 Maple St\, Easthampton\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR
