@@ -1,16 +1,52 @@
 {
   "shows": [
+
+    {
+      "date": "2026-04-11",
+      "day": "11",
+      "month": "APR",
+      "venue": "Private Party",
+      "location": "",
+      "time": "",
+      "support": "Want to book us for a private party? Contact us at <a href='mailto:hello@bromantics.band'>hello@bromantics.band</a>",
+      "mapQuery": "",
+      "ageRestriction": "",
+      "poster": "img/default-show-poster.jpg"
+    },
+    {
+      "date": "2026-03-28",
+      "day": "28",
+      "month": "MAR",
+      "venue": "Bright Ideas Brewing",
+      "location": "109 Apremont Way, Westfield",
+      "time": "6:00 - 9:00 PM",
+      "support": "We're excited to play at this great brewery! Get your new wave fix!",
+      "mapQuery": "bright+ideas+brewing+109+Apremont+Way+Westfield",
+      "ageRestriction": "All ages"
+    },
+    {
+      "date": "2026-03-07",
+      "day": "7",
+      "month": "MAR",
+      "venue": "The Shea Theater",
+      "location": "71 Avenue A, Turners Falls",
+      "time": "7:00 - 10:00 PM",
+      "support": "We are playing as part of the Arc-a-Palooza Benefit for the United Arc. Save the date, more details coming soon!",
+      "mapQuery": "Shea+Theater+71+Avenue+A+Turners+Falls",
+      "ageRestriction": "All ages",
+      "poster": "img/default-show-poster.jpg"
+    },
     {
       "date": "2026-01-24",
       "day": "24",
       "month": "JAN",
       "venue": "Progression Brewing Company",
       "location": "9 Pearl St, Northampton",
-      "time": "6:00 - 9:00 PM",
+      "time": "7:00 - 9:30 PM",
       "support": "Join us at this great brewery in downtown Northampton.",
       "mapQuery": "Progression+Brewing+Company+9+Pearl+St+Northampton",
       "ageRestriction": "18+",
-      "poster": "img/default-show-poster.jpg"
+      "poster": "img/posters/bromantics-progression-1-24-2026.jpg"
     },
     {
       "date": "2025-10-04",
