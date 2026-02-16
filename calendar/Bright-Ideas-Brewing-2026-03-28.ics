@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2026-03-28-Bright-Ideas-Brewing@bromantics.band
+DTSTAMP:20260119T040057Z
+DTSTART:20260328T220000Z
+DTEND:20260329T010000Z
+SUMMARY:The Bromantics at Bright Ideas Brewing
+DESCRIPTION:We're excited to play at this great brewery! Get your new wave fix!
+LOCATION:Bright Ideas Brewing\, 109 Apremont Way\, Westfield\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR

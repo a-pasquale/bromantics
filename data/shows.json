@@ -1,6 +1,17 @@
 {
   "shows": [
-
+    {
+      "date": "2026-03-21",
+      "day": "21",
+      "month": "MAR",
+      "venue": "Francie's Tavern",
+      "location": "108 Maple St, Holyoke",
+      "time": "4:00 - 8:00 PM",
+      "support": "It's the biggest party of the year after the Holyoke Saint Patrick's Day Road Race!",
+      "mapQuery": "Francie's+Tavern+108+Maple+St+Holyoke",
+      "ageRestriction": "21+",
+      "poster": ""
+    },
     {
       "date": "2026-04-11",
       "day": "11",
@@ -8,7 +19,7 @@
       "venue": "Private Party",
       "location": "",
       "time": "",
-      "support": "Want to book us for a private party? Contact us at <a href='mailto:hello@bromantics.band'>hello@bromantics.band</a>",
+      "support": "Want to book us for your party? Contact us at <a href='mailto:hello@bromantics.band'>hello@bromantics.band</a>",
       "mapQuery": "",
       "ageRestriction": "",
       "poster": "img/default-show-poster.jpg"
@@ -28,13 +39,13 @@
       "date": "2026-03-07",
       "day": "7",
       "month": "MAR",
-      "venue": "The Shea Theater",
-      "location": "71 Avenue A, Turners Falls",
-      "time": "7:00 - 10:00 PM",
-      "support": "We are playing as part of the Arc-a-Palooza Benefit for the United Arc. Save the date, more details coming soon!",
-      "mapQuery": "Shea+Theater+71+Avenue+A+Turners+Falls",
+      "venue": "Ja'Duke Center for the Performing Arts",
+      "location": "110 Industrial Blvd, Turners Falls",
+      "time": "6:30 - 10:00 PM",
+      "support": "We are playing as part of the Arc-a-Palooza Benefit for the United Arc along with Alex Casavant Ft. Nick and Joe, Little House Blues, Psychedelic Farm Girls. <a href='https://res.cloudinary.com/htjycsyzr/image/upload/t6kgjymv85xa2keyrthh'>Get your tickets now!</a>",
+      "mapQuery": "Ja'Duke+Center+for+the+Performing+Arts+110+Industrial+Blvd+Turners+Falls",
       "ageRestriction": "All ages",
-      "poster": "img/default-show-poster.jpg"
+      "poster": "https://res.cloudinary.com/htjycsyzr/image/upload/t6kgjymv85xa2keyrthh"
     },
     {
       "date": "2026-01-24",
