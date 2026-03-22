@@ -1,6 +1,42 @@
 {
   "shows": [
     {
+      "date": "2026-12-12",
+      "day": "12",
+      "month": "DEC",
+      "venue": "Progression Brewing Company",
+      "location": "9 Pearl St, Northampton",
+      "time": "6:30 - 9:30 PM",
+      "support": "Join us at this great brewery in downtown Northampton.",
+      "mapQuery": "Progression+Brewing+Company+9+Pearl+St+Northampton",
+      "ageRestriction": "18+",
+      "poster": ""
+    },
+    {
+      "date": "2026-10-24",
+      "day": "24",
+      "month": "OCT",
+      "venue": "New City Brewery",
+      "location": "180 Pleasant St, Easthampton",
+      "time": "7:00 - 10:00 PM",
+      "support": "Our fourth annual Halloween show! Wear your costume and celebrate with us!",
+      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
+      "ageRestriction": "",
+      "poster": ""
+    },
+    {
+      "date": "2026-09-12",
+      "day": "12",
+      "month": "SEP",
+      "venue": "Se7ens",
+      "location": "75 Cottage St, Easthampton",
+      "time": "8:00 - 12:00 PM",
+      "support": "Join us on the dance floor!",
+      "mapQuery": "Se7ens+Sports+Bar+and+Grill+75+Cottage+St+Easthampton",
+      "ageRestriction": "21+",
+      "poster": ""
+    },
+    {
       "date": "2026-03-21",
       "day": "21",
       "month": "MAR",
