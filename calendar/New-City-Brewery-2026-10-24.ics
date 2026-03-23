@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2026-10-24-New-City-Brewery@bromantics.band
+DTSTAMP:20260322T174409Z
+DTSTART:20261024T230000Z
+DTEND:20261025T020000Z
+SUMMARY:The Bromantics at New City Brewery
+DESCRIPTION:Our fourth annual Halloween show! Wear your costume and celebrate with us!
+LOCATION:New City Brewery\, 180 Pleasant St\, Easthampton\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR

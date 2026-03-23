@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2026-12-12-Progression-Brewing-Company@bromantics.band
+DTSTAMP:20260322T174409Z
+DTSTART:20261212T233000Z
+DTEND:20261213T023000Z
+SUMMARY:The Bromantics at Progression Brewing Company
+DESCRIPTION:Join us at this great brewery in downtown Northampton.
+LOCATION:Progression Brewing Company\, 9 Pearl St\, Northampton\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR

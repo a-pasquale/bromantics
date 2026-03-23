@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2026-09-12-Se7ens@bromantics.band
+DTSTAMP:20260322T174409Z
+DTSTART:20260913T000000Z
+DTEND:20260912T160000Z
+SUMMARY:The Bromantics at Se7ens
+DESCRIPTION:Join us on the dance floor!
+LOCATION:Se7ens\, 75 Cottage St\, Easthampton\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR
