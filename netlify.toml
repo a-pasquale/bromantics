@@ -46,8 +46,9 @@
     [headers.values]
     Content-Type = "audio/wav"
 
-# Redirect to index.html for SPA-like navigation
+# Redirect to index.html for SPA-like navigation (force=false ensures existing files are served directly)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = false
