@@ -1,6 +1,18 @@
 {
   "shows": [
     {
+      "date": "2026-06-27",
+      "day": "27",
+      "month": "JUN",
+      "venue": "New City Brewery",
+      "location": "180 Pleasant St, Easthampton",
+      "time": "7:00 - 10:00 PM",
+      "support": "<a href='https://www.zynpop.com/'>ZYN</a> is joining us for a night focusing on new wave, alt rock and ‘80s classics. Dress up ‘80s style if you dare! We want to see some acid washed jeans, shoulder pads and neon colors!",
+      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
+      "ageRestriction": "All ages",
+      "poster": ""
+    },
+    {
       "date": "2026-12-12",
       "day": "12",
       "month": "DEC",

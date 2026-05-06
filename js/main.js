@@ -973,23 +973,88 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(script);
     }
 
+    // Truncate HTML to a max number of visible characters while preserving tags
+    // and closing any tags left open by the cut.
+    function truncateHtml(html, maxChars) {
+        const openTags = [];
+        let visibleCount = 0;
+        let result = '';
+        let i = 0;
+
+        while (i < html.length && visibleCount < maxChars) {
+            if (html[i] === '<') {
+                const tagEnd = html.indexOf('>', i);
+                if (tagEnd === -1) break;
+                const tag = html.substring(i, tagEnd + 1);
+                const closeMatch = tag.match(/^<\/([a-zA-Z][a-zA-Z0-9]*)/);
+                const openMatch = tag.match(/^<([a-zA-Z][a-zA-Z0-9]*)([^>]*)>/);
+                if (closeMatch) {
+                    const name = closeMatch[1].toLowerCase();
+                    const idx = openTags.lastIndexOf(name);
+                    if (idx !== -1) openTags.splice(idx, 1);
+                } else if (openMatch && !tag.endsWith('/>')) {
+                    const name = openMatch[1].toLowerCase();
+                    const voidTags = ['br', 'hr', 'img', 'input', 'meta', 'link'];
+                    if (!voidTags.includes(name)) openTags.push(name);
+                }
+                result += tag;
+                i = tagEnd + 1;
+            } else {
+                result += html[i];
+                visibleCount++;
+                i++;
+            }
+        }
+
+        // Break on word boundary if we cut mid-word
+        if (i < html.length) {
+            const lastSpace = result.lastIndexOf(' ');
+            if (lastSpace > result.length * 0.8) {
+                result = result.substring(0, lastSpace);
+                // Re-derive open tags after trimming
+                openTags.length = 0;
+                const tagRe = /<\/?([a-zA-Z][a-zA-Z0-9]*)([^>]*)>/g;
+                let m;
+                while ((m = tagRe.exec(result)) !== null) {
+                    const full = m[0];
+                    const name = m[1].toLowerCase();
+                    const voidTags = ['br', 'hr', 'img', 'input', 'meta', 'link'];
+                    if (full.startsWith('</')) {
+                        const idx = openTags.lastIndexOf(name);
+                        if (idx !== -1) openTags.splice(idx, 1);
+                    } else if (!full.endsWith('/>') && !voidTags.includes(name)) {
+                        openTags.push(name);
+                    }
+                }
+            }
+        }
+
+        // Close any tags still open
+        for (let j = openTags.length - 1; j >= 0; j--) {
+            result += `</${openTags[j]}>`;
+        }
+        return result;
+    }
+
     // Function to create support description with accordion functionality
     function createSupportAccordion(supportText, showIndex) {
         // Strip HTML tags to get text content for length calculation, replacing with spaces
         const textContent = supportText.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
         const threshold = 180;
-        
+
         // If text is short, just return it normally
         if (textContent.length <= threshold) {
             return `<div class="support-text">${supportText}</div>`;
         }
-        
-        // For long text, create accordion
-        let previewText = textContent.substring(0, threshold);
-        // Break on word boundary to avoid cutting words in half
-        const lastSpaceIndex = previewText.lastIndexOf(' ');
-        if (lastSpaceIndex > threshold * 0.8) { // Only use word break if it's not too short
-            previewText = previewText.substring(0, lastSpaceIndex);
+
+        // For long text, create accordion. Truncate the HTML (not the stripped text)
+        // so that links/formatting inside the preview are preserved.
+        const previewText = truncateHtml(supportText, threshold);
+        // If truncation kept ~all visible content (e.g. the only thing past the cut
+        // was a short trailing tag), skip the accordion entirely.
+        const previewVisible = previewText.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+        if (previewVisible.length >= textContent.length - 5) {
+            return `<div class="support-text">${supportText}</div>`;
         }
         const accordionId = `support-${showIndex}`;
         
