@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2026-06-27-New-City-Brewery@bromantics.band
+DTSTAMP:20260623T025559Z
+DTSTART:20260627T230000Z
+DTEND:20260628T020000Z
+SUMMARY:The Bromantics at New City Brewery
+DESCRIPTION:ZYN is joining us for a night focusing on new wave\, alt rock and ‘80s classics. Dress up ‘80s style if you dare! We want to see some acid washed jeans\, shoulder pads and neon colors!
+LOCATION:New City Brewery\, 180 Pleasant St\, Easthampton\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR
