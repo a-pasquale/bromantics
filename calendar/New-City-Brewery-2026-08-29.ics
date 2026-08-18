@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2026-08-29-New-City-Brewery@bromantics.band
+DTSTAMP:20260818T171607Z
+DTSTART:20260829T220000Z
+DTEND:20260830T030000Z
+SUMMARY:The Bromantics at New City Brewery
+DESCRIPTION:Porchfest Party Time!!! We're having a fundraiser show to help raise funding for this year's Porchfest. Local bands The Bromantics\, Reuben Toadstool\, No No Knows (a tribute to the Yeah Yeah Yeahs)\, Vimana\, and Orange & Amber will all be playing! All proceeds from this show will go to supporting this year's Easthampton Porchfest (taking place on 10/3). Come out for a fun night of music\, dance\, beer and food! RSVP on Facebook
+LOCATION:New City Brewery\, 180 Pleasant St\, Easthampton\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR
