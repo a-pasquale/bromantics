@@ -1,6 +1,30 @@
 {
   "shows": [
     {
+      "date": "2026-08-29",
+      "day": "29",
+      "month": "AUG",
+      "venue": "New City Brewery",
+      "location": "180 Pleasant St, Easthampton",
+      "time": "6:00 - 11:00 PM",
+      "support": "Porchfest Party Time!!! We're having a fundraiser show to help raise funding for this year's Porchfest. Local bands The Bromantics, Reuben Toadstool, No No Knows (a tribute to the Yeah Yeah Yeahs), Vimana, and Orange & Amber will all be playing! All proceeds from this show will go to supporting this year's <a href='https://www.easthamptonporchfest.com/'>Easthampton Porchfest</a> (taking place on 10/3). Come out for a fun night of music, dance, beer and food! <a href='https://www.facebook.com/events/2020608558578375'>RSVP on Facebook</a>",
+      "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
+      "ageRestriction": "All ages",
+      "poster": "img/posters/porchfest_fundraiser_with_bands.jpg"
+    },
+    {
+      "date": "2026-10-03",
+      "day": "3",
+      "month": "OCT",
+      "venue": "Easthampton Porchfest",
+      "location": "Easthampton",
+      "time": "TBD",
+      "support": "Check us out on a porch near you! Time and location to be announced. And don't forget to check out <a href='https://www.easthamptonporchfest.com/'>the other amazing bands playing!</a>",
+      "mapQuery": "",
+      "ageRestriction": "All ages",
+      "poster": ""
+    },
+    {
       "date": "2026-06-27",
       "day": "27",
       "month": "JUN",
