@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bromantics//Show Calendar//EN
+BEGIN:VEVENT
+UID:2026-10-03-Easthampton-Porchfest@bromantics.band
+DTSTAMP:20260929T034249Z
+DTSTART:20261003T200000Z
+DTEND:20261003T210000Z
+SUMMARY:The Bromantics at Easthampton Porchfest
+DESCRIPTION:Check us out on a porch near you! And don't forget to check out the other amazing bands playing!
+LOCATION:Easthampton Porchfest\, 76 Garfield Ave\, Easthampton\, MA
+URL:https://bromantics.band
+END:VEVENT
+END:VCALENDAR
