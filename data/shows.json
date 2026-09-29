@@ -17,10 +17,10 @@
       "day": "3",
       "month": "OCT",
       "venue": "Easthampton Porchfest",
-      "location": "Easthampton",
-      "time": "TBD",
-      "support": "Check us out on a porch near you! Time and location to be announced. And don't forget to check out <a href='https://www.easthamptonporchfest.com/'>the other amazing bands playing!</a>",
-      "mapQuery": "",
+      "location": "76 Garfield Ave, Easthampton",
+      "time": "4:00 - 5:00 PM",
+      "support": "Check us out on a porch near you! And don't forget to check out <a href='https://www.easthamptonporchfest.com/'>the other amazing bands playing!</a>",
+      "mapQuery": "76+Garfield+Ave+Easthampton",
       "ageRestriction": "All ages",
       "poster": ""
     },
@@ -58,7 +58,7 @@
       "support": "Our fourth annual Halloween show! Wear your costume and celebrate with us!",
       "mapQuery": "New+City+Brewery+180+Pleasant+St+Easthampton",
       "ageRestriction": "",
-      "poster": ""
+      "poster": "img/posters/halloween_2025.jpg"
     },
     {
       "date": "2026-09-12",

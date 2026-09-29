@@ -1,5 +1,5 @@
 // Version control for cache busting
-const VERSION = '1.5.2';
+const VERSION = '1.5.3';
 
 // Using 4 shows per page for optimal display balance
 
